@@ -160,14 +160,52 @@ footer{margin-top:40px;font-size:12.5px;color:var(--muted);display:grid;gap:6px;
 .mod .it b{font-family:var(--f-display)}
 .mod .it span{font-size:13px;color:var(--muted)}
 .mod .soon{margin:0;color:var(--muted);font-style:italic}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;margin-bottom:6px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:2px}
+.stat b{font-family:var(--f-display);font-size:28px;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+.concl{display:grid;gap:12px;margin:18px 0 26px}
+.concl h2,.mods-h{font-family:var(--f-display);font-size:22px;margin:8px 0 2px;color:var(--verde-oscuro,var(--fg))}
+.hall{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:12px}
+.hall article{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--verde);border-radius:var(--r);padding:14px 16px;display:grid;gap:6px;align-content:start;min-width:0}
+.hall article.sec{border-left-color:var(--line)}
+.hall h3{margin:0;font-family:var(--f-display);font-size:16.5px;text-wrap:balance}
+.hall p{margin:0;font-size:14.5px;line-height:1.55}
+.hall .ej{font-size:13px;color:var(--muted)}
+.check{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 18px}
+.check ol{margin:6px 0 0;padding-left:20px;display:grid;gap:4px;font-size:14.5px}
+.nota-dat{font-size:12.5px;color:var(--muted);margin:0}
+
 </style></head><body>
 <div class="wrap">
 <header class="top">
   <div class="eyebrow">360Educa · Certificación CNBV PLD/FT · 2ª convocatoria 2026</div>
   <h1>Revisión de <span class="hl">simuladores</span></h1>
-  <p class="lede">Elige el módulo. En cada revisión verás, pregunta por pregunta, cuántos contestaron mal, qué eligieron, en qué se equivocaron, cómo cachar el error y el fundamento real.</p>
+  <p class="lede">Primero lo que vimos en todo el grupo; luego elige tu módulo. En cada revisión verás, pregunta por pregunta, cuántos contestaron mal, qué eligieron, en qué se equivocaron, cómo cachar el error y el fundamento real.</p>
   <hr class="membrete">
 </header>
+<section class="stats" aria-label="Aciertos del grupo por área">
+  <div class="stat"><b>83 %</b><span>Módulo 1 · Área 1 · 26 preguntas</span></div>
+  <div class="stat"><b>80 %</b><span>Módulo 2 · Área 2 · 90 preguntas</span></div>
+  <div class="stat"><b>71 %</b><span>Módulo 3 · Área 3 · 39 preguntas</span></div>
+</section>
+<section class="concl" id="conclusiones">
+  <h2>Qué nos dicen los resultados</h2>
+  <div class="hall">
+    <article><h3>Sí tienen la base. Lo que falla son las fronteras.</h3><p>El grupo acertó 78 % de las 155 preguntas. En 33 de las 52 que más costaron, casi todos los errores cayeron en <b>una sola opción</b>: no es adivinar, es confundir algo que sí estudiaron con su vecino más parecido.</p><p class="ej">Requisitos del Auditor contra los de la Persona Moral · reportes de Centros Cambiarios contra los de Transmisores · la ENR 2020 contra la 2023 · retos del GAFI contra elementos de Basilea.</p></article>
+    <article><h3>Contestan con lógica, y el examen pide el texto.</h3><p>El distractor ganador suele ser «lo razonable»: frontera norte = dólares, alto-medio-bajo para todo, sumar operaciones chicas, el costo como reto del EBR. Cuando la norma dice otra cosa, la intuición pierde.</p><p class="ej">Recepción ilimitada de dólares (40 % eligió Tijuana) · acumulación en joyería (60 % sumó) · grados mínimos SOFIPO (25 % puso tres).</p></article>
+    <article><h3>Se les escapan las excepciones y las reformas.</h3><p>Saben la regla general y la aplican donde hay una excepción: el Centro Cambiario que ya no manda Relevante en compras de 5,000 USD o más, los 2 días del Oficial de Cumplimiento en Bancos (reforma 2024) contra 10 en otros sectores, los 5 años de conservación de Asesores contra los 10 de Bancos.</p></article>
+    <article class="sec"><h3>Leer sí cuenta, pero es lo menos.</h3><p>Hay errores de lectura cuando las opciones cambian en una sola palabra: «primeros» o «últimos» días, días multa o UMA, trimestral o mensual, la columna de impacto o la de probabilidad. Fallan entre 10 y 35 %. Es real, pero pesa menos que las confusiones de arriba.</p></article>
+  </div>
+  <div class="check"><b>Antes de contestar cada pregunta</b><ol>
+    <li>¿De qué <b>sector, documento o año</b> habla? Las mismas obligaciones cambian de plazo o de cifra según el sujeto.</li>
+    <li>¿Hay una <b>excepción</b> a la regla general? Si la pregunta da un caso con monto, sector o fecha, búscala.</li>
+    <li>Compara las opciones y encuentra la <b>palabra que cambia</b>: ahí está la pregunta.</li>
+    <li>Si una opción «suena lógica», confírmala contra el <b>texto de la norma</b> antes de marcarla.</li>
+  </ol></div>
+  <p class="nota-dat">Datos del Simulador 2, 2.ª convocatoria, 20 alumnos. Desde la pregunta 16 del Área 1 hubo una respuesta en blanco en cada pregunta, al parecer de una persona que no terminó; los porcentajes la cuentan como error, así que el grupo que sí contestó está unos 4 puntos más arriba. Conclusiones: criterio didáctico 360Educa.</p>
+</section>
+<h2 class="mods-h">Elige tu módulo</h2>
 <div class="mods"><section class="mod"><div class="mh"><span class="num">Módulo 1</span><h2>Conocimientos básicos</h2></div><a class="it" href="modulo-1/simulador-2/index.html"><b>Simulador 2 · Área 1</b><span>26 preguntas · 83 % de aciertos del grupo</span></a></section><section class="mod"><div class="mh"><span class="num">Módulo 2</span><h2>Aspectos técnicos</h2></div><a class="it" href="modulo-2/simulador-2/index.html"><b>Simulador 2 · Área 2</b><span>90 preguntas · 80 % de aciertos del grupo</span></a></section><section class="mod"><div class="mh"><span class="num">Módulo 3</span><h2>Auditoría y riesgos</h2></div><a class="it" href="modulo-3/simulador-2/index.html"><b>Simulador 2 · Área 3</b><span>39 preguntas · 71 % de aciertos del grupo</span></a></section></div>
 <footer><span>Sólo porcentajes del grupo; sin resultados individuales.</span><span>Material didáctico 360Educa; no sustituye la norma.</span></footer>
 </div></body></html>
