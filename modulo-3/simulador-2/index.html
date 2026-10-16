@@ -298,9 +298,11 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
 .qc .why > div{display:grid;gap:3px}
 .qc .lb{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .qc .ans{font-family:var(--f-display);font-weight:800}
-.qc ul.wr{margin:0;padding-left:18px;display:grid;gap:2px}
+.qc ul.wr{margin:0;padding-left:18px;display:grid;gap:8px}
+.qc ul.wr .ex{display:block;margin-top:2px}
 .qc .nota{font-size:12.5px;color:var(--muted);font-style:italic;margin:0}
-.qc .fund{font-weight:600}
+.qc .fund{font-weight:500;line-height:1.55}
+.qc .fundb{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg)}
 .practica .qc:not(.rev) .why,.practica .qc:not(.rev) .op .v,.practica .qc:not(.rev) .op .bar,.practica .qc:not(.rev) .hd .mal{visibility:hidden}
 .practica .qc:not(.rev) .why{display:none}
 .practica .qc:not(.rev) .op.ok{border-color:var(--line);border-width:1px}
@@ -327,10 +329,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1b, 2a, 3c</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1a, 2c, 3d · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Quienes eligieron a) le dieron al Informe los 20 días hábiles que son del Manual: cruzaron los dos plazos que se remiten a la Comisión.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Cada plazo tiene su disparador. <b>Informe</b>: 60 días naturales desde el cierre del ejercicio. <b>Manual</b>: 20 días hábiles desde que lo aprueba el comité de auditoría. <b>Personas con Control</b>: 10 días hábiles desde que los accionistas lo comunican. Los 3 días hábiles son de la transmisión de acciones de más del 2 %, que aquí no se pregunta.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">DCG SOFOM, 52ª (p. 36), 53ª y 54ª (p. 37)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> 1a, 2c, 3d · <b>2 alumnos</b> (10 %)<span class="ex">Le dieron al Informe los 20 días hábiles del Manual y al Manual los 10 días del Control: corrieron un lugar todos los plazos. Los tres se mandan a la autoridad y por eso se mezclan.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Quienes eligieron a) le dieron al Informe los 20 días hábiles que son del Manual: cruzaron los dos plazos que se remiten a la Comisión.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Amarra cada plazo a su disparador: <b>cierre del ejercicio → 60 días naturales</b> (Informe); <b>aprobación del comité de auditoría → 20 días hábiles</b> (Manual); <b>los accionistas comunican → 10 días hábiles</b> (Control). El de 3 días hábiles es de la transmisión de acciones de más del 2 % y aquí sobra.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">DCG SOFOM, 52ª, p. 36 del PDF: «…remitirse a la Comisión dentro de los sesenta días naturales siguientes al cierre del ejercicio al que corresponda la revisión…». 53ª, p. 37: «…dentro de los diez días hábiles siguientes a aquel en que los accionistas o socios respectivos comuniquen esa situación a la persona que se encuentre a cargo de la administración…» y «…dentro de los tres días hábiles siguientes a que haya inscrito… la transmisión de cualquiera de sus acciones por más del dos por ciento…». 54ª, p. 37: «…dentro de los veinte días hábiles siguientes a la fecha en que su respectivo comité de auditoría las apruebe…».</span></div>
   </div>
 </article><article class="qc" id="p2">
   <div class="hd"><span class="no">Pregunta 2</span><span class="k">3.1.1</span><span class="mal hi">Contestaron mal: 10 de 20 (50 %)</span></div>
@@ -339,10 +341,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1, 4, 5</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> 3, 4, 5 · <b>6 alumnos</b> (30 %)</li><li><b>a)</b> 1, 2, 4 · <b>3 alumnos</b> (15 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>«No ser apoderada» y «no haber sido sentenciada por delitos patrimoniales» sí son requisitos de los Lineamientos, pero del <b>Auditor</b>, no de la Persona Moral. Los dos suenan a independencia, y la independencia sí es requisito de la Persona Moral. Por eso se cuelan.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>El QUINTO (Persona Moral) tiene sólo <b>tres</b> fracciones: I independencia, II recursos técnicos, humanos, financieros y administrativos, III no ejercer el Control. Si el requisito suena a <b>currículum o antecedentes de una persona</b> (estudios, certificado, sentencias, ser apoderado, litigios, listas), es del CUARTO, el Auditor.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, CUARTO fr. III y VI (pp. 4–5) y QUINTO fr. I a III (p. 5)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>d)</b> 3, 4, 5 · <b>6 alumnos</b> (30 %)<span class="ex">Metieron «no ser apoderada» (3). Es un requisito real, pero del <b>Auditor persona física</b> (CUARTO fr. VI), y dejaron fuera la independencia (1), que sí es de la Persona Moral.</span></li><li><b>a)</b> 1, 2, 4 · <b>3 alumnos</b> (15 %)<span class="ex">Metieron «no haber sido sentenciada por delitos patrimoniales» (2), que es del Auditor (CUARTO fr. III), y dejaron fuera «no ejercer el Control» (5).</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>«No ser apoderada» y «no haber sido sentenciada por delitos patrimoniales» sí son requisitos de los Lineamientos, pero del <b>Auditor</b>, no de la Persona Moral. Los dos suenan a independencia, y la independencia sí es requisito de la Persona Moral. Por eso se cuelan.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>El QUINTO (Persona Moral) tiene sólo tres fracciones: <b>independencia, recursos suficientes y no ejercer el Control</b>. Todo lo que suena a antecedentes de una persona (estudios, certificado, sentencias, ser apoderado, litigios, listas) es del CUARTO, el Auditor.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Lineamientos, QUINTO, p. 5 del PDF: «I. La Persona Moral, el Auditor y las personas que formen parte del equipo de auditoría… deberán ser y mantenerse independientes… II. …deberá contar con los recursos técnicos, humanos, financieros y administrativos suficientes… III. …no deberá ejercer el Control en el Sujeto Supervisado…». Contraste, CUARTO, pp. 4–5: «III. No haber sido sentenciado por delitos patrimoniales… VI. No formar parte de la estructura accionaria… ni ser Oficial de Cumplimiento, funcionario, apoderado o empleado…».</span></div>
   </div>
 </article><article class="qc" id="p3">
   <div class="hd"><span class="no">Pregunta 3</span><span class="k">3.1.1</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
@@ -351,10 +353,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) Irregularidades que, a su juicio, pudieran favorecer el delito del 400 Bis</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> Un reporte de Operaciones Relevantes del primer trimestre se presentó extemporáneo · <b>3 alumnos</b> (15 %)</li><li><b>b)</b> La capacitación anual omitió las constancias de 2 de los 5 empleados capacitados · <b>1 alumno</b> (5 %)</li><li><b>c)</b> Su Oficial de Cumplimiento todavía no cuenta con la certificación · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 15 % eligió el reporte extemporáneo. Es un incumplimiento, pero puntual: se evalúa en Cumplimiento regulatorio y se anota como hallazgo, no como asunto preocupante.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>El apartado C sólo llama preocupante a cuatro cosas: medidas que no son acordes a los productos u Operaciones; controles sin eficacia para mitigar los Riesgos; hallazgos que sean <b>infracción grave</b>; e irregularidades que puedan favorecer el <b>139 Quáter o el 400 Bis</b>. Un incumplimiento aislado (constancias, certificación, un reporte tarde) no entra.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, OCTAVO, apartado C (pp. 12–13)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>d)</b> Un reporte de Operaciones Relevantes del primer trimestre se presentó extemporáneo · <b>3 alumnos</b> (15 %)<span class="ex">Eligieron el reporte de Operaciones Relevantes extemporáneo. Es un incumplimiento, pero puntual: va como hallazgo en Cumplimiento regulatorio, no como asunto «preocupante».</span></li><li><b>b)</b> La capacitación anual omitió las constancias de 2 de los 5 empleados capacitados · <b>1 alumno</b> (5 %)<span class="ex">Las constancias faltantes son un hallazgo de capacitación, no un supuesto del apartado C.</span></li><li><b>c)</b> Su Oficial de Cumplimiento todavía no cuenta con la certificación · <b>1 alumno</b> (5 %)<span class="ex">La falta de certificación del Oficial es un incumplimiento puntual; no encuadra en ninguno de los cuatro supuestos de «preocupante».</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 15 % eligió el reporte extemporáneo. Es un incumplimiento, pero puntual: se evalúa en Cumplimiento regulatorio y se anota como hallazgo, no como asunto preocupante.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>El apartado C sólo llama preocupante a cuatro cosas: medidas <b>no acordes</b> a productos u Operaciones, controles <b>sin eficacia</b>, hallazgos que sean <b>infracción grave</b> e irregularidades que puedan favorecer el <b>139 Quáter o el 400 Bis</b>. Un incumplimiento aislado no entra.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Lineamientos, OCTAVO, apartado C, p. 13 del PDF: «Se considera preocupante cuando… las medidas implementadas no son acordes al tipo de servicios, productos u Operaciones…; cuando operativamente considere que no existe una eficacia en los controles…; cuando existan hallazgos que se sitúen en alguna infracción grave…; o cuando detecte irregularidades que con base en su juicio profesional pudieran favorecer… la comisión de los delitos previstos en los artículos 139 Quáter o 400 Bis del Código Penal Federal».</span></div>
   </div>
 </article><article class="qc" id="p4">
   <div class="hd"><span class="no">Pregunta 4</span><span class="k">3.1.1</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span></div>
@@ -363,10 +365,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1, 2, 4</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1, 2, 3 · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 2, 4, 5 · <b>3 alumnos</b> (15 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>«Sancionar deficiencias» y «metodología de riesgos» son temas reales del Módulo 3, así que parecen parte del objeto. La CNBV sí sanciona y las Disposiciones sí piden metodología, pero eso no lo regulan estos Lineamientos.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>El PRIMERO tiene <b>tres objetos</b>, en el orden en que vive el informe: <b>contratar → elaborar → remitir</b>. Si la opción no es uno de esos tres momentos, no es objeto de los Lineamientos.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, PRIMERO (p. 3)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> 1, 2, 3 · <b>3 alumnos</b> (15 %)<span class="ex">Metieron el enunciado 3 («criterios conforme a los cuales la Comisión sancionará»). Suena a algo que haría la CNBV, pero los Lineamientos no regulan sanciones; y dejaron fuera la remisión (4).</span></li><li><b>d)</b> 2, 4, 5 · <b>3 alumnos</b> (15 %)<span class="ex">Metieron el 5 («metodología para evaluar Riesgos») y sacaron la contratación (1). La metodología la piden las DCG y la desarrolla la Guía de Metodología, no estos Lineamientos.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>«Sancionar deficiencias» y «metodología de riesgos» son temas reales del Módulo 3, así que parecen parte del objeto. La CNBV sí sanciona y las Disposiciones sí piden metodología, pero eso no lo regulan estos Lineamientos.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>El PRIMERO tiene tres objetos, en el orden en que vive el informe: <b>contratar → elaborar → remitir</b>. Si la opción no es uno de esos tres momentos, no es objeto.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Lineamientos, PRIMERO, p. 3 del PDF: «1. Establecer los requisitos mínimos que los Sujetos Supervisados deben observar en la contratación de Personas Morales y Auditores… 2. …respecto de la elaboración del Informe de Auditoría que realice el Auditor. 3. …respecto de la remisión a la Comisión del Informe de Auditoría».</span></div>
   </div>
 </article><article class="qc" id="p5">
   <div class="hd"><span class="no">Pregunta 5</span><span class="k">3.1.1</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span></div>
@@ -375,10 +377,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">d) 5 años a partir de la presentación ante la Comisión del Informe de Auditoría</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 5 años a partir de la elaboración del Informe de Auditoría · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El error acertó los 5 años pero no el arranque: lo contó desde la elaboración.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>El reloj empieza cuando el informe <b>llega a la Comisión</b>: 5 años a partir de su presentación.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, QUINTO, último párrafo (pp. 5–6)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>c)</b> 5 años a partir de la elaboración del Informe de Auditoría · <b>1 alumno</b> (5 %)<span class="ex">Acertó el plazo (5 años) pero no el arranque: lo contó desde la elaboración del informe.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El error acertó los 5 años pero no el arranque: lo contó desde la elaboración.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>El reloj empieza cuando el informe <b>llega a la Comisión</b>.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Lineamientos, QUINTO, último párrafo, p. 6 del PDF: «…por un plazo mínimo de cinco años contado a partir de la presentación ante la Comisión del Informe de Auditoría correspondiente».</span></div>
   </div>
 </article><article class="qc" id="p6">
   <div class="hd"><span class="no">Pregunta 6</span><span class="k">3.1.1</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span></div>
@@ -387,10 +389,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">d) No cumple</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> Cumple Parcialmente · <b>2 alumnos</b> (10 %)</li><li><b>b)</b> Cumple Mayoritariamente · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Quienes eligieron Parcialmente o Mayoritariamente pensaron que, como los comisionistas sí integran expedientes, algo se cumple.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Si la entidad no recaba, no registra ni conserva lo que la obligación exige, el cumplimiento <b>no cubre los elementos necesarios</b>: No cumple. Parcialmente es cuando falta <b>evidencia objetiva</b> de un cumplimiento que podría existir.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, OCTAVO, apartado B, numerales 3 y 4 (p. 12)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>c)</b> Cumple Parcialmente · <b>2 alumnos</b> (10 %)<span class="ex">Eligieron Cumple Parcialmente pensando que, como el comisionista sí integra los expedientes, algo se cumple. Pero la entidad no recaba, no registra ni conserva: no hay cumplimiento que demostrar.</span></li><li><b>b)</b> Cumple Mayoritariamente · <b>1 alumno</b> (5 %)<span class="ex">Mayoritariamente exige que sólo falte una mejora; aquí falta la obligación completa.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Quienes eligieron Parcialmente o Mayoritariamente pensaron que, como los comisionistas sí integran expedientes, algo se cumple.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span><b>No cumple</b> = el cumplimiento no cubre los elementos necesarios. <b>Parcialmente</b> = podría cumplir, pero falta evidencia objetiva. Si la entidad simplemente no lo hace, es No cumple.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Lineamientos, OCTAVO, apartado B, p. 12 del PDF: «3. Cumple Parcialmente. Cuando la eficacia no puede ser demostrada… por no contar con evidencia objetiva… 4. No cumple. Cuando el cumplimiento no cubre los elementos necesarios de conformidad con las Disposiciones, o bien, se trata de un incumplimiento que actualiza una sanción». Obligación XIV (comisionistas), p. 12.</span></div>
   </div>
 </article><article class="qc" id="p7">
   <div class="hd"><span class="no">Pregunta 7</span><span class="k">3.1.1</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span></div>
@@ -399,10 +401,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1c, 2d, 3b</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 1d, 2b, 3c · <b>1 alumno</b> (5 %)</li><li><b>d)</b> 1d, 2c, 3b · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Los errores pusieron el hallazgo 1 (sin evidencia) como No cumple, o bajaron la sanción a Mayoritariamente.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Cada nivel tiene su palabra clave: <b>sin evidencia objetiva</b> → Parcialmente; <b>actualiza una sanción</b> → No cumple; <b>sólo recomendación de mejora</b> → Mayoritariamente; <b>no requiere ni recomienda mejoras</b> → Cumple. El quinto sentido es No aplica.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, OCTAVO, apartado B (p. 12)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>c)</b> 1d, 2b, 3c · <b>1 alumno</b> (5 %)<span class="ex">Puso el hallazgo 1 (sin actas) como No cumple, la sanción como Mayoritariamente y la recomendación como Parcialmente: cruzó los tres.</span></li><li><b>d)</b> 1d, 2c, 3b · <b>1 alumno</b> (5 %)<span class="ex">Pusieron el 1 como No cumple y el 2 (sanción) como Parcialmente: invirtieron los dos niveles bajos.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Los errores pusieron el hallazgo 1 (sin evidencia) como No cumple, o bajaron la sanción a Mayoritariamente.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Palabra clave de cada nivel: <b>sin evidencia objetiva</b> → Parcialmente; <b>actualiza una sanción</b> → No cumple; <b>sólo recomendación de mejora</b> → Mayoritariamente; <b>ni mejoras ni recomendaciones</b> → Cumple. El quinto sentido es No aplica.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Lineamientos, OCTAVO, apartado B, p. 12 del PDF: «2. Cumple Mayoritariamente… el Auditor deberá incluir al menos una recomendación de mejora… 3. Cumple Parcialmente… por no contar con evidencia objetiva… 4. No cumple… o bien, se trata de un incumplimiento que actualiza una sanción».</span></div>
   </div>
 </article></div></section><section id="t312"><h2>3.1.2 · Reglamento de Supervisión</h2><div class="clin"><article class="qc" id="p8">
   <div class="hd"><span class="no">Pregunta 8</span><span class="k">3.1.2</span><span class="mal hi">Contestaron mal: 10 de 20 (50 %)</span></div>
@@ -411,10 +413,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) Supuestos de las visitas especiales</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> Tipos de visitas de inspección · <b>6 alumnos</b> (30 %)</li><li><b>b)</b> Supuestos de las visitas de investigación · <b>2 alumnos</b> (10 %)</li><li><b>a)</b> Definición de las visitas ordinarias · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>«Tipos de visitas» es la idea general del bloque de visitas, y por eso se elige cuando no se recuerda el número exacto. Los arts. 5 a 9 hablan todos de visitas; sin el mapa de artículos, cualquiera parece correcta.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Recítalo en orden: <b>5</b> tipos (ordinarias, especiales, de investigación) · <b>6</b> ordinarias · <b>7</b> programa anual · <b>8</b> especiales y sus seis supuestos · <b>9</b> investigación.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Reglamento de Supervisión, arts. 5 a 9 (pp. 6–7)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>d)</b> Tipos de visitas de inspección · <b>6 alumnos</b> (30 %)<span class="ex">Eligieron «tipos de visitas»: es el art. 5, el que abre el capítulo. Recordaron el tema (visitas), no el número.</span></li><li><b>b)</b> Supuestos de las visitas de investigación · <b>2 alumnos</b> (10 %)<span class="ex">Las visitas de investigación son el art. 9.</span></li><li><b>a)</b> Definición de las visitas ordinarias · <b>1 alumno</b> (5 %)<span class="ex">Las ordinarias se definen en el art. 6.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>«Tipos de visitas» es la idea general del bloque de visitas, y por eso se elige cuando no se recuerda el número exacto. Los arts. 5 a 9 hablan todos de visitas; sin el mapa de artículos, cualquiera parece correcta.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Recítalo en orden: <b>5</b> tipos · <b>6</b> ordinarias · <b>7</b> programa anual · <b>8</b> especiales (seis supuestos) · <b>9</b> investigación · <b>10</b> investigación a quien opera sin autorización.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Reglamento de Supervisión, art. 5, p. 6 del PDF: «Las visitas de inspección… podrán ser ordinarias, especiales o de investigación». Art. 8, pp. 6–7: «La Comisión podrá llevar a cabo visitas especiales, no incluidas en el programa anual…, en cualquiera de los supuestos siguientes…».</span></div>
   </div>
 </article><article class="qc" id="p9">
   <div class="hd"><span class="no">Pregunta 9</span><span class="k">3.1.2</span><span class="mal hi">Contestaron mal: 8 de 20 (40 %)</span></div>
@@ -423,10 +425,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) 2, 4</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1, 2 · <b>3 alumnos</b> (15 %)</li><li><b>b)</b> 1, 3 · <b>2 alumnos</b> (10 %)</li><li><b>d)</b> 3, 4 · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Los enunciados 1 y 3 describen algo que no estaba en el programa anual, igual que una visita especial. Especial e investigación están las dos fuera del programa anual, así que se confunden.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>La palabra <b>«indicios»</b> es de investigación: de una conducta (art. 9) o de alguien que opera sin autorización (art. 10). La especial nace de un <b>hecho de la entidad</b>: seguimiento de una visita, cambios en su situación, inicio de operaciones después del programa, hechos no contemplados o cooperación internacional.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Reglamento de Supervisión, art. 8 fr. III y IV (pp. 6–7); arts. 9 y 10 (p. 7)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> 1, 2 · <b>3 alumnos</b> (15 %)<span class="ex">Metieron el enunciado 1 («indicios de alguna conducta»). Es el supuesto de la visita de investigación del art. 9.</span></li><li><b>b)</b> 1, 3 · <b>2 alumnos</b> (10 %)<span class="ex">Los dos enunciados (1 y 3) son de investigación: arts. 9 y 10.</span></li><li><b>d)</b> 3, 4 · <b>2 alumnos</b> (10 %)<span class="ex">El 3 (operar sin autorización) es investigación, art. 10.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Los enunciados 1 y 3 describen algo que no estaba en el programa anual, igual que una visita especial. Especial e investigación están las dos fuera del programa anual, así que se confunden.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>La palabra <b>«indicios»</b> delata la investigación. La especial nace de un <b>hecho de la entidad</b>: seguimiento de una visita, cambios en su situación, inicio de operaciones después del programa, hechos no contemplados o cooperación internacional.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Reglamento de Supervisión, art. 8, pp. 6–7 del PDF: «III. Cuando se presenten cambios o modificaciones en la situación contable, legal, económica, financiera o administrativa…; IV. Cuando una Entidad Supervisada inicie operaciones después de la elaboración del programa anual…». Art. 9, p. 7: «…siempre que la Comisión tenga indicios…». Art. 10, p. 7: «…cuando tenga indicios de que cualquier persona, sin contar con la autorización correspondiente: I. Opere como Entidad Supervisada o se ostente con tal carácter…».</span></div>
   </div>
 </article><article class="qc" id="p10">
   <div class="hd"><span class="no">Pregunta 10</span><span class="k">3.1.2</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span></div>
@@ -435,10 +437,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) Prevención y corrección</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> Inspección mediante visitas · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 10 % eligió inspección porque la orden llega después de una visita.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>La visita es inspección. Lo que se ordena <b>después</b> para corregir (acciones, medidas correctivas o programas de cumplimiento forzoso) es prevención y corrección.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">LCNBV, art. 5; Reglamento de Supervisión, art. 52 (p. 19)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> Inspección mediante visitas · <b>2 alumnos</b> (10 %)<span class="ex">Eligieron inspección porque la orden llega después de una visita. La visita fue inspección; la orden de corregir ya es otra facultad.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 10 % eligió inspección porque la orden llega después de una visita.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>La <b>visita</b> es inspección. Lo que se <b>ordena después para corregir</b> (acciones, medidas correctivas o programas de cumplimiento forzoso) es prevención y corrección.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Reglamento de Supervisión, art. 52, p. 19 del PDF: «La Comisión podrá… ordenar a las Entidades Supervisadas o Personas, mediante oficio, la adopción de las acciones o medidas tendientes a corregir los hechos, actos u omisiones…» (Título Cuarto, Capítulo II «De la adopción de acciones, medidas correctivas y programas de cumplimiento forzoso»).</span></div>
   </div>
 </article><article class="qc" id="p11">
   <div class="hd"><span class="no">Pregunta 11</span><span class="k">3.1.2</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span></div>
@@ -447,10 +449,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) 1c, 2b, 3a</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1a, 2b, 3d · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El error le dio a inspección las medidas correctivas y a prevención y corrección el plazo para ofrecer pruebas.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Inspección = <b>visitas</b>; vigilancia = <b>información que se entrega</b>; prevención y corrección = <b>medidas y programas</b>. El plazo para manifestar y ofrecer pruebas es del trámite de observaciones, no una facultad: es el distractor que sobra.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Reglamento de Supervisión, arts. 4 y 5 (pp. 5–6), 43 (p. 16) y 52 (p. 19)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> 1a, 2b, 3d · <b>1 alumno</b> (5 %)<span class="ex">Le dio a inspección las medidas correctivas y a prevención y corrección el plazo para ofrecer pruebas.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El error le dio a inspección las medidas correctivas y a prevención y corrección el plazo para ofrecer pruebas.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Inspección = <b>visitas</b>; vigilancia = <b>análisis de la información que se entrega</b>; prevención y corrección = <b>medidas y programas</b>. El plazo de 10 días hábiles para manifestar y ofrecer pruebas es del <b>emplazamiento a sanción</b>, no una facultad: es el distractor que sobra.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Reglamento de Supervisión, art. 5, p. 6 del PDF (visitas ordinarias, especiales o de investigación); art. 43, p. 16: «La vigilancia se efectuará a través del análisis de la información…»; art. 52, p. 19 (acciones y medidas correctivas). El plazo del distractor: art. 62, p. 22: «…dentro de un plazo de 10 días hábiles… manifieste por escrito lo que a su derecho convenga, ofrezca pruebas…».</span></div>
   </div>
 </article><article class="qc" id="p12">
   <div class="hd"><span class="no">Pregunta 12</span><span class="k">3.1.2</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span></div>
@@ -459,10 +461,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) 1c, 2a, 3b</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1a, 2b, 3c · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El error leyó la lista en el orden a, b, c sin relacionarla.</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> 1a, 2b, 3c · <b>1 alumno</b> (5 %)<span class="ex">Relacionó en el orden de la lista (1a, 2b, 3c) sin leer las características.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El error leyó la lista en el orden a, b, c sin relacionarla.</span></div>
     <div class="regla"><b>Cómo cachar el error</b><span><b>Indicios</b> → investigación; <b>programa anual</b> → ordinaria; <b>fuera del programa por un hecho de la entidad</b> → especial.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Reglamento de Supervisión, arts. 6 a 9 (pp. 6–7)</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Reglamento de Supervisión, art. 6, p. 6 del PDF: «Las visitas ordinarias serán aquéllas que se efectúen de conformidad con el programa anual…»; art. 8, pp. 6–7 (especiales, «no incluidas en el programa anual»); art. 9, p. 7: «Las visitas de investigación se efectuarán siempre que la Comisión tenga indicios…».</span></div>
   </div>
 </article><article class="qc" id="p13">
   <div class="hd"><span class="no">Pregunta 13</span><span class="k">3.1.2</span><span class="mal">Contestaron mal: 1 de 20 (5 %)</span></div>
@@ -471,10 +473,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) Al menos dos días hábiles antes de la visita</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Nadie eligió una opción equivocada; un alumno la dejó en blanco.</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Nadie eligió una opción equivocada; un alumno la dejó en blanco.</span></div>
     <div class="regla"><b>Cómo cachar el error</b><span>Ordinarias y especiales: aviso con <b>al menos 2 días hábiles</b>. La de investigación puede notificarse <b>en el acto de inicio</b>: ese es el distractor d).</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Reglamento de Supervisión, art. 21 (p. 10)</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Reglamento de Supervisión, art. 21, p. 10 del PDF: «La orden de visita deberá notificarse al menos con dos días hábiles de anticipación… cuando se trate de visitas ordinarias y especiales. En el caso de visitas de investigación, podrá notificarse en el acto de inicio de la misma».</span></div>
   </div>
 </article></div></section><section id="t321"><h2>3.2.1 · Guía EBR del GAFI</h2><div class="clin"><article class="qc" id="p14">
   <div class="hd"><span class="no">Pregunta 14</span><span class="k">3.2.1</span><span class="mal">Contestaron mal: 5 de 20 (25 %)</span></div>
@@ -483,10 +485,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) 1, 3, 5</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1, 2, 4 · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 2, 3, 5 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 15 % eligió la opción con «clientes de bajo riesgo» y «competencia». La Guía habla de clientes de <b>alto</b> riesgo, y la competencia no aparece.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>La lista del párr. 56: naturaleza, escala, diversidad y complejidad del negocio; mercados a los que se dirige; clientes ya identificados como de <b>alto</b> riesgo; jurisdicciones; canales de distribución; auditoría interna y resultados de regulación; volumen y alcance de operaciones. Si un enunciado dice «bajo riesgo», está cambiado.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">GAFI, Guía EBR Sector Bancario, Sección III, párr. 56 (p. 21)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> 1, 2, 4 · <b>3 alumnos</b> (15 %)<span class="ex">Eligieron la opción con «número de clientes de bajo riesgo» y «competencia y participación de mercado». La Guía habla de clientes de <b>alto</b> riesgo, y la competencia no está en la lista.</span></li><li><b>d)</b> 2, 3, 5 · <b>1 alumno</b> (5 %)<span class="ex">Metió los clientes de bajo riesgo (2) y sacó los mercados a los que se dirige (1).</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 15 % eligió la opción con «clientes de bajo riesgo» y «competencia». La Guía habla de clientes de <b>alto</b> riesgo, y la competencia no aparece.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Lista del párr. 56: naturaleza, escala, diversidad y complejidad del negocio; mercados a los que se dirige; clientes ya identificados como de <b>alto</b> riesgo; jurisdicciones; canales de distribución; auditoría interna y resultados de regulación; volumen y alcance de operaciones. Si dice «bajo riesgo», está cambiado.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">GAFI, Guía EBR Sector Bancario, párr. 56, p. 21 del PDF: «…Los mercados a los que se dirige; El número de clientes que ya han sido identificados como de alto riesgo; …La auditoría interna y los resultados de regulación; El volumen y alcance de sus operaciones…».</span></div>
   </div>
 </article><article class="qc" id="p15">
   <div class="hd"><span class="no">Pregunta 15</span><span class="k">3.2.1</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
@@ -495,10 +497,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">b) Ajuste de la intensidad de la supervisión en materia de ALA/CFT</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> Ajuste de la frecuencia y naturaleza de la supervisión continua · <b>3 alumnos</b> (15 %)</li><li><b>c)</b> Ajuste de la intensidad de los controles para la autorización · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 15 % eligió frecuencia y naturaleza; el 10 %, los controles para la autorización. Los tres hablan de qué hace el supervisor según el riesgo.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>«<b>Alcance o nivel de evaluación</b>» es la firma de la intensidad: qué tan a fondo se revisa. Frecuencia es cada cuándo; autorización es al entrar al mercado.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">GAFI, Sección II, ajuste d) de la intensidad de la supervisión (p. 16)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> Ajuste de la frecuencia y naturaleza de la supervisión continua · <b>3 alumnos</b> (15 %)<span class="ex">Eligieron «frecuencia y naturaleza de la supervisión continua»: es otro de los ajustes del supervisor, pero habla de cada cuándo, no de qué tan a fondo.</span></li><li><b>c)</b> Ajuste de la intensidad de los controles para la autorización · <b>2 alumnos</b> (10 %)<span class="ex">«Intensidad de los controles para la autorización» es el ajuste al entrar al mercado (licencias), no el alcance de la revisión.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 15 % eligió frecuencia y naturaleza; el 10 %, los controles para la autorización. Los tres hablan de qué hace el supervisor según el riesgo.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>«<b>Alcance o nivel de evaluación</b>» = intensidad: qué tan a fondo. Frecuencia = cada cuándo. Autorización = al entrar al mercado.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">GAFI, Guía EBR Sector Bancario, Sección II, p. 16 del PDF: «d) Ajuste de la intensidad de la supervisión en materia de ALA/CFT: los supervisores deben determinar el alcance o nivel de evaluación apropiados en función de los riesgos identificados…».</span></div>
   </div>
 </article><article class="qc" id="p16">
   <div class="hd"><span class="no">Pregunta 16</span><span class="k">3.2.1</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span></div>
@@ -507,10 +509,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1, 4, 5</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1, 2, 3 · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 2, 4, 5 · <b>3 alumnos</b> (15 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>«Costo económico» y «grupos de trabajo» son retos de cualquier proyecto real, así que suenan lógicos. La pregunta pide «retos» y el sentido común dice que el costo es un reto. La Guía no lo nombra.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Los retos son <b>seis títulos</b> de la Sección I.D: Asignación de responsabilidades · Identificación del riesgo · Evaluación del riesgo · Mitigación del riesgo · Desarrollo de un entendimiento común del EBR · Inclusión financiera. Si no es uno de esos títulos, no es reto.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">GAFI, Guía EBR Sector Bancario, Sección I.D, párr. 17 y siguientes (pp. 10–12)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> 1, 2, 3 · <b>3 alumnos</b> (15 %)<span class="ex">Metieron «costo económico» y «desarrollo de grupos de trabajo»: son retos de sentido común, pero la Guía no los nombra; y dejaron fuera inclusión financiera y mitigación.</span></li><li><b>d)</b> 2, 4, 5 · <b>3 alumnos</b> (15 %)<span class="ex">Metieron el costo económico (2) en lugar de la asignación de responsabilidades (1).</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>«Costo económico» y «grupos de trabajo» son retos de cualquier proyecto real, así que suenan lógicos. La pregunta pide «retos» y el sentido común dice que el costo es un reto. La Guía no lo nombra.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Los retos son <b>seis títulos</b> de la Sección I.D: Asignación de responsabilidades · Identificación del riesgo · Evaluación del riesgo · Mitigación del riesgo · Desarrollo de un entendimiento común del EBR · Inclusión financiera. El costo no es título.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">GAFI, Guía EBR Sector Bancario, Sección I.D, pp. 10–12 del PDF: «17. Poner en práctica el EBR puede plantear una serie de desafíos: ASIGNACIÓN DE RESPONSABILIDADES EN UN EBR… IDENTIFICACIÓN DEL RIESGO DE LA/FT… EVALUACIÓN DEL RIESGO DE LA/FT… MITIGACIÓN DEL RIESGO DE LA/FT… DESARROLLO DE UN ENTENDIMIENTO COMÚN DE EBR… INCLUSIÓN FINANCIERA».</span></div>
   </div>
 </article><article class="qc" id="p17">
   <div class="hd"><span class="no">Pregunta 17</span><span class="k">3.2.1 · 3.2.2</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span></div>
@@ -519,10 +521,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1a, 1b, 2c, 2d, 1e, 2f, 1g, 2h, 2i</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1a, 1b, 1c, 2d, 2e, 1f, 1g, 2h, 2i · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 2a, 2b, 2c, 1d, 1e, 1f, 1g, 2h, 2i · <b>2 alumnos</b> (10 %)</li><li><b>c)</b> 2a, 2b, 1c, 1d, 1e, 2f, 1g, 1h, 1i · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Identificar, evaluar y mitigar aparecen en los dos documentos con palabras casi iguales. El elemento f de Basilea es casi la suma de a, e y g, así que se reparten mal.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span><b>Suelto</b> (identificación, evaluación, mitigación) es reto del GAFI. <b>En bloque de cuatro verbos</b> («evaluación, comprensión, gestión y mitigación») es Basilea. Inclusión financiera sólo es reto. Basilea nombra procesos del banco con su cliente: aceptación, seguimiento, información, notificación.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">GAFI, Sección I.D (pp. 10–12); Basilea, Adecuada gestión de los riesgos BC/FT, apartado II.1 (pp. 8–17)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> 1a, 1b, 1c, 2d, 2e, 1f, 1g, 2h, 2i · <b>3 alumnos</b> (15 %)<span class="ex">Mandaron la política de aceptación de clientes (c) y la evaluación, comprensión, gestión y mitigación (f) al GAFI, y la evaluación del riesgo (e) a Basilea.</span></li><li><b>d)</b> 2a, 2b, 2c, 1d, 1e, 1f, 1g, 2h, 2i · <b>2 alumnos</b> (10 %)<span class="ex">Mandaron identificación e inclusión (a, b) a Basilea: invirtieron casi todo.</span></li><li><b>c)</b> 2a, 2b, 1c, 1d, 1e, 2f, 1g, 1h, 1i · <b>1 alumno</b> (5 %)<span class="ex">Invirtió los dos documentos.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Identificar, evaluar y mitigar aparecen en los dos documentos con palabras casi iguales. El elemento f de Basilea es casi la suma de a, e y g, así que se reparten mal.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span><b>Suelto</b> (identificación, evaluación, mitigación) = reto del GAFI. <b>En bloque de cuatro verbos</b> («evaluación, comprensión, gestión y mitigación») = Basilea. Inclusión financiera sólo es reto. Basilea nombra procesos del banco con su cliente: aceptación, seguimiento, información, notificación.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">GAFI, Sección I.D, pp. 10–12 del PDF (títulos de los seis retos). Basilea, Adecuada gestión de los riesgos BC/FT, índice, p. 3 del PDF: «II. Elementos esenciales de una sólida gestión del riesgo BC/FT: 1. Evaluación, comprensión, gestión y mitigación de riesgos; 2. Política de aceptación de clientes; 3. Identificación, verificación y elaboración del perfil de riesgo de clientes y beneficiarios efectivos; 4. Seguimiento continuo; 5. Gestión de la información; 6. Notificación de transacciones sospechosas y bloqueo de activos».</span></div>
   </div>
 </article></div></section><section id="t322"><h2>3.2.2 · Basilea</h2><div class="clin"><article class="qc" id="p18">
   <div class="hd"><span class="no">Pregunta 18</span><span class="k">3.2.2</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
@@ -531,10 +533,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) 1a, 2b, 3a, 4b</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 1b, 2a, 3a, 4b · <b>4 alumnos</b> (20 %)</li><li><b>b)</b> 1a, 2b, 3b, 4a · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 20 % invirtió los dos primeros: le dio al GAFI la gestión global del riesgo y a Basilea los principios.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span><b>Basilea mira al banco por dentro</b>: integrar el riesgo LA/FT en su gestión global y cuidar su seguridad y solvencia. <b>El GAFI habla de principios</b> y de un entendimiento común entre autoridades y bancos.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Basilea, Introducción, párr. 1 (p. 5) y párr. 5 (p. 6); GAFI, Propósito de la Guía, párr. 4 (p. 6)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>c)</b> 1b, 2a, 3a, 4b · <b>4 alumnos</b> (20 %)<span class="ex">Invirtieron los dos primeros: le dieron al GAFI «integrar los riesgos en la gestión global» y a Basilea «preparar los principios».</span></li><li><b>b)</b> 1a, 2b, 3b, 4a · <b>1 alumno</b> (5 %)<span class="ex">Acertó los dos primeros pero invirtió 3 y 4: le dio al GAFI la seguridad y solvencia (que es de Basilea) y a Basilea el entendimiento común (que es del GAFI).</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 20 % invirtió los dos primeros: le dio al GAFI la gestión global del riesgo y a Basilea los principios.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span><b>Basilea mira al banco por dentro</b>: incluir el riesgo BC/FT en su gestión global y cuidar su seguridad y solvencia. <b>El GAFI habla de principios</b> y de un entendimiento común entre autoridades y bancos.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Basilea, párr. 1, p. 5 del PDF: «…directrices sobre la forma en que los bancos deberán incluir el blanqueo de capitales (BC) y la financiación del terrorismo (FT) dentro de su gestión global del riesgo»; párr. 5, p. 6: «Una sólida gestión del riesgo BC/FT tiene especial relevancia para la seguridad y solvencia generales de los bancos y del sistema bancario». GAFI, párr. 4, p. 6: «Preparar los principios que deben ponerse en práctica en la aplicación de un enfoque basado en riesgo… Sobre todo, fomentar el desarrollo de un entendimiento común…».</span></div>
   </div>
 </article><article class="qc" id="p19">
   <div class="hd"><span class="no">Pregunta 19</span><span class="k">3.2.2</span><span class="mal hi">Contestaron mal: 11 de 20 (55 %)</span></div>
@@ -543,10 +545,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) 1, 2, 4, 8, 9, 10</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 2, 4, 5, 6, 8, 10 · <b>5 alumnos</b> (25 %)</li><li><b>b)</b> 1, 3, 4, 5, 8, 10 · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 2, 4, 6, 7, 9, 10 · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>«Controles internos» suena esencial para cualquier banco, y «ajuste de la intensidad de la supervisión» suena a enfoque basado en riesgo. Los dos son conceptos reales, pero vienen de otros textos: el ajuste de intensidad es de la Guía del GAFI para <b>supervisores</b>, e identificación del riesgo e inclusión financiera son retos del GAFI.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Basilea II.1 tiene <b>seis</b> elementos: Evaluación, comprensión, gestión y mitigación de riesgos · Política de aceptación de clientes · Identificación, verificación y perfil de riesgo de clientes y beneficiarios efectivos · Seguimiento continuo · Gestión de la información · Notificación de transacciones sospechosas y bloqueo de activos. Si la opción habla de lo que hace el supervisor, no es Basilea II.1.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Basilea, apartado II.1 (pp. 8–17); GAFI, Sección II, ajuste d) de la intensidad de la supervisión (p. 16)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>c)</b> 2, 4, 5, 6, 8, 10 · <b>5 alumnos</b> (25 %)<span class="ex">Metieron «ajuste de la intensidad de la supervisión» (5), que es un ajuste del supervisor en la Guía del GAFI, y «controles internos» (6); dejaron fuera notificación (1) y seguimiento continuo (9).</span></li><li><b>b)</b> 1, 3, 4, 5, 8, 10 · <b>3 alumnos</b> (15 %)<span class="ex">Metieron «identificación del riesgo de LA/FT» (3), que es un reto del GAFI, y el ajuste de intensidad (5).</span></li><li><b>d)</b> 2, 4, 6, 7, 9, 10 · <b>2 alumnos</b> (10 %)<span class="ex">Metieron controles internos (6) e inclusión financiera (7), que es reto del GAFI.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>«Controles internos» suena esencial para cualquier banco, y «ajuste de la intensidad de la supervisión» suena a enfoque basado en riesgo. Los dos son conceptos reales, pero vienen de otros textos: el ajuste de intensidad es de la Guía del GAFI para <b>supervisores</b>, e identificación del riesgo e inclusión financiera son retos del GAFI.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Basilea II.1 tiene <b>seis</b> elementos con nombre fijo (ver fundamento). Si la opción habla de lo que hace el <b>supervisor</b> o de un <b>reto</b>, viene del GAFI.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Basilea, índice, p. 3 del PDF, y Sección II, pp. 8–17: «1. Evaluación, comprensión, gestión y mitigación de riesgos… 2. Política de aceptación de clientes… 3. Identificación, verificación y elaboración del perfil de riesgo de clientes y beneficiarios efectivos… 4. Seguimiento continuo… 5. Gestión de la información… 6. Notificación de transacciones sospechosas y bloqueo de activos». Contraste: GAFI, Sección II, p. 16: «d) Ajuste de la intensidad de la supervisión…».</span></div>
   </div>
 </article><article class="qc" id="p20">
   <div class="hd"><span class="no">Pregunta 20</span><span class="k">3.2.2</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
@@ -555,10 +557,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) 1a, 2d, 3b</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> 1a, 2d, 3c · <b>3 alumnos</b> (15 %)</li><li><b>c)</b> 1d, 2a, 3b · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 15 % le dio a las unidades de negocio «promover una sólida gestión del riesgo»; el 10 % invirtió auditoría interna y responsable de PBC/FT.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Primera línea: <b>identifica, evalúa y controla</b> los riesgos de sus actividades. Segunda: <b>seguimiento continuo</b> del cumplimiento. Tercera: <b>evalúa de forma independiente</b> y rinde cuentas al comité de auditoría. «Promover una sólida gestión» es el objetivo del documento, no la función de una línea.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Basilea, II.1 c), párr. 19 a 26 (pp. 9–10)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>b)</b> 1a, 2d, 3c · <b>3 alumnos</b> (15 %)<span class="ex">Le dieron a las unidades de negocio «promover una sólida gestión del riesgo». Esa frase es el objetivo del documento, no la función de la primera línea.</span></li><li><b>c)</b> 1d, 2a, 3b · <b>2 alumnos</b> (10 %)<span class="ex">Invirtió auditoría interna y responsable de PBC/FT.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 15 % le dio a las unidades de negocio «promover una sólida gestión del riesgo»; el 10 % invirtió auditoría interna y responsable de PBC/FT.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>1.ª línea <b>identifica, evalúa y controla</b> los riesgos de sus actividades; 2.ª da <b>seguimiento continuo</b> al cumplimiento; 3.ª <b>evalúa de forma independiente</b> y rinde cuentas al comité de auditoría.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Basilea, II.1 c), párr. 19, p. 9 del PDF: «…las unidades de negocio… constituyen la primera línea de defensa encargada de identificar, evaluar y controlar los riesgos de sus actividades»; párr. 26, p. 10: «La auditoría interna, la tercera línea de defensa, desempeña una función importante al evaluar de forma independiente la gestión y los controles del riesgo, rindiendo cuentas al comité de auditoría del Consejo…».</span></div>
   </div>
 </article><article class="qc" id="p21">
   <div class="hd"><span class="no">Pregunta 21</span><span class="k">3.2.2</span><span class="mal">Contestaron mal: 5 de 20 (25 %)</span></div>
@@ -567,10 +569,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) 1a, 2d, 3f</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> 1a, 2e, 3c · <b>2 alumnos</b> (10 %)</li><li><b>c)</b> 1b, 2d, 3c · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 10 % puso al auditor externo como tercera línea; otro 10 %, al gobierno corporativo como primera.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Las tres líneas están <b>dentro</b> del banco: el negocio (promotoría), cumplimiento (Oficial de Cumplimiento) y auditoría interna. El auditor externo, el Consejo y la alta dirección no son ninguna de las tres.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Basilea, II.1 c), párr. 19 a 26 (pp. 9–10)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>b)</b> 1a, 2e, 3c · <b>2 alumnos</b> (10 %)<span class="ex">Pusieron a la alta dirección como segunda línea y al auditor externo como tercera. Ninguno de los dos es línea de defensa.</span></li><li><b>c)</b> 1b, 2d, 3c · <b>2 alumnos</b> (10 %)<span class="ex">Pusieron al gobierno corporativo como primera línea y al auditor externo como tercera.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 10 % puso al auditor externo como tercera línea; otro 10 %, al gobierno corporativo como primera.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Las tres líneas están <b>dentro</b> del banco: negocio (promotoría), cumplimiento (Oficial de Cumplimiento) y <b>auditoría interna</b>. Consejo, alta dirección y auditor externo no son líneas.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Basilea, II.1 c), párr. 19, p. 9 del PDF: «…las unidades de negocio (por ejemplo, las actividades de cara al público…) constituyen la primera línea… El departamento de auditoría interna constituye la tercera línea de defensa».</span></div>
   </div>
 </article></div></section><section id="t331"><h2>3.3.1 · Metodología de evaluación de riesgos</h2><div class="clin"><article class="qc" id="p22">
   <div class="hd"><span class="no">Pregunta 22</span><span class="k">3.3.1</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span></div>
@@ -579,10 +581,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">d) Productos y servicios, y países y áreas geográficas</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> Frecuencia y monto de las transacciones del Cliente · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El único error eligió frecuencia y monto, que es un indicador de transacciones, no un elemento.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Los cuatro elementos mínimos son: clientes y/o usuarios; países y áreas geográficas; productos y servicios; transacciones y canales. Lo demás (actividad, nacionalidad, domicilio, frecuencia, incidencia) son <b>indicadores</b> dentro de esos elementos.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Guía de Metodología, definición IV (p. 2)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>b)</b> Frecuencia y monto de las transacciones del Cliente · <b>1 alumno</b> (5 %)<span class="ex">Eligió «frecuencia y monto de las transacciones»: es un indicador del elemento transacciones, no un elemento.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El único error eligió frecuencia y monto, que es un indicador de transacciones, no un elemento.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Los cuatro elementos mínimos: <b>clientes y/o usuarios · países y áreas geográficas · productos y servicios · transacciones y canales</b>. Actividad, nacionalidad, domicilio, frecuencia o incidencia son indicadores.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Guía CNBV de Metodología de Evaluación de Riesgos, definición IV, p. 2 del PDF: «Elementos de Riesgo… considerando al menos los siguientes: Clientes y/o Usuarios; países y áreas geográficas; productos y servicios; transacciones y canales de envío o distribución…».</span></div>
   </div>
 </article><article class="qc" id="p23">
   <div class="hd"><span class="no">Pregunta 23</span><span class="k">3.3.1</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span></div>
@@ -591,10 +593,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">d) 2, 4</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> 1, 4 · <b>2 alumnos</b> (10 %)</li><li><b>c)</b> 2, 3 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 10 % aceptó los «24 meses». La Guía dice <b>12 meses</b>.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Tres disparadores: <b>12 meses</b> desde los resultados de la implementación, <b>nuevos Riesgos</b> y <b>actualización de la ENR</b>. No hay revisión semestral. Si cambian el número de meses, la opción ya es falsa.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Guía de Metodología, III. Valoración (p. 12)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>b)</b> 1, 4 · <b>2 alumnos</b> (10 %)<span class="ex">Aceptaron el enunciado de «24 meses». La Guía dice 12 meses: cambiaron la cifra.</span></li><li><b>c)</b> 2, 3 · <b>1 alumno</b> (5 %)<span class="ex">Metió la revisión «semestral», que la Guía no pide.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 10 % aceptó los «24 meses». La Guía dice <b>12 meses</b>.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Tres disparadores: <b>12 meses</b> desde los resultados de la implementación, <b>nuevos Riesgos</b> y <b>actualización de la ENR</b>. Si cambian el número, la opción ya es falsa.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Guía CNBV de Metodología, III. Valoración, p. 12 del PDF: «…actualizar su Metodología de Evaluación de Riesgos en un plazo no mayor a 12 meses contados a partir de que cuente con los resultados de su implementación, cuando se detecte la existencia de nuevos Riesgos o cuando se actualice la Evaluación Nacional de Riesgos…».</span></div>
   </div>
 </article><article class="qc" id="p24">
   <div class="hd"><span class="no">Pregunta 24</span><span class="k">3.3.1</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
@@ -603,10 +605,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) Identificar cambios en el grado de exposición al Riesgo</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> Comprender y evaluar el Riesgo específico de cada Cliente · <b>4 alumnos</b> (20 %)</li><li><b>b)</b> Determinar el Grado de Riesgo asignado a cada Cliente · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 20 % eligió «el Riesgo de cada Cliente». Eso es el grado de riesgo del cliente (tema 3.3.2), no la metodología de la entidad.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>La metodología mide a la <b>entidad</b>; su revisión sirve para identificar cambios en el grado de exposición al Riesgo. Si la opción habla de un Cliente, es del otro tema.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Guía de Metodología, III. Valoración (p. 12)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> Comprender y evaluar el Riesgo específico de cada Cliente · <b>4 alumnos</b> (20 %)<span class="ex">Eligieron «comprender y evaluar el Riesgo específico de cada Cliente»: eso es el grado de riesgo del cliente (tema 3.3.2), no la metodología de la entidad.</span></li><li><b>b)</b> Determinar el Grado de Riesgo asignado a cada Cliente · <b>1 alumno</b> (5 %)<span class="ex">«Grado de Riesgo de cada Cliente» también es del cliente, no de la entidad.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 20 % eligió «el Riesgo de cada Cliente». Eso es el grado de riesgo del cliente (tema 3.3.2), no la metodología de la entidad.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>La metodología mide a la <b>entidad</b>; su revisión sirve para identificar cambios en el grado de exposición al Riesgo. Si la opción habla de «cada Cliente», es del otro tema.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Guía CNBV de Metodología, III. Valoración, p. 12 del PDF: «…lo anterior, con el objeto de identificar los cambios en el grado de exposición al Riesgo…».</span></div>
   </div>
 </article><article class="qc" id="p25">
   <div class="hd"><span class="no">Pregunta 25</span><span class="k">3.3.1</span><span class="mal">Contestaron mal: 5 de 20 (25 %)</span></div>
@@ -615,10 +617,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">b) 2, 3, 4</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1, 3, 5 · <b>2 alumnos</b> (10 %)</li><li><b>c)</b> 2, 3, 5 · <b>1 alumno</b> (5 %)</li><li><b>d)</b> 2, 4, 5 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Los errores metieron el enunciado 5, que es de la tercera fase, o el 1, que no es un proceso de la Guía.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>El diseño tiene tres procesos: <b>identificar</b> elementos e indicadores, <b>medir</b> con pesos e <b>identificar los Mitigantes implementados</b>. Revisar eficiencia y eficacia es la fase de <b>Valoración</b>.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Guía de Metodología, I. Diseño (pp. 4–10) y III. Valoración (p. 12)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> 1, 3, 5 · <b>2 alumnos</b> (10 %)<span class="ex">Metieron el 1 (identificar los delitos) y el 5 (revisar eficiencia y eficacia). El 5 es la tercera fase, Valoración.</span></li><li><b>c)</b> 2, 3, 5 · <b>1 alumno</b> (5 %)<span class="ex">Cambió la identificación de elementos e indicadores (4) por la revisión de eficacia (5).</span></li><li><b>d)</b> 2, 4, 5 · <b>1 alumno</b> (5 %)<span class="ex">Cambió el método de medición (3) por la revisión de eficacia (5).</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Los errores metieron el enunciado 5, que es de la tercera fase, o el 1, que no es un proceso de la Guía.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Diseño = tres procesos: <b>identificar elementos e indicadores · medir con pesos · identificar mitigantes implementados</b>. Revisar eficiencia y eficacia es <b>Valoración</b>.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Guía CNBV de Metodología, I. Diseño, p. 4 del PDF: «Es la primera fase… y comprende los procesos siguientes: 1. Identificación de los Elementos de Riesgo y sus correspondientes Indicadores…»; p. 8: «El método deberá establecer una relación entre los Indicadores… y el Elemento de Riesgo al que pertenecen, a fin de asignar un peso…»; p. 10: «…la identificación de los Mitigantes implementados…». III. Valoración, p. 12: «…comprende una revisión de la eficiencia y eficacia de la misma…».</span></div>
   </div>
 </article><article class="qc" id="p26">
   <div class="hd"><span class="no">Pregunta 26</span><span class="k">3.3.1</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span></div>
@@ -627,10 +629,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">d) 1c, 2d, 3b, 4a</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1a, 2c, 3b, 4d · <b>1 alumno</b> (5 %)</li><li><b>b)</b> 1c, 2b, 3a, 4d · <b>1 alumno</b> (5 %)</li><li><b>c)</b> 1c, 2d, 3a, 4b · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Los errores se repartieron. El cruce típico: «sucursales» suena a área geográfica, pero lo que importa es que reciben <b>efectivo</b>.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Fideicomiso que no individualiza → <b>producto</b>; joven accionista → <b>cliente</b>; municipio con incidencia → <b>área geográfica</b>; pagos en efectivo en sucursales → <b>canal</b>.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Guía de Metodología, tabla de Elementos de Riesgo e Indicadores (p. 5)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> 1a, 2c, 3b, 4d · <b>1 alumno</b> (5 %)<span class="ex">Puso el efectivo en sucursales como producto y el fideicomiso como cliente.</span></li><li><b>b)</b> 1c, 2b, 3a, 4d · <b>1 alumno</b> (5 %)<span class="ex">Puso el municipio con incidencia como cliente.</span></li><li><b>c)</b> 1c, 2d, 3a, 4b · <b>1 alumno</b> (5 %)<span class="ex">Cruzó el efectivo en sucursales con el municipio: pensó en «sucursal» = lugar.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Los errores se repartieron. El cruce típico: «sucursales» suena a área geográfica, pero lo que importa es que reciben <b>efectivo</b>.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Fideicomiso que no individualiza → <b>producto</b>; joven accionista → <b>cliente</b>; municipio con incidencia → <b>área geográfica</b>; pagos en <b>efectivo</b> en sucursales → <b>canal</b>.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Guía CNBV de Metodología, tabla de Elementos de Riesgo e Indicadores, p. 5 del PDF: Productos y servicios: «*Anonimato o falta de identificación…»; Clientes: «*Edad/fecha de constitución»; Áreas geográficas: «*Incidencia delictiva»; Transacciones y canales: «*Instrumento monetario, moneda o medios de pago de Riesgo».</span></div>
   </div>
 </article><article class="qc" id="p27">
   <div class="hd"><span class="no">Pregunta 27</span><span class="k">3.3.1</span><span class="mal hi">Contestaron mal: 9 de 20 (45 %)</span></div>
@@ -639,10 +641,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) Banca móvil que permite disponer de inmediato de los recursos</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> Tarjeta prepagada recargable que permite transferir valor · <b>7 alumnos</b> (35 %)</li><li><b>c)</b> Sucursal ubicada en un municipio fronterizo de alta marginación · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>«Transferir valor» suena a transacción, y por eso la tarjeta prepagada parece de canales. La tabla sí dice «transferencia de valor», pero la pone en Productos y servicios.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Pregúntate: ¿es <b>lo que el cliente contrata</b> o <b>por dónde opera</b>? Lo que contrata es Producto (anonimato, alto valor, facilita transferir valor). Por dónde opera es Canal (no presencial, acceso inmediato a los recursos, montos altos). La tarjeta es el producto; la app es la vía.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Guía CNBV para la elaboración de una Metodología de Evaluación de Riesgos, tabla de Elementos de Riesgo e Indicadores (p. 5)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>d)</b> Tarjeta prepagada recargable que permite transferir valor · <b>7 alumnos</b> (35 %)<span class="ex">Eligieron la tarjeta prepagada porque «transferir valor» suena a transacción. La tabla pone «facilitan la transferencia de valor» en <b>Productos y servicios</b>.</span></li><li><b>c)</b> Sucursal ubicada en un municipio fronterizo de alta marginación · <b>1 alumno</b> (5 %)<span class="ex">Municipio fronterizo de alta marginación es indicador de áreas geográficas.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>«Transferir valor» suena a transacción, y por eso la tarjeta prepagada parece de canales. La tabla sí dice «transferencia de valor», pero la pone en Productos y servicios.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Pregúntate: ¿es <b>lo que el cliente contrata</b> (producto) o <b>por dónde opera</b> (canal)? La tarjeta es el producto; la banca móvil es la vía.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Guía CNBV de Metodología, tabla, p. 5 del PDF: Productos y servicios: «*Productos o servicios que facilitan la transferencia de valor»; Transacciones y canales: «*Canales de envío no presenciales (como cajeros, medios electrónicos, etc.) *Canales con acceso inmediato a los recursos».</span></div>
   </div>
 </article></div></section><section id="t332"><h2>3.3.2 · Grado de riesgo del cliente</h2><div class="clin"><article class="qc" id="p28">
   <div class="hd"><span class="no">Pregunta 28</span><span class="k">3.3.2</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span></div>
@@ -651,10 +653,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">d) 2, 4</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 2, 3 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El único error eligió referencias personales en lugar de sociedades con vínculos patrimoniales.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Persona física de alto riesgo: <b>cónyuge, dependientes económicos y sociedades con vínculos patrimoniales</b>. Empleador y referencias no aparecen.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">DCG SOFIPO, 27ª (p. 28)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>c)</b> 2, 3 · <b>1 alumno</b> (5 %)<span class="ex">Cambió las sociedades con vínculos patrimoniales por las referencias personales.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El único error eligió referencias personales en lugar de sociedades con vínculos patrimoniales.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Persona física de alto riesgo: <b>cónyuge, dependientes económicos y sociedades con vínculos patrimoniales</b>.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">DCG SOFIPO, 27ª, p. 28 del PDF: «…procurarán obtener los datos señalados en el Capítulo II… respecto del cónyuge y dependientes económicos del Cliente, así como de las sociedades y asociaciones con las que mantenga vínculos patrimoniales, para el caso de personas físicas…».</span></div>
   </div>
 </article><article class="qc" id="p29">
   <div class="hd"><span class="no">Pregunta 29</span><span class="k">3.3.2</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
@@ -663,10 +665,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">d) 2, 3, 5, 6</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 2, 3, 4, 5 · <b>3 alumnos</b> (15 %)</li><li><b>b)</b> 1, 3, 4, 5 · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 15 % metió la frecuencia de pagos y dejó fuera el destino de los recursos; el 10 % metió además el monto.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Los criterios describen <b>al cliente</b>: antecedentes, profesión, actividad o giro, origen y destino de los recursos, residencia y geolocalización. Monto y frecuencia de pagos son <b>perfil transaccional</b>, otra parte de la 27ª.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">DCG SOFIPO, 27ª, último párrafo (p. 28)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>c)</b> 2, 3, 4, 5 · <b>3 alumnos</b> (15 %)<span class="ex">Metieron la frecuencia mensual de pagos (4) y dejaron fuera el destino de los recursos (6).</span></li><li><b>b)</b> 1, 3, 4, 5 · <b>2 alumnos</b> (10 %)<span class="ex">Metieron el monto y la frecuencia de pagos (1, 4) y sacaron antecedentes y destino.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 15 % metió la frecuencia de pagos y dejó fuera el destino de los recursos; el 10 % metió además el monto.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Los criterios describen <b>al cliente</b>: antecedentes, profesión, actividad o giro, origen y destino de los recursos, residencia y geolocalización. Monto y frecuencia de pagos son <b>perfil transaccional</b>.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">DCG SOFIPO, 27ª, último párrafo, p. 28 del PDF: «…criterios conducentes a ese fin, que tomen en cuenta, entre otros aspectos, los antecedentes del Cliente, su profesión, actividad o giro del negocio, el origen y destino de sus recursos, el lugar de su residencia, Geolocalización…».</span></div>
   </div>
 </article><article class="qc" id="p30">
   <div class="hd"><span class="no">Pregunta 30</span><span class="k">3.3.2</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span></div>
@@ -675,10 +677,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) 2, 3</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> 2, 4 · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 10 % eligió a la estudiante en lugar del mexicano en banca privada que vive en España.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Alto como mínimo: <b>PEP extranjera</b> y <b>no residente asignado a banca privada</b>. Ni el monto, ni la edad, ni el tipo de crédito hacen alto por sí solos.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">DCG Bancos, 28ª (p. 43)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>d)</b> 2, 4 · <b>2 alumnos</b> (10 %)<span class="ex">Eligieron a la estudiante de maestría en lugar del mexicano en banca privada que vive en España. Ni la edad ni el crédito estudiantil hacen alto riesgo.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 10 % eligió a la estudiante en lugar del mexicano en banca privada que vive en España.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Alto como mínimo: <b>PEP extranjera</b> y <b>no residente asignado a banca privada</b>.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">DCG Bancos, 28ª, p. 43 del PDF: «Se considerarán como Clientes de Grado de Riesgo alto, al menos a los Clientes no residentes en el país y que se encuentren asignados al segmento conocido como banca privada…, así como a las Personas Políticamente Expuestas extranjeras».</span></div>
   </div>
 </article><article class="qc" id="p31">
   <div class="hd"><span class="no">Pregunta 31</span><span class="k">3.3.2</span><span class="mal hi">Contestaron mal: 8 de 20 (40 %)</span></div>
@@ -687,10 +689,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) Alto y bajo</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> Alto, medio y bajo · <b>5 alumnos</b> (25 %)</li><li><b>c)</b> Bajo y medio · <b>1 alumno</b> (5 %)</li><li><b>d)</b> Medio y alto · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>«Alto, medio y bajo» es la escala que más se usa en la práctica. Tres grados sí son el mínimo, pero para personas morales y fideicomisos, no para personas físicas.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Mínimo en la 27ª: persona <b>física, 2</b> (alto y bajo); persona <b>moral y fideicomiso, 3</b> (alto, medio y bajo). La Entidad puede agregar grados intermedios. La moral tiene más capas.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">DCG SOFIPO, 27ª (pp. 27–28)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>b)</b> Alto, medio y bajo · <b>5 alumnos</b> (25 %)<span class="ex">Eligieron alto, medio y bajo: es el mínimo para personas <b>morales</b> y fideicomisos, no para personas físicas.</span></li><li><b>c)</b> Bajo y medio · <b>1 alumno</b> (5 %)<span class="ex">Bajo y medio no es ninguna de las dos escalas.</span></li><li><b>d)</b> Medio y alto · <b>1 alumno</b> (5 %)<span class="ex">Medio y alto tampoco.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>«Alto, medio y bajo» es la escala que más se usa en la práctica. Tres grados sí son el mínimo, pero para personas morales y fideicomisos, no para personas físicas.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Persona <b>física: 2</b> (alto y bajo). Persona <b>moral y fideicomiso: 3</b> (alto, medio y bajo). La moral tiene más capas.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">DCG SOFIPO, 27ª, pp. 27–28 del PDF: «…establecer, como mínimo, (i) dos clasificaciones respecto de sus Clientes personas físicas: Grados de Riesgo alto y bajo, y (ii) tres clasificaciones respecto de sus Clientes personas morales y Fideicomisos: Grados de Riesgo alto, medio y bajo».</span></div>
   </div>
 </article><article class="qc" id="p32">
   <div class="hd"><span class="no">Pregunta 32</span><span class="k">3.3.2</span><span class="mal">Contestaron mal: 5 de 20 (25 %)</span></div>
@@ -699,10 +701,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) Obtener la aprobación de un directivo con facultades específicas</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> Obtener la autorización previa del Comité de Comunicación y Control · <b>3 alumnos</b> (15 %)</li><li><b>c)</b> Presentar un reporte de Operación Inusual ante la Secretaría · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 15 % eligió al Comité de Comunicación y Control, porque es el órgano que dictamina.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>PEP con alto riesgo → <b>aprobación de un directivo con facultades específicas</b>, tanto para iniciar como para continuar. El Comité dictamina operaciones, no aprueba clientes.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">DCG SOFIPO, 28ª (p. 28)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>b)</b> Obtener la autorización previa del Comité de Comunicación y Control · <b>3 alumnos</b> (15 %)<span class="ex">Eligieron la autorización del Comité de Comunicación y Control. El Comité dictamina operaciones; no aprueba clientes.</span></li><li><b>c)</b> Presentar un reporte de Operación Inusual ante la Secretaría · <b>1 alumno</b> (5 %)<span class="ex">Un ROI no es requisito para continuar la relación con una PEP.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 15 % eligió al Comité de Comunicación y Control, porque es el órgano que dictamina.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>PEP + alto riesgo → <b>aprobación de un directivo con facultades específicas</b>, para iniciar y también para continuar.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">DCG SOFIPO, 28ª, p. 28 del PDF: «…detecte que la persona que pretenda ser Cliente o que ya lo sea… reúne los requisitos para ser considerado Persona Políticamente Expuesta y, además, como de Grado de Riesgo alto, dicha Entidad deberá… obtener la aprobación de un directivo o su equivalente que cuente con facultades específicas… a efecto de iniciar o, en su caso, continuar la relación comercial».</span></div>
   </div>
 </article></div></section><section id="t333"><h2>3.3.3 · ENR 2023</h2><div class="clin"><article class="qc" id="p33">
   <div class="hd"><span class="no">Pregunta 33</span><span class="k">3.3.3</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
@@ -711,10 +713,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1, 3 y 4</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> 3, 5 y 6 · <b>4 alumnos</b> (20 %)</li><li><b>a)</b> 2, 3 y 5 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El 20 % eligió juegos con apuesta y tarjetas prepagadas, que en 2023 son medio-bajo y medio.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Alto en 2023. Sistema financiero: sólo <b>Banca Múltiple G-7 y Banca Múltiple-Cambiarios</b>. Actividades vulnerables: <b>obras de arte, metales y joyas, monederos y certificados</b> (monederos subió de medio).</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">ENR 2023, Cap. IV: matriz sectorial (p. 21) y AV (p. 25)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>d)</b> 3, 5 y 6 · <b>4 alumnos</b> (20 %)<span class="ex">Eligieron obras de arte, juegos con apuesta y tarjetas prepagadas. Juegos con apuesta es medio-bajo y prepagadas es medio.</span></li><li><b>a)</b> 2, 3 y 5 · <b>1 alumno</b> (5 %)<span class="ex">Metió Banca Múltiple-Inversión (medio) y juegos con apuesta (medio-bajo).</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El 20 % eligió juegos con apuesta y tarjetas prepagadas, que en 2023 son medio-bajo y medio.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Alto en 2023: sistema financiero <b>sólo Banca Múltiple G-7 y Banca Múltiple-Cambiarios</b>; actividades vulnerables <b>obras de arte, metales y joyas, monederos y certificados</b>.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">ENR 2023, Cap. IV, matriz de riesgo sectorial, p. 21 del PDF: «BANCA MÚLTIPLE-CAMBIARIOS · 2020 ALTO · 2023 ALTO»; «BANCA MÚLTIPLE-INVERSIÓN · MEDIO · MEDIO». Riesgo de LD de las AV, p. 25: «OBRAS DE ARTE · ALTO · ALTO»; «MONEDEROS Y CERTIFICADOS… · MEDIO · ALTO»; «TARJETAS PREPAGADAS, VALES O CUPONES · MEDIO · MEDIO»; «JUEGOS CON APUESTA… · MEDIO-BAJO · MEDIO-BAJO».</span></div>
   </div>
 </article><article class="qc" id="p34">
   <div class="hd"><span class="no">Pregunta 34</span><span class="k">3.3.3</span><span class="mal hi">Contestaron mal: 11 de 20 (55 %)</span></div>
@@ -723,10 +725,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) 1, 5 y 6</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> 1, 4 y 5 · <b>6 alumnos</b> (30 %)</li><li><b>a)</b> 1, 2 y 3 · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 1, 2 y 6 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Uniones de crédito eran riesgo medio en 2020. Se recuerda el nivel de la evaluación anterior, no el de 2023.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Medio en 2023: <b>transmisores de dinero</b> (subieron de medio-bajo), <b>SOFOM reguladas</b> y <b>tarjetas prepagadas</b>. Uniones de crédito <b>bajaron</b> a medio-bajo; SOFOM no reguladas y tarjetas de servicios o de crédito son medio-bajo. Lee siempre la columna 2023.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">ENR 2023, Cap. IV: matriz de riesgo sectorial (p. 21) y riesgo de LD de las AV (p. 25)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>b)</b> 1, 4 y 5 · <b>6 alumnos</b> (30 %)<span class="ex">Metieron uniones de crédito: eran <b>medio en 2020</b>, pero bajaron a medio-bajo en 2023. Leyeron la columna equivocada.</span></li><li><b>a)</b> 1, 2 y 3 · <b>3 alumnos</b> (15 %)<span class="ex">Metieron SOFOM no reguladas y tarjetas de servicios o crédito: las dos son medio-bajo.</span></li><li><b>d)</b> 1, 2 y 6 · <b>1 alumno</b> (5 %)<span class="ex">Metió SOFOM no reguladas (medio-bajo).</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Uniones de crédito eran riesgo medio en 2020. Se recuerda el nivel de la evaluación anterior, no el de 2023.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Medio en 2023: <b>transmisores de dinero</b> (subieron de medio-bajo), <b>SOFOM reguladas</b> y <b>tarjetas prepagadas</b>. Uniones de crédito <b>bajaron</b>. Lee siempre la columna 2023.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">ENR 2023, Cap. IV, matriz de riesgo sectorial, p. 21 del PDF: «TRANSMISORES DE DINERO · MEDIO-BAJO · MEDIO»; «SOFOM REGULADAS · MEDIO · MEDIO»; «UNIONES DE CRÉDITO · MEDIO · MEDIO-BAJO»; «SOFOM NO REGULADAS · MEDIO-BAJO · MEDIO-BAJO». AV, p. 25: «TARJETAS PREPAGADAS, VALES O CUPONES · MEDIO · MEDIO»; «TARJETAS DE SERVICIOS O DE CRÉDITO · MEDIO-BAJO · MEDIO-BAJO».</span></div>
   </div>
 </article><article class="qc" id="p35">
   <div class="hd"><span class="no">Pregunta 35</span><span class="k">3.3.3</span><span class="mal hi">Contestaron mal: 11 de 20 (55 %)</span></div>
@@ -735,10 +737,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) Debilidad regulatoria de las Instituciones de Tecnología Financiera</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> Deficientes controles en los movimientos transfronterizos en puertos de entrada y salida internacional · <b>4 alumnos</b> (20 %)</li><li><b>d)</b> Deficiente impartición de justicia · <b>4 alumnos</b> (20 %)</li><li><b>b)</b> Debilidad en los procesos de contratación pública de bienes y servicios · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>«Debilidad regulatoria» suena grave, y la palabra se lee como «alto». Las cuatro son vulnerabilidades de LD y las cuatro se oyen serias.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Tres de las cuatro son <b>alto y alto</b>: contratación pública, puertos e impartición de justicia. Lo institucional es alto; lo regulatorio de ITF y de comercio electrónico es <b>medio y medio</b>.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">ENR 2023, Cap. XI, Mapa 3, vulnerabilidades de LD, factores 18, 23, 24 y 25 (p. 84)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>c)</b> Deficientes controles en los movimientos transfronterizos en puertos de entrada y salida internacional · <b>4 alumnos</b> (20 %)<span class="ex">Eligieron puertos de entrada y salida: es <b>alto y alto</b>.</span></li><li><b>d)</b> Deficiente impartición de justicia · <b>4 alumnos</b> (20 %)<span class="ex">Impartición de justicia también es alto y alto.</span></li><li><b>b)</b> Debilidad en los procesos de contratación pública de bienes y servicios · <b>2 alumnos</b> (10 %)<span class="ex">Contratación pública es alto y alto.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>«Debilidad regulatoria» suena grave, y la palabra se lee como «alto». Las cuatro son vulnerabilidades de LD y las cuatro se oyen serias.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Tres de las cuatro son <b>alto y alto</b>: contratación pública, puertos e impartición de justicia. ITF y comercio electrónico son <b>medio y medio</b>.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">ENR 2023, Cap. XI, Mapa 3, vulnerabilidades de LD, p. 84 del PDF (facilitación · explotación): «18 Debilidad en los procesos de contratación pública… Alto · Alto»; «23 Deficientes controles en los movimientos transfronterizos en puertos… Alto · Alto»; «24 Deficiente impartición de justicia · Alto · Alto»; «25 Debilidad regulatoria de las Instituciones de Tecnología Financiera · Medio · Medio».</span></div>
   </div>
 </article><article class="qc" id="p36">
   <div class="hd"><span class="no">Pregunta 36</span><span class="k">3.3.3</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span></div>
@@ -747,10 +749,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">d) Activos virtuales: MEDIO · Ransomware: ALTO · COVID-19: MEDIO</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> Activos virtuales: ALTO · Ransomware: ALTO · COVID-19: MEDIO · <b>4 alumnos</b> (20 %)</li><li><b>c)</b> Activos virtuales: ALTO · Ransomware: ALTO · COVID-19: ALTO · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Activos virtuales tiene <b>impacto</b> alto, y se pasa ese grado a la columna de probabilidad. Se recuerda «activos virtuales = alto» sin recordar de qué columna. El 10 % que eligió c) puso todo en alto.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>Emergentes, impacto · probabilidad: <b>activos virtuales alto · medio</b>; <b>ransomware alto · alto</b>; <b>COVID-19 medio · medio</b>. Sólo ransomware tiene probabilidad alta.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">ENR 2023, Cap. XI, Mapa 6, factores emergentes 35 a 37 (p. 88)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>a)</b> Activos virtuales: ALTO · Ransomware: ALTO · COVID-19: MEDIO · <b>4 alumnos</b> (20 %)<span class="ex">Pusieron activos virtuales en probabilidad ALTA: tomaron su grado de <b>impacto</b> (alto) y lo pasaron a la columna de probabilidad.</span></li><li><b>c)</b> Activos virtuales: ALTO · Ransomware: ALTO · COVID-19: ALTO · <b>2 alumnos</b> (10 %)<span class="ex">Pusieron los tres factores en alto.</span></li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Activos virtuales tiene <b>impacto</b> alto, y se pasa ese grado a la columna de probabilidad. Se recuerda «activos virtuales = alto» sin recordar de qué columna. El 10 % que eligió c) puso todo en alto.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Emergentes (impacto · probabilidad): <b>activos virtuales alto · medio</b>; <b>ransomware alto · alto</b>; <b>COVID-19 medio · medio</b>. Sólo ransomware tiene probabilidad alta.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">ENR 2023, Cap. XI, Mapa 6, factores emergentes, p. 88 del PDF (impacto · ocurrencia): «35 Debilidad regulatoria de los Activos Virtuales · Alto · Medio»; «36 Incremento de los ataques de Ransomware · Alto · Alto»; «37 Endebles controles de los efectos derivados de la pandemia de COVID-19 · Medio · Medio».</span></div>
   </div>
 </article><article class="qc" id="p37">
   <div class="hd"><span class="no">Pregunta 37</span><span class="k">3.3.3</span><span class="mal hi">Contestaron mal: 9 de 20 (45 %)</span></div>
@@ -759,10 +761,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) Insuficiente obligatoriedad de la normativa para implementar un EBR por parte de los SO de AV: MEDIO</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> Deficiente información sobre el Beneficiario Final: ALTO · <b>4 alumnos</b> (20 %)</li><li><b>c)</b> Debilidad en el Marco Jurídico del SF: ALTO · <b>3 alumnos</b> (15 %)</li><li>En blanco: 2 alumnos</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>El beneficiario final es tema estrella y se asume alto. Y los dos marcos jurídicos se cruzan. Las opciones c y d tienen nombres reales del Mapa 2; sólo el grado está cambiado.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span>En el Régimen, sólo el <b>Marco Jurídico de AV</b> es alto en facilitación. El <b>Marco Jurídico del SF</b> es bajo y bajo, el único bajo de los 37 factores. El resto, beneficiario final incluido, es medio.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">ENR 2023, Cap. XI, Mapa 2, vulnerabilidades del Régimen de PLD/CFT (pp. 82–83)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>d)</b> Deficiente información sobre el Beneficiario Final: ALTO · <b>4 alumnos</b> (20 %)<span class="ex">Pusieron el beneficiario final en ALTO: es tema estrella y se asume grave, pero en la ENR es medio.</span></li><li><b>c)</b> Debilidad en el Marco Jurídico del SF: ALTO · <b>3 alumnos</b> (15 %)<span class="ex">Pusieron el Marco Jurídico del SF en ALTO: es el de AV el que es alto; el del SF es bajo.</span></li><li>En blanco: 2 alumnos</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>El beneficiario final es tema estrella y se asume alto. Y los dos marcos jurídicos se cruzan. Las opciones c y d tienen nombres reales del Mapa 2; sólo el grado está cambiado.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>En el Régimen sólo el <b>Marco Jurídico de AV</b> es alto en facilitación. El <b>Marco Jurídico del SF</b> es bajo y bajo, el único bajo de los 37 factores. El resto, beneficiario final incluido, es medio.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">ENR 2023, Cap. XI, Mapa 2, vulnerabilidades del Régimen, pp. 82–83 del PDF (facilitación · explotación): «1 Debilidad en el Marco Jurídico de AV · Alto · Medio»; «2 Debilidad en el Marco Jurídico del SF · Bajo · Bajo»; «6 Insuficiente obligatoriedad de la normativa para implementar un EBR por los SO de AV · Medio · Medio»; «10 Deficiente información sobre el Beneficiario Final · Medio · Medio».</span></div>
   </div>
 </article></div></section><section id="t334"><h2>3.3.4 · Riesgos de corrupción</h2><div class="clin"><article class="qc" id="p38">
   <div class="hd"><span class="no">Pregunta 38</span><span class="k">3.3.4</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span></div>
@@ -771,10 +773,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">a) 1d, 2b, 3c, 4a</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> 1a, 2b, 3c, 4d · <b>1 alumno</b> (5 %)</li><li><b>d)</b> 1b, 2a, 3c, 4d · <b>1 alumno</b> (5 %)</li><li>En blanco: 2 alumnos</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>Los errores cruzaron la definición general de corrupción con la de gran escala.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span><b>Niveles más altos</b> → gran escala; <b>bajo y mediano rango, cotidiano</b> → menores; <b>manipular políticas para conservar el poder</b> → política. «Abuso del poder para beneficio propio» es la definición general de corrupción, de la que salen las otras tres.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Guía Anticorrupción, I.1.3 Transparencia Internacional (p. 6)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>b)</b> 1a, 2b, 3c, 4d · <b>1 alumno</b> (5 %)<span class="ex">Cruzó la definición general («abuso del poder para beneficio propio») con la de gran escala.</span></li><li><b>d)</b> 1b, 2a, 3c, 4d · <b>1 alumno</b> (5 %)<span class="ex">Cruzó gran escala con actos menores.</span></li><li>En blanco: 2 alumnos</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>Los errores cruzaron la definición general de corrupción con la de gran escala.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span><b>Niveles más altos</b> → gran escala; <b>bajo y mediano rango, cotidiano</b> → menores; <b>manipular políticas para conservar el poder</b> → política. «Abuso del poder para beneficio propio» es la definición general, de la que salen las otras tres.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Guía Anticorrupción, I.1.3, p. 6 del PDF: «…define a la corrupción como el abuso del poder para beneficio propio, y puede clasificarse en “corrupción a gran escala”, “actos de corrupción menores” y “corrupción política”… Corrupción a gran escala: consiste en actos cometidos en los niveles más altos del gobierno… Actos de corrupción menores: radican en el abuso cotidiano de poder por PEP de bajo y mediano rango… Corrupción política: es la manipulación de políticas, instituciones y normas de procedimiento…».</span></div>
   </div>
 </article><article class="qc" id="p39">
   <div class="hd"><span class="no">Pregunta 39</span><span class="k">3.3.4</span><span class="mal hi">Contestaron mal: 11 de 20 (55 %)</span></div>
@@ -783,10 +785,10 @@ span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radiu
   <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
   <div class="why">
     <div><span class="lb">Respuesta correcta</span><span class="ans">c) 1b, 2a, 3d, 4c</span></div>
-    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> 1a, 2b, 3d, 4c · <b>5 alumnos</b> (25 %)</li><li><b>a)</b> 1a, 2b, 3c, 4d · <b>3 alumnos</b> (15 %)</li><li><b>b)</b> 1b, 2a, 3c, 4d · <b>1 alumno</b> (5 %)</li><li>En blanco: 2 alumnos</li></ul></div>
-    <div><span class="lb">En qué se equivocaron</span><span>«A través de terceros» suena a ocultar la identidad, y «uso de vehículos» suena a un comportamiento. Las dos palabras clave apuntan al bloque contrario.</span></div>
-    <div class="regla"><b>Cómo cachar el error</b><span><b>III.1 Ocultamiento</b> = estructuras: vehículos corporativos, prestanombres, familiares o intermediarios. <b>III.2 PEP atípica</b> = conducta del cliente: compra y revende en corto plazo, pregunta por la política PLD, evita hablar del origen de su riqueza. <b>III.3</b> = cuentas de dependencias. <b>III.4</b> = casos en México: empresas fachada y licitaciones simuladas.</span></div>
-    <div><span class="lb">Fundamento real</span><span class="fund">Guía Anticorrupción, III.1 a III.4 (pp. 14–17)</span></div>
+    <div><span class="lb">Qué contestaron mal y en qué se equivocaron</span><ul class="wr"><li><b>d)</b> 1a, 2b, 3d, 4c · <b>5 alumnos</b> (25 %)<span class="ex">Invirtieron 1 y 2: «a través de terceros» les sonó a ocultar identidad, y «uso de vehículos» a comportamiento. Es al revés.</span></li><li><b>a)</b> 1a, 2b, 3c, 4d · <b>3 alumnos</b> (15 %)<span class="ex">Además de invertir 1 y 2, cruzó 3 y 4 (empresas fachada con cuentas de dependencias).</span></li><li><b>b)</b> 1b, 2a, 3c, 4d · <b>1 alumno</b> (5 %)<span class="ex">Acertó 1 y 2, pero cruzó las empresas fachada (casos en México) con las cuentas de dependencias.</span></li><li>En blanco: 2 alumnos</li></ul></div>
+    <div><span class="lb">Por qué engaña</span><span>«A través de terceros» suena a ocultar la identidad, y «uso de vehículos» suena a un comportamiento. Las dos palabras clave apuntan al bloque contrario.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span><b>III.1 Ocultamiento</b> = estructuras: vehículos corporativos, prestanombres, familiares, intermediarios. <b>III.2 PEP atípica</b> = conducta: compra y revende en corto plazo, pregunta por la política PLD, evita hablar del origen de su riqueza. <b>III.3</b> = cuentas de dependencias. <b>III.4</b> = casos en México: empresas fachada, licitaciones simuladas.</span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund">Guía Anticorrupción, III.1 Ocultamiento de identidad, p. 14 del PDF: «El uso de vehículos corporativos (personas morales, mandatos sin representación y Fideicomisos) sin una justificación comercial válida». III.2, p. 15: «El Cliente o Usuario adquiere, directamente o a través de terceros…, bienes muebles e inmuebles y los vuelve a negociar en un corto plazo». III.4, p. 17: «Para la asignación de contratos, varias de las empresas fachada simulan competir en los concursos de licitación…».</span></div>
   </div>
 </article></div></section>
 <footer><span>Porcentajes del grupo de la 2ª convocatoria (20 alumnos); uno dejó el Área 3 en blanco y otro las preguntas 37 a 39. Páginas según el PDF de cada fuente en la biblioteca del Aula.</span><span>«Cómo cachar el error»: criterio didáctico 360Educa. Material didáctico; no sustituye la norma.</span></footer>
