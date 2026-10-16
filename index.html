@@ -160,7 +160,10 @@ footer{margin-top:40px;font-size:12.5px;color:var(--muted);display:grid;gap:6px;
 .mod .it b{font-family:var(--f-display)}
 .mod .it span{font-size:13px;color:var(--muted)}
 .mod .soon{margin:0;color:var(--muted);font-style:italic}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px;margin-bottom:6px}
+.goto{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--verde);border-radius:var(--r);padding:14px 16px;margin-bottom:16px}
+.goto label{width:100%;font-family:var(--f-display);font-size:17px}
+.goto input{font:inherit;font-size:18px;width:6.5em;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,96px),1fr));gap:8px;margin-bottom:6px}
 .stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:2px}
 .stat b{font-family:var(--f-display);font-size:28px;font-variant-numeric:tabular-nums}
 .stat span{font-size:13px;color:var(--muted)}
@@ -184,10 +187,11 @@ footer{margin-top:40px;font-size:12.5px;color:var(--muted);display:grid;gap:6px;
   <p class="lede">Primero lo que vimos en todo el grupo; luego elige tu módulo. En cada revisión verás, pregunta por pregunta, cuántos contestaron mal, qué eligieron, en qué se equivocaron, cómo cachar el error y el fundamento real.</p>
   <hr class="membrete">
 </header>
+<form class="goto" id="goto"><label for="goto-n"><b>¿Qué pregunta de tu examen quieres revisar?</b></label><input id="goto-n" type="number" min="1" max="155" inputmode="numeric" placeholder="1–155"><button class="btn" type="submit">Ir</button><span class="mini" id="goto-msg">Del 1 al 26 es el Módulo 1; del 27 al 116, el Módulo 2; del 117 al 155, el Módulo 3.</span></form>
 <section class="stats" aria-label="Aciertos del grupo por área">
-  <div class="stat"><b>83 %</b><span>Módulo 1 · Área 1 · 26 preguntas</span></div>
-  <div class="stat"><b>80 %</b><span>Módulo 2 · Área 2 · 90 preguntas</span></div>
-  <div class="stat"><b>71 %</b><span>Módulo 3 · Área 3 · 39 preguntas</span></div>
+  <div class="stat"><b>83 %</b><span>Módulo 1 · preguntas 1 a 26</span></div>
+  <div class="stat"><b>80 %</b><span>Módulo 2 · preguntas 27 a 116</span></div>
+  <div class="stat"><b>71 %</b><span>Módulo 3 · preguntas 117 a 155</span></div>
 </section>
 <section class="concl" id="conclusiones">
   <h2>Qué nos dicen los resultados</h2>
@@ -206,6 +210,6 @@ footer{margin-top:40px;font-size:12.5px;color:var(--muted);display:grid;gap:6px;
   <p class="nota-dat">Datos del Simulador 2, 2.ª convocatoria, 20 alumnos. Desde la pregunta 16 del Área 1 hubo una respuesta en blanco en cada pregunta, al parecer de una persona que no terminó; los porcentajes la cuentan como error, así que el grupo que sí contestó está unos 4 puntos más arriba. Conclusiones: criterio didáctico 360Educa.</p>
 </section>
 <h2 class="mods-h">Elige tu módulo</h2>
-<div class="mods"><section class="mod"><div class="mh"><span class="num">Módulo 1</span><h2>Conocimientos básicos</h2></div><a class="it" href="modulo-1/simulador-2/index.html"><b>Simulador 2 · Área 1</b><span>26 preguntas · 83 % de aciertos del grupo</span></a></section><section class="mod"><div class="mh"><span class="num">Módulo 2</span><h2>Aspectos técnicos</h2></div><a class="it" href="modulo-2/simulador-2/index.html"><b>Simulador 2 · Área 2</b><span>90 preguntas · 80 % de aciertos del grupo</span></a></section><section class="mod"><div class="mh"><span class="num">Módulo 3</span><h2>Auditoría y riesgos</h2></div><a class="it" href="modulo-3/simulador-2/index.html"><b>Simulador 2 · Área 3</b><span>39 preguntas · 71 % de aciertos del grupo</span></a></section></div>
+<div class="mods"><section class="mod"><div class="mh"><span class="num">Módulo 1</span><h2>Conocimientos básicos</h2></div><a class="it" href="modulo-1/simulador-2/index.html"><b>Simulador 2 · Área 1</b><span>Preguntas 1 a 26 del examen · 83 % de aciertos</span></a></section><section class="mod"><div class="mh"><span class="num">Módulo 2</span><h2>Aspectos técnicos</h2></div><a class="it" href="modulo-2/simulador-2/index.html"><b>Simulador 2 · Área 2</b><span>Preguntas 27 a 116 del examen · 80 % de aciertos</span></a></section><section class="mod"><div class="mh"><span class="num">Módulo 3</span><h2>Auditoría y riesgos</h2></div><a class="it" href="modulo-3/simulador-2/index.html"><b>Simulador 2 · Área 3</b><span>Preguntas 117 a 155 del examen · 71 % de aciertos</span></a></section></div>
 <footer><span>Sólo porcentajes del grupo; sin resultados individuales.</span><span>Material didáctico 360Educa; no sustituye la norma.</span></footer>
-</div></body></html>
+</div><script>(function(){var f=document.getElementById("goto");f.addEventListener("submit",function(e){e.preventDefault();var n=parseInt(document.getElementById("goto-n").value,10),m=document.getElementById("goto-msg");if(!(n>=1&&n<=155)){m.textContent="Escribe un número del 1 al 155.";return}var mod=n<=26?1:(n<=116?2:3);location.href="modulo-"+mod+"/simulador-2/#p"+n;});})();</script></body></html>

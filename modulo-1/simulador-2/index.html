@@ -2,507 +2,744 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Revisión Simulador 2 · Área 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Revisión Simulador 2 · Módulo 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
 <style>
-:root {
-  --g:#64c27b; --g2:#87d895; --ink:#1b1b1e; --ink2:#393e41;
-  --bg:#f6f8f6; --card:#ffffff; --tx:#1b1b1e; --mut:#5b6266; --line:#dfe5e0;
-  --okbg:#e9f7ec; --ko:#e2725b; --kobg:#fcebe6; --barbg:#e8ece9; --tipbg:#f0faf2; --gt:#2f8a48;
+:root{
+  --bg:#faf5ec; --surface:#ffffff; --surface-2:#f3ede1; --line:#e4dccd;
+  --fg:#1b1b1e; --muted:#5b5f62; --carbon:#393e41;
+  --verde:#64c27b; --verde-claro:#87d895; --verde-tint:#e3f4e6;
+  --morado:#a663cc; --morado-tint:#f1e6f8;
+  --turquesa:#80bcb5; --amarillo:#faa916; --coral:#ff8361; --coral-tint:#ffe9e2;
+  --no:#b9b2a5; --on-color:#1b1b1e; --on-dark:#ffffff;
+  --f-display:"Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --r:10px;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg:#1b1b1e; --card:#26292c; --tx:#eef1ee; --mut:#a8b0b3; --line:#393e41;
-    --okbg:#1f3a27; --ko:#f08a74; --kobg:#3d2621; --barbg:#393e41; --tipbg:#1f3326; --gt:#87d895;
-  }
-}
-:root[data-theme="dark"] {
-  --bg:#1b1b1e; --card:#26292c; --tx:#eef1ee; --mut:#a8b0b3; --line:#393e41;
-  --okbg:#1f3a27; --ko:#f08a74; --kobg:#3d2621; --barbg:#393e41; --tipbg:#1f3326; --gt:#87d895;
-}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#17181a; --surface:#212326; --surface-2:#2a2c30; --line:#393c41;
+  --fg:#f2eee6; --muted:#b4b0a8; --carbon:#d6d2ca;
+  --verde:#6fcb86; --verde-claro:#87d895; --verde-tint:#1f3a28;
+  --morado:#b884d6; --morado-tint:#33253d;
+  --turquesa:#8fc8c1; --amarillo:#f7b23b; --coral:#ff9373; --coral-tint:#3d2620;
+  --no:#5f5b55; --on-color:#1b1b1e; --on-dark:#ffffff; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#17181a; --surface:#212326; --surface-2:#2a2c30; --line:#393c41;
+  --fg:#f2eee6; --muted:#b4b0a8; --carbon:#d6d2ca;
+  --verde:#6fcb86; --verde-claro:#87d895; --verde-tint:#1f3a28;
+  --morado:#b884d6; --morado-tint:#33253d;
+  --turquesa:#8fc8c1; --amarillo:#f7b23b; --coral:#ff9373; --coral-tint:#3d2620;
+  --no:#5f5b55; --on-color:#1b1b1e; --on-dark:#ffffff; color-scheme:dark }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-wrap:break-word}
-.wrap{max-width:860px;margin:0 auto;padding:16px}
-.hero{border:1px solid var(--ink2);background:var(--ink);color:#fff;border-radius:14px;padding:20px 18px;margin-bottom:16px}
-.hero .k{color:var(--g2);font-weight:600;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase}
-.hero h1{margin:.2em 0 .3em;font-size:1.5rem;line-height:1.25}
-.hero .meta{color:#cfd6d1;font-size:.95rem}
-.score{display:flex;align-items:baseline;gap:10px;margin-top:12px}
-.score b{font-size:2.4rem;color:var(--g);white-space:nowrap}
-h2{color:var(--gt);font-size:1.15rem;margin:22px 0 10px}
-h4{color:var(--gt);margin:0 0 4px;font-size:.95rem}
-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden;font-size:.93rem}
-th{background:var(--g);color:var(--ink);text-align:left;padding:8px 10px;white-space:nowrap}
-td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:middle}
-td.qs a{color:var(--gt);margin-right:6px;font-weight:600;text-decoration:none}
-td.num{white-space:nowrap}
-.mini{display:inline-block;width:52px;height:8px;background:var(--barbg);border-radius:4px;margin-right:6px;vertical-align:middle;overflow:hidden}
-.mini i{display:block;height:100%;background:var(--g)}
-.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
-.btn{border:2px solid var(--g);background:var(--card);color:var(--tx);border-radius:999px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer}
-.btn[aria-pressed="true"]{background:var(--g);color:var(--ink)}
-.jumps{display:flex;flex-wrap:wrap;gap:6px}
-.j{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;border-radius:8px;background:var(--card);border:1px solid var(--line);color:var(--tx);text-decoration:none;font-weight:600}
-.j.bad{background:var(--ko);border-color:var(--ko);color:#fff}
-.legend{font-size:.85rem;color:var(--mut)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px 10px;margin:14px 0;scroll-margin-top:12px}
-.card.sev{border-left:5px solid var(--ko)}
-.card header{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-bottom:8px}
-.qn{font-weight:700;color:var(--gt)}
-.tag{font-size:.8rem;background:var(--okbg);color:var(--gt);padding:2px 8px;border-radius:999px}
-.wr{margin-left:auto;font-size:.85rem;color:var(--mut)}
-.stem ol{padding-left:1.3em;margin:.4em 0}
-.stem li{margin:.25em 0}
-.cols{font-size:.92rem;color:var(--mut);background:var(--bg);padding:8px 10px;border-radius:8px}
-.nota{font-size:.88rem;color:var(--mut);font-style:italic}
-.ops{list-style:none;padding:0;margin:10px 0}
-.op{display:grid;grid-template-columns:28px 1fr;grid-template-areas:"l t" "l b";column-gap:8px;padding:8px 10px;border:2px solid var(--line);border-radius:10px;margin:6px 0}
-.op .lt{grid-area:l;font-weight:700;color:var(--mut)}
-.op .ot{grid-area:t}
-.op .bar{grid-area:b;display:flex;align-items:center;gap:8px;height:10px;background:var(--barbg);border-radius:5px;margin-top:6px;overflow:hidden;max-width:calc(100% - 92px)}
-.op .bar i{display:block;height:100%;background:var(--mut)}
-.op .ct{grid-area:b;justify-self:end;font-size:.82rem;color:var(--mut);margin-top:1px}
-.op.ok{border-color:var(--g);background:var(--okbg)}
-.op.ok .bar i{background:var(--g)}
-.op.ko{border-color:var(--ko);background:var(--kobg)}
-.op.ko .bar i{background:var(--ko)}
-.op.blank{border-style:dashed}
-.reveal{display:none;margin:4px 0 8px;border:2px solid var(--g);background:transparent;color:var(--tx);border-radius:8px;padding:7px 12px;font:inherit;font-weight:600;cursor:pointer}
-.blk{padding:8px 0;border-top:1px solid var(--line)}
-.blk p,.blk ul{margin:.2em 0}
-.blk ul{padding-left:1.2em}
-.tip{background:var(--tipbg);border-radius:8px;padding:10px;border-top:0;margin:6px 0}
-.src p{font-size:.92rem;color:var(--mut)}
-body.practice .op.ok,body.practice .op.ko{border-color:var(--line);background:transparent}
-body.practice .op .bar,body.practice .op .ct,body.practice .wr{visibility:hidden}
-body.practice .rev{display:none}
-body.practice .reveal{display:inline-block}
-body.practice .card.open .rev{display:block}
-body.practice .card.open .op.ok{border-color:var(--g);background:var(--okbg)}
-body.practice .card.open .op.ko{border-color:var(--ko);background:var(--kobg)}
-body.practice .card.open .op .bar,body.practice .card.open .op .ct,body.practice .card.open .wr{visibility:visible}
-  .topbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:0 0 12px;font-size:.92rem}
-.topbar a{color:var(--gt);font-weight:600;text-decoration:none}
-footer{font-size:.85rem;color:var(--mut);border-top:1px solid var(--line);margin-top:24px;padding-top:12px}
-footer p{margin:.4em 0}
-@media (max-width:520px){ .hero h1{font-size:1.25rem} td,th{padding:7px 6px} .mini{display:none} }
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.55;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:18px;padding-block:20px 64px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(21px,3vw,27px);font-weight:800}
+h3{font-size:16px;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--f-display);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.hl{background:var(--verde);color:var(--on-color);padding:0 .18em;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.lede{max-width:68ch;color:var(--carbon);font-size:16px}
+.membrete{height:3px;background:var(--verde-claro);border:0;margin:14px 0 0}
+header.top{display:grid;gap:12px;padding-block:8px 18px}
+nav.idx{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding-block:8px;margin-bottom:8px;scrollbar-width:thin}
+nav.idx a{flex:0 0 auto;font-size:13px;font-weight:600;color:var(--fg);text-decoration:none;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+nav.idx a:hover{border-color:var(--morado)}
+section{padding-block:30px 6px;display:grid;gap:14px;scroll-margin-top:60px}
+.sub{color:var(--muted);max-width:72ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.num{font-variant-numeric:tabular-nums}
+.ref{font-size:12px;color:var(--muted);font-weight:600}
+.mini{font-size:13px}
+/* Puertas */
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.door{appearance:none;text-align:left;font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:6px;cursor:pointer;position:relative}
+.door:hover{border-color:var(--carbon)}
+.door[aria-pressed="true"]{outline:3px solid var(--morado);outline-offset:-1px}
+.door .n{font-family:var(--f-display);font-weight:800;font-size:40px;line-height:1}
+.door .t{font-family:var(--f-display);font-weight:700;font-size:15px}
+.door .d{font-size:13px;color:var(--muted)}
+.door .tag{justify-self:start;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:var(--surface-2)}
+.door.debe .tag{background:var(--amarillo);color:var(--on-color)}
+.ritmo{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;font-family:var(--f-display);font-weight:800;font-size:22px}
+.ritmo span.lbl{font-family:var(--f-body);font-weight:500;font-size:14px;color:var(--muted)}
+.extra{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.extra .card{display:grid;gap:6px}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;justify-self:start}
+.pill.star{background:var(--amarillo);color:var(--on-color)}
+.pill.warn{background:var(--coral);color:var(--on-color)}
+/* Matriz */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+thead th{font-family:var(--f-display);font-size:12.5px;font-weight:700;background:var(--surface-2);position:sticky;top:0}
+thead th button{all:unset;cursor:pointer;display:grid;gap:2px}
+thead th button:focus-visible{outline:2px solid var(--morado);outline-offset:3px}
+thead th small{font-family:var(--f-body);font-weight:500;color:var(--muted);font-size:11px}
+th.col-x{background:var(--coral-tint)}
+tbody th{font-weight:600;font-size:14px;white-space:nowrap;border-left:6px solid var(--fam,var(--line))}
+tbody th button{all:unset;cursor:pointer}
+tbody th button:focus-visible{outline:2px solid var(--morado);outline-offset:3px}
+td.cell{text-align:center;padding:5px}
+.c{all:unset;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:74px;min-height:30px;padding:3px 8px;border-radius:7px;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.c:focus-visible{outline:2px solid var(--morado);outline-offset:2px}
+.c.si{background:var(--verde);color:var(--on-color)}
+.c.debe{background:var(--amarillo);color:var(--on-color)}
+.c.medio{border:2px dashed var(--carbon);color:var(--fg)}
+.c.no{color:var(--no);font-weight:600}
+tr.fam-sep th, tr.fam-sep td{border-top:2px solid var(--line)}
+table.dim tbody td.cell:not(.on) .c{opacity:.28}
+table.dim thead th.on{background:var(--morado);color:var(--on-dark)}
+table.dim thead th.on small{color:var(--on-dark)}
+tbody tr.rowon th{background:var(--morado-tint)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted);align-items:center}
+.legend .c{min-width:auto;cursor:default}
+.detail{border-left:6px solid var(--morado)}
+.detail h3{margin-bottom:4px}
+.detail ul{margin:8px 0 0;padding-left:18px;display:grid;gap:4px}
+/* Asistente */
+.wiz{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:820px){.wiz{grid-template-columns:1fr}}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:8px}
+legend{font-family:var(--f-display);font-weight:700;font-size:14px;margin-bottom:6px}
+legend b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--carbon);color:var(--bg);font-size:12px;margin-right:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{cursor:pointer;font-size:13px;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;gap:6px}
+.chips label i{width:9px;height:9px;border-radius:50%;background:var(--fam,var(--line))}
+.chips input:checked + label{background:var(--morado);border-color:var(--morado);color:var(--on-dark)}
+.chips input:focus-visible + label{outline:2px solid var(--morado);outline-offset:2px}
+.verdict{display:grid;gap:10px;align-content:start}
+.vbadge{justify-self:start;font-family:var(--f-display);font-weight:800;font-size:22px;padding:4px 14px;border-radius:8px}
+.vbadge.si{background:var(--verde);color:var(--on-color)}
+.vbadge.debe{background:var(--amarillo);color:var(--on-color)}
+.vbadge.no{background:var(--carbon);color:var(--bg)}
+.vbadge.medio{border:2px dashed var(--carbon)}
+.req{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.req li{display:grid;grid-template-columns:22px 1fr;gap:6px;font-size:14px}
+.req li::before{content:"✓";font-weight:800;color:var(--verde)}
+.note{font-size:13.5px;background:var(--surface-2);border-radius:8px;padding:10px 12px}
+.note.warn{background:var(--coral-tint)}
+/* Requisitos */
+table.req-t{min-width:980px;font-size:13px}
+table.req-t td{vertical-align:top}
+table.req-t tbody th{border-left:0;white-space:normal;min-width:150px;font-size:13px}
+.yes{font-weight:700}
+.y::before{content:"Sí · ";font-weight:800;color:var(--verde)}
+.n0{color:var(--muted)}
+.colfilter{display:flex;flex-wrap:wrap;gap:6px}
+.colfilter button{font:inherit;font-size:13px;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.colfilter button[aria-pressed="true"]{background:var(--carbon);color:var(--bg);border-color:var(--carbon)}
+/* Transferencias */
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;counter-reset:t}
+.tl .card{display:grid;gap:6px;border-top:5px solid var(--amarillo)}
+.tl .k{font-family:var(--f-display);font-weight:800;font-size:18px}
+/* Trampas */
+.traps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.trap{display:grid;gap:6px;border:2px dashed var(--carbon);background:var(--surface)}
+.trap h3{font-size:15px}
+/* Práctica */
+.quiz{display:grid;gap:12px}
+.qbox{display:grid;gap:12px}
+.qtext{font-size:17px;font-weight:600;max-width:70ch}
+.qbtns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-weight:700;padding:9px 18px;border-radius:8px;border:0;cursor:pointer;background:var(--morado);color:var(--on-dark)}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.qfb{font-size:14.5px;border-radius:8px;padding:10px 12px;background:var(--surface-2)}
+.qfb b.ok{color:var(--verde)} .qfb b.bad{color:var(--coral)}
+.score{font-family:var(--f-display);font-weight:800}
+footer{margin-top:40px;font-size:12.5px;color:var(--muted);display:grid;gap:6px;max-width:80ch}
+@media (prefers-reduced-motion:no-preference){ .c,.door,.chips label{transition:background .15s, opacity .15s, border-color .15s} }
+
+
+/* ---- Frente 4: piezas nuevas ---- */
+.topbar{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;padding:9px 16px;background:#1b1b1e;color:#fff;font:600 13px/1.3 Inter,Arial,sans-serif}
+.topbar a{color:#fff}
+.topbar .sp{flex:1}
+.topbar button{font:inherit;font-size:12px;color:#fff;background:transparent;border:1px solid #6b6f72;border-radius:999px;padding:4px 10px;cursor:pointer}
+.topbar button[aria-pressed="true"]{background:var(--verde);color:#1b1b1e;border-color:var(--verde)}
+body.proj{font-size:18px}
+body.proj .wrap{max-width:1280px}
+body.proj .qtext{font-size:24px}
+body.proj .sorter .it{font-size:17px}
+body.proj table{font-size:16px}
+.rec{transition:filter .15s}
+body.recitar .rec:not(.shown){filter:blur(6px);cursor:pointer;user-select:none}
+.hint-rec{display:none}
+body.recitar .hint-rec{display:block}
+/* ganchos */
+.hooks{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.hook{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--verde);border-radius:var(--r);padding:12px 14px;display:grid;gap:4px;align-content:start}
+.hook .n{font-family:var(--f-display);font-weight:800;font-size:38px;line-height:1}
+.hook .t{font-family:var(--f-display);font-weight:700;font-size:14px}
+.hook .d{font-size:12.5px;color:var(--muted)}
+.hook.warn{border-top-color:var(--coral)}
+.col .hooks{grid-template-columns:repeat(auto-fit,minmax(125px,1fr))}
+.col .hook .n{font-size:30px}
+.hook.star{border-top-color:var(--amarillo)}
+/* tablas de contenido */
+table.t2{min-width:720px;font-size:14px}
+table.t2 td,table.t2 th{vertical-align:top}
+table.t2 tbody th{border-left:0;white-space:normal;min-width:170px;font-size:14px}
+td.dif{background:var(--coral-tint)}
+td.ok{background:var(--verde-tint)}
+td.na{color:var(--no)}
+td.lv-a,span.lv-a{background:var(--coral-tint);font-weight:700}
+td.lv-ma,span.lv-ma{background:color-mix(in srgb,var(--coral) 12%,var(--surface));font-weight:600}
+td.lv-m,span.lv-m{background:color-mix(in srgb,var(--amarillo) 22%,var(--surface))}
+td.lv-mb,span.lv-mb{background:color-mix(in srgb,var(--amarillo) 9%,var(--surface))}
+td.lv-b,span.lv-b{background:var(--verde-tint)}
+td.chg{outline:2px solid var(--carbon);outline-offset:-3px}
+span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radius:5px}
+.tick{font-weight:800;color:var(--verde)}
+.cross{font-weight:800;color:var(--coral)}
+.tl .k{justify-self:start;font-size:13px}
+.k{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:1px 7px;border-radius:999px;background:var(--surface-2);margin-right:4px}
+.k.g{background:var(--verde);color:var(--on-color)} .k.m{background:var(--morado);color:var(--on-dark)} .k.a{background:var(--amarillo);color:var(--on-color)} .k.c{background:var(--coral);color:var(--on-color)} .k.t{background:var(--turquesa);color:var(--on-color)}
+.lit{font-style:italic}
+.lit::before{content:"«"} .lit::after{content:"»"}
+.regla{display:grid;gap:4px;border-left:6px solid var(--verde);background:var(--surface);border-radius:8px;padding:10px 14px}
+.regla b{font-family:var(--f-display)}
+.crit{font-size:12px;color:var(--muted);font-style:italic}
+/* sorter */
+.sorter{display:grid;gap:8px}
+.sorter .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.sorter .it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14.5px}
+@media (max-width:700px){.sorter .it{grid-template-columns:1fr}}
+.sorter .opts{display:flex;flex-wrap:wrap;gap:6px}
+.sorter .opts button{font:inherit;font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);color:var(--fg);cursor:pointer}
+.sorter .opts button:disabled{cursor:default;opacity:.55}
+.sorter .opts button.right{background:var(--verde);color:var(--on-color);opacity:1;border-color:var(--verde)}
+.sorter .opts button.wrong{background:var(--coral);color:var(--on-color);opacity:1;border-color:var(--coral)}
+.sorter .fb{grid-column:1/-1;font-size:13.5px;color:var(--carbon)}
+.sorter .fb .ref{margin-left:6px}
+.sorter .it.done{border-color:var(--carbon)}
+/* ronda */
+.ronda{display:grid;gap:12px}
+.ronda .head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.ronda .opts{display:grid;gap:8px}
+.ronda .op{all:unset;cursor:pointer;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:15px}
+.ronda .op b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--surface-2);font-family:var(--f-display)}
+.ronda .op.sel{outline:3px solid var(--morado);outline-offset:-2px}
+.ronda .op.right{background:var(--verde-tint);border-color:var(--verde)}
+.ronda .op.right b{background:var(--verde);color:var(--on-color)}
+.ronda .op.wrong{background:var(--coral-tint);border-color:var(--coral)}
+.ronda .op:focus-visible{outline:2px solid var(--morado)}
+.ronda .pat{font-size:12px;font-weight:700;color:var(--muted)}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--carbon)}
+/* línea de tiempo */
+.tline{display:grid;gap:0;counter-reset:st}
+.tline .st{display:grid;grid-template-columns:44px 1fr;gap:12px;position:relative;padding-bottom:14px}
+.tline .st::before{counter-increment:st;content:counter(st);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--verde);color:var(--on-color);font-family:var(--f-display);font-weight:800;z-index:1}
+.tline .st::after{content:"";position:absolute;left:16px;top:34px;bottom:0;width:2px;background:var(--line)}
+.tline .st:last-child::after{display:none}
+.tline .st .card{display:grid;gap:4px;padding:10px 14px}
+.tline .st.alert::before{background:var(--coral)}
+/* asistente */
+.steps{display:grid;gap:12px}
+.qstep{display:grid;gap:8px}
+.qstep[hidden]{display:none}
+.yn{display:flex;gap:8px;flex-wrap:wrap}
+.yn button{font:inherit;font-weight:700;padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.yn button[aria-pressed="true"]{background:var(--morado);color:var(--on-dark);border-color:var(--morado)}
+.cases{display:flex;flex-wrap:wrap;gap:6px}
+.cases button{font:inherit;font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:999px;border:1px dashed var(--carbon);background:var(--surface);color:var(--fg);cursor:pointer;text-align:left}
+.cases button[aria-pressed="true"]{background:var(--carbon);color:var(--bg)}
+.vbadge.c1{background:var(--verde);color:var(--on-color)}
+.vbadge.c2{background:var(--verde-claro);color:var(--on-color)}
+.vbadge.c3{background:var(--amarillo);color:var(--on-color)}
+.vbadge.c4{background:var(--coral);color:var(--on-color)}
+.vbadge.c5{background:var(--surface-2);border:2px dashed var(--carbon)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.col h3{margin-bottom:6px}
+.col ol,.col ul{margin:0;padding-left:20px;display:grid;gap:5px}
+.col.gafi{border-top:5px solid var(--morado)} .col.bas{border-top:5px solid var(--turquesa)} .col.dcg{border-top:5px solid var(--amarillo)}
+@media (max-width:700px){table.t2{min-width:600px;font-size:13px} table.t2 tbody th{min-width:110px} .hook .n{font-size:30px}}
+@media print{.topbar,nav.idx,.btn,.yn,.cases,.sorter .opts{display:none!important} body{background:#fff} .card{break-inside:avoid}}
+
 </style>
 </head>
 <body>
+<nav class="topbar" aria-label="Repaso"><b style="font-family:Montserrat,Arial,sans-serif;letter-spacing:.04em">Módulo 1 · Revisión</b><a href="../../index.html">← Elegir módulo</a><span class="sp"></span><button type="button" id="b-proj" aria-pressed="false">Modo proyección</button><button type="button" id="b-rec" aria-pressed="false">Modo recitar</button><button type="button" id="b-print">Imprimir</button></nav>
 <div class="wrap">
-  <nav class="topbar" aria-label="Repaso"><b>Módulo 1 · Repaso</b><a href="../../index.html">← Elegir módulo</a></nav>
-  <section class="hero">
-    <div class="k">360Educa · Certificación CNBV PLD/FT</div>
-    <h1>Módulo 1 · Revisión del Simulador 2</h1>
-    <div class="meta">2.ª convocatoria · Área 1, temas 1.1 a 1.3 · 26 preguntas · grupo de 20 alumnos</div>
-    <div class="score"><b>83 %</b><span>de aciertos del grupo en el área</span></div>
-  </section>
-
-  <h2>Aciertos por tema</h2>
-  <table>
-    <thead><tr><th>Tema</th><th>Preguntas</th><th>Acierto</th></tr></thead>
-    <tbody><tr><td>1.1.1 Lavado de dinero</td><td class='qs'><a href='#q1'>1</a> <a href='#q2'>2</a></td><td class='num'><span class='mini'><i style='width:78%'></i></span>78 %</td></tr><tr><td>1.1.2 Financiamiento al terrorismo</td><td class='qs'><a href='#q3'>3</a></td><td class='num'><span class='mini'><i style='width:70%'></i></span>70 %</td></tr><tr><td>1.1.3 Corrupción</td><td class='qs'><a href='#q4'>4</a> <a href='#q5'>5</a></td><td class='num'><span class='mini'><i style='width:95%'></i></span>95 %</td></tr><tr><td>1.1.4 Penas del delito de ORPI</td><td class='qs'><a href='#q6'>6</a></td><td class='num'><span class='mini'><i style='width:90%'></i></span>90 %</td></tr><tr><td>1.1.5 Penas del delito de FT</td><td class='qs'><a href='#q7'>7</a></td><td class='num'><span class='mini'><i style='width:70%'></i></span>70 %</td></tr><tr><td>1.2.1 Organismos y foros</td><td class='qs'><a href='#q8'>8</a> <a href='#q9'>9</a> <a href='#q10'>10</a></td><td class='num'><span class='mini'><i style='width:83%'></i></span>83 %</td></tr><tr><td>1.2.2 GAFI · Mandato y retos</td><td class='qs'><a href='#q11'>11</a> <a href='#q12'>12</a></td><td class='num'><span class='mini'><i style='width:72%'></i></span>72 %</td></tr><tr><td>1.2.2 Recomendaciones del GAFI</td><td class='qs'><a href='#q13'>13</a> <a href='#q14'>14</a> <a href='#q15'>15</a> <a href='#q16'>16</a> <a href='#q17'>17</a> <a href='#q18'>18</a> <a href='#q19'>19</a> <a href='#q20'>20</a> <a href='#q21'>21</a> <a href='#q22'>22</a> <a href='#q23'>23</a></td><td class='num'><span class='mini'><i style='width:85%'></i></span>85 %</td></tr><tr><td>1.3.1 Régimen de prevención</td><td class='qs'><a href='#q24'>24</a></td><td class='num'><span class='mini'><i style='width:90%'></i></span>90 %</td></tr><tr><td>1.3.2 Autoridades nacionales</td><td class='qs'><a href='#q25'>25</a> <a href='#q26'>26</a></td><td class='num'><span class='mini'><i style='width:88%'></i></span>88 %</td></tr></tbody>
-  </table>
-
-  <h2>Ir a una pregunta</h2>
-  <div class="jumps"><a class='j' href='#q1' title='3 de 20 contestaron mal'>1</a><a class='j' href='#q2' title='6 de 20 contestaron mal'>2</a><a class='j' href='#q3' title='6 de 20 contestaron mal'>3</a><a class='j' href='#q4' title='0 de 20 contestaron mal'>4</a><a class='j' href='#q5' title='2 de 20 contestaron mal'>5</a><a class='j' href='#q6' title='2 de 20 contestaron mal'>6</a><a class='j' href='#q7' title='6 de 20 contestaron mal'>7</a><a class='j' href='#q8' title='0 de 20 contestaron mal'>8</a><a class='j' href='#q9' title='3 de 20 contestaron mal'>9</a><a class='j bad' href='#q10' title='7 de 20 contestaron mal'>10</a><a class='j bad' href='#q11' title='7 de 20 contestaron mal'>11</a><a class='j' href='#q12' title='4 de 20 contestaron mal'>12</a><a class='j' href='#q13' title='2 de 20 contestaron mal'>13</a><a class='j' href='#q14' title='4 de 20 contestaron mal'>14</a><a class='j' href='#q15' title='3 de 20 contestaron mal'>15</a><a class='j bad' href='#q16' title='7 de 20 contestaron mal'>16</a><a class='j' href='#q17' title='1 de 20 contestaron mal'>17</a><a class='j' href='#q18' title='1 de 20 contestaron mal'>18</a><a class='j' href='#q19' title='4 de 20 contestaron mal'>19</a><a class='j' href='#q20' title='1 de 20 contestaron mal'>20</a><a class='j' href='#q21' title='4 de 20 contestaron mal'>21</a><a class='j' href='#q22' title='5 de 20 contestaron mal'>22</a><a class='j' href='#q23' title='1 de 20 contestaron mal'>23</a><a class='j' href='#q24' title='2 de 20 contestaron mal'>24</a><a class='j' href='#q25' title='2 de 20 contestaron mal'>25</a><a class='j' href='#q26' title='3 de 20 contestaron mal'>26</a></div>
-  <p class="legend">En coral: preguntas que el 35 % del grupo o más contestó mal.</p>
-
-  <div class="tools">
-    <button class="btn" id="pm" type="button" aria-pressed="false">Modo práctica</button>
-    <span class="legend">Oculta respuestas y revisión; contesta y luego toca «Ver la revisión».</span>
-  </div>
-
-  
-<article class="card" id="q1">
-  <header><span class="qn">Pregunta 1</span><span class="tag">Lavado de dinero</span><span class="wr">3 de 20 mal</span></header>
+<header class="top">
+  <div class="eyebrow">360Educa · Módulo 1 · Conocimientos básicos · Certificación CNBV PLD/FT · 2.ª convocatoria 2026</div>
+  <h1>Simulador 2 · <span class="hl">Módulo 1, preguntas 1 a 26</span></h1>
+  <p class="lede">Área 1 · Básicos: 26 preguntas, 83 % de aciertos del grupo. Qué se contestó mal, por qué y cómo no volver a caer.</p>
+  <p class="mini sub hint-rec">Modo recitar: las celdas difuminadas se descubren con un toque. Dilas en voz alta antes de tocar.</p>
+  <hr class="membrete">
+</header>
+<nav class="idx" aria-label="Secciones"><a href="#como">Cómo leerla</a><a href="#preguntas">Preguntas</a></nav>
+<style>
+.clin{display:grid;gap:18px}
+.qc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:12px;min-width:0;scroll-margin-top:70px}
+.qc .hd{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.qc .hd .no{font-family:var(--f-display);font-weight:800;font-size:20px}
+.qc .hd .sub2{font-size:12.5px;color:var(--muted);width:100%}
+.qc .hd .mal{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums}
+.qc .hd .mal.hi{color:var(--coral)}
+.qc .stem{font-size:15.5px;line-height:1.55;min-width:0}
+.qc .stem ol,.qc .stem ul{margin:6px 0;padding-left:22px;display:grid;gap:3px}
+.qc .stem ul.items{list-style:none;padding-left:0}
+.qc .stem p{margin:6px 0}
+.qc .ops{display:grid;gap:6px}
+.qc .op{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 10px;position:relative;overflow:hidden;background:var(--bg)}
+.qc .op b{font-family:var(--f-display)}
+.qc .op .bar{position:absolute;inset:0 auto 0 0;z-index:0;background:var(--surface-2)}
+.qc .op > *{position:relative;z-index:1}
+.qc .op .v{text-align:right;font-variant-numeric:tabular-nums;font-size:13px;font-weight:700;white-space:nowrap}
+.qc .op.ok{border-color:var(--verde);border-width:2px}
+.qc .op.ok .bar{background:var(--verde-tint)}
+.qc .op.bad .bar{background:var(--coral-tint)}
+.qc .why{display:grid;gap:12px}
+.qc .why > div{display:grid;gap:3px;min-width:0}
+.qc .why ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.qc .why p{margin:0}
+.qc .lb{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.qc .ans{font-family:var(--f-display);font-weight:800}
+.qc .nota{font-size:12.5px;color:var(--muted);font-style:italic;margin:0}
+.qc .fundb{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--bg)}
+.qc .fund{line-height:1.55}
+.qc.rv .hd .mal{color:var(--muted)}
+.practica .qc:not(.rev) .why,.practica .qc:not(.rev) .op .v,.practica .qc:not(.rev) .op .bar,.practica .qc:not(.rev) .hd .mal{visibility:hidden}
+.practica .qc:not(.rev) .why{display:none}
+.practica .qc:not(.rev) .op.ok{border-color:var(--line);border-width:1px}
+.qc [data-rev]{display:none}
+.practica .qc [data-rev]{display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips a{font-size:12.5px;font-weight:700;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--surface);font-variant-numeric:tabular-nums}
+.chips a.hi{border-color:var(--coral);background:var(--coral-tint)}
+.modo{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.goto{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.goto input{font:inherit;width:7em;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+</style>
+<section id="como">
+  <h2>Cómo leer esta revisión</h2>
+  <p class="sub">Las preguntas llevan <b>el mismo número que en tu examen</b> (1 a 26). En cada una ves cuántos contestaron mal y qué eligieron, en qué se equivocaron, cómo cachar el error y el fundamento con el texto de la fuente. Números del grupo completo (20 alumnos); no hay resultados individuales.</p>
+  <form class="goto" id="goto"><label for="goto-n"><b>Ir a la pregunta del examen</b></label><input id="goto-n" type="number" min="1" max="26" inputmode="numeric" placeholder="1–26"><button class="btn" type="submit">Ir</button><span class="mini" id="goto-msg"></span></form>
+  <div class="tablewrap"><table class="t2"><thead><tr><th>Tema</th><th>Aciertos</th><th>Preguntas del examen</th></tr></thead><tbody><tr><th>Lavado de dinero</th><td class="num">78 %</td><td>1, 2</td></tr><tr><th>Financiamiento al terrorismo</th><td class="num">70 %</td><td>3</td></tr><tr><th>Corrupción</th><td class="num">95 %</td><td>4, 5</td></tr><tr><th>Penas del delito de operaciones con recursos de procedencia ilícita</th><td class="num">90 %</td><td>6</td></tr><tr><th>Penas del delito de financiamiento al terrorismo conforme al Código</th><td class="num">70 %</td><td>7</td></tr><tr><th>Conocimientos básicos sobre los organismos y foros</th><td class="num">83 %</td><td>8, 9, 10</td></tr><tr><th>Grupo de Acción Financiera Internacional</th><td class="num">72 %</td><td>11, 12</td></tr><tr><th>Recomendaciones del GAFI</th><td class="num">85 %</td><td>13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23</td></tr><tr><th>Régimen de prevención</th><td class="num">90 %</td><td>24</td></tr><tr><th>Autoridades nacionales en materia de prevención</th><td class="num">88 %</td><td>25, 26</td></tr></tbody></table></div>
+  <h3>Todas las preguntas</h3>
+  <p class="mini">En rojo, las que fallaron 7 o más alumnos (35 % o más).</p>
+  <div class="chips"><a href="#p1" class="">1 · 3 mal</a><a href="#p2" class="">2 · 6 mal</a><a href="#p3" class="">3 · 6 mal</a><a href="#p4" class="">4 · 0 mal</a><a href="#p5" class="">5 · 2 mal</a><a href="#p6" class="">6 · 2 mal</a><a href="#p7" class="">7 · 6 mal</a><a href="#p8" class="">8 · 0 mal</a><a href="#p9" class="">9 · 3 mal</a><a href="#p10" class="hi">10 · 7 mal</a><a href="#p11" class="hi">11 · 7 mal</a><a href="#p12" class="">12 · 4 mal</a><a href="#p13" class="">13 · 2 mal</a><a href="#p14" class="">14 · 4 mal</a><a href="#p15" class="">15 · 3 mal</a><a href="#p16" class="hi">16 · 7 mal</a><a href="#p17" class="">17 · 1 mal</a><a href="#p18" class="">18 · 1 mal</a><a href="#p19" class="">19 · 4 mal</a><a href="#p20" class="">20 · 1 mal</a><a href="#p21" class="">21 · 4 mal</a><a href="#p22" class="">22 · 5 mal</a><a href="#p23" class="">23 · 1 mal</a><a href="#p24" class="">24 · 2 mal</a><a href="#p25" class="">25 · 2 mal</a><a href="#p26" class="">26 · 3 mal</a></div>
+  <div class="modo"><button class="btn ghost" type="button" id="b-prac" aria-pressed="false">Modo práctica: ocultar respuestas</button><span class="mini">Para contestar primero y revisar después.</span></div>
+</section>
+<section id="preguntas"><h2>Preguntas 1 a 26</h2><div class="clin"><article class="qc" id="p1">
+  <div class="hd"><span class="no">Pregunta 1</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span><span class="sub2">Área 1 · Básicos · pregunta 1 del área · Lavado de dinero</span></div>
   <div class="stem">Relaciona las etapas del Lavado de Dinero con el caso práctico al que hace referencia cada una de ellas:<ol><li>El dueño de un restaurante deposita $200,000 MXN proveniente de la venta de drogas en la cuenta bancaria de la empresa, haciéndolo pasar por ingresos del negocio.</li><li>Un inspector encuentra que un establecimiento de venta de alimentos incumple determinadas disposiciones administrativas. En lugar de imponer la sanción correspondiente, le solicita al propietario $20,000 para no levantar el acta.</li><li>El señor Antonio, con los 3 millones de pesos provenientes de la venta de armas que tiene en su cuenta con el Banco «Alegría», realiza varias transferencias hacia cuentas de empresas relacionadas con él. Posteriormente, una de esas empresas envía los recursos a una cuenta bancaria ubicada en otro país.</li><li>Un empresario participa en un procedimiento para obtener un contrato público. Antes de que se tome la decisión, entrega a un funcionario un reloj de alto valor con la finalidad de que favorezca su propuesta.</li><li>Después de varios movimientos dentro y fuera del país, la señora Amelia utiliza los 5 millones de pesos de su cuenta bancaria, obtenidos por la trata de personas, para adquirir varios vehículos y departamentos en la Ciudad de México.</li></ol><p class='cols'>a) Integración · b) Colocación · c) Estratificación</p></div>
-  
-  <ul class="ops"><li class='op ko'><span class='lt'>A</span><span class='ot'>1a, 3b, 5c</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li><li class='op ok'><span class='lt'>B</span><span class='ot'>1b, 3c, 5a</span><span class='bar'><i style='width:85%'></i></span><span class='ct'>17 · 85 %</span></li><li class='op'><span class='lt'>C</span><span class='ot'>2b, 4c, 5a</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ko'><span class='lt'>D</span><span class='ot'>2a, 4b, 5c</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>3 de 20</b> (15 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>A</b> «1a, 3b, 5c»: 2 de 20 (10 %)</li><li><b>D</b> «2a, 4b, 5c»: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>A.</b> Cruzaron las dos primeras etapas: pusieron el depósito del restaurante (caso 1) como <b>integración</b> y las transferencias de Antonio (caso 3) como <b>colocación</b>. Engaña la frase «haciéndolo pasar por ingresos del negocio», que suena a dinero que ya parece legítimo. Pero es el primer contacto del efectivo con el banco: eso es colocación.</li><li><b>D.</b> Usó los casos 2 y 4, que no son lavado: el inspector que pide dinero y el reloj para ganar el contrato son <b>cohecho</b>. No hay recursos ilícitos que se muevan para darles apariencia legítima.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Primer contacto del efectivo con el banco = colocación. Transferencias en cadena y al extranjero = estratificación.</b> Si en el caso alguien da o pide algo a un servidor público, es corrupción: descártalo. Con 1b y 3c sólo queda una opción.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>VSPP de la CNBV, «Lavado de Dinero», p. 1: las tres etapas con su ejemplo (colocación: red de depósitos bancarios en efectivo; estratificación: transferencias bancarias). CPF art. 222, fr. I (p. 81): cohecho, para los casos 2 y 4.</p></div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:10.0%"></span><b>A</b><span>1a, 3b, 5c</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:85.0%"></span><b>B</b><span>1b, 3c, 5a</span><span class="v">17 · 85 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>C</b><span>2b, 4c, 5a</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>D</b><span>2a, 4b, 5c</span><span class="v">1 · 5 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">B) 1b, 3c, 5a</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>A)</b> 1a, 3b, 5c · <b>2 alumnos</b> (10 %)</li><li><b>D)</b> 2a, 4b, 5c · <b>1 alumno</b> (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>A.</b> Cruzaron las dos primeras etapas: pusieron el depósito del restaurante (caso 1) como <b>integración</b> y las transferencias de Antonio (caso 3) como <b>colocación</b>. Engaña la frase «haciéndolo pasar por ingresos del negocio», que suena a dinero que ya parece legítimo. Pero es el primer contacto del efectivo con el banco: eso es colocación.</li><li><b>D.</b> Usó los casos 2 y 4, que no son lavado: el inspector que pide dinero y el reloj para ganar el contrato son <b>cohecho</b>. No hay recursos ilícitos que se muevan para darles apariencia legítima.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Primer contacto del efectivo con el banco = colocación. Transferencias en cadena y al extranjero = estratificación.</b> Si en el caso alguien da o pide algo a un servidor público, es corrupción: descártalo. Con 1b y 3c sólo queda una opción.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>VSPP de la CNBV, «Lavado de Dinero», p. 1: las tres etapas con su ejemplo (colocación: red de depósitos bancarios en efectivo; estratificación: transferencias bancarias). CPF art. 222, fr. I (p. 81): cohecho, para los casos 2 y 4.</p></span></div>
   </div>
-</article>
-<article class="card" id="q2">
-  <header><span class="qn">Pregunta 2</span><span class="tag">Lavado de dinero</span><span class="wr">6 de 20 mal</span></header>
+</article><article class="qc" id="p2">
+  <div class="hd"><span class="no">Pregunta 2</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span><span class="sub2">Área 1 · Básicos · pregunta 2 del área · Lavado de dinero</span></div>
   <div class="stem">Relaciona de manera correcta la definición de lavado de dinero con el organismo o documento que le corresponde:<ol><li>La ocultación o el encubrimiento de la naturaleza, el origen, la ubicación, el destino, el movimiento o la propiedad reales de bienes, o de derechos relativos a tales bienes, a sabiendas de que proceden del [narcotráfico o tráfico ilícito], o de un acto de participación en tal delito.</li><li>La ocultación o disimulación de la verdadera naturaleza, origen, ubicación, disposición, movimiento o propiedad de bienes o del legítimo derecho a estos, a sabiendas de que dichos bienes son producto del delito.</li><li>Proceso a través del cual es encubierto el origen de los fondos generados mediante el ejercicio de algunas actividades ilegales (siendo las más comunes, tráfico de drogas o estupefacientes, contrabando de armas, corrupción, fraude, trata de personas, lenocinio, extorsión, piratería, evasión fiscal y terrorismo).</li><li>A quien adquiera, enajene, administre, custodie, posea, cambie, convierta, deposite, retire, dé o reciba por cualquier motivo, invierta, traspase, transporte o transfiera, oculte, encubra o pretenda ocultar o encubrir la naturaleza, origen, ubicación, destino, movimiento, propiedad o titularidad de recursos, derechos o bienes de cualquier naturaleza, cuando tenga conocimiento de que proceden o representan el producto de una actividad ilícita, dentro del territorio nacional, de éste hacia el extranjero o a la inversa.</li></ol><p class='cols'>a. Código Penal Federal · b. Convención de Viena (ONU) · c. Convención de Palermo (ONU) · d. Comisión Nacional Bancaria y de Valores</p></div>
-  
-  <ul class="ops"><li class='op ok'><span class='lt'>A</span><span class='ot'>1b, 2c, 3d, 4a</span><span class='bar'><i style='width:70%'></i></span><span class='ct'>14 · 70 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>1c, 2b, 3d, 4a</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>1b, 2c, 3a, 4d</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li><li class='op ko'><span class='lt'>D</span><span class='ot'>1a, 2b, 3c, 4d</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>6 de 20</b> (30 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>B</b> «1c, 2b, 3d, 4a»: 2 de 20 (10 %)</li><li><b>C</b> «1b, 2c, 3a, 4d»: 2 de 20 (10 %)</li><li><b>D</b> «1a, 2b, 3c, 4d»: 2 de 20 (10 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>B.</b> Cruzaron <b>Viena con Palermo</b>. Las dos convenciones son de la ONU y sus definiciones casi se calcan; la diferencia está en de dónde vienen los bienes.</li><li><b>C.</b> Cruzaron <b>CNBV con CPF</b>. Las dos son mexicanas; se distinguen por la forma de la frase.</li><li><b>D.</b> Relacionaron en orden (1a, 2b, 3c, 4d), sin distinguir ninguna fuente.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Drogas = Viena. Cualquier delito («producto del delito») = Palermo. «Proceso…» con lista de actividades = CNBV. «A quien…» + lista de verbos = CPF</b> (así empieza un tipo penal).</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>VSPP de la CNBV, «Lavado de Dinero», p. 1 (definición 3, literal). CPF art. 400 Bis, fr. I (p. 133; definición 4). Recomendaciones del GAFI, NI R.3, párr. 1 (p. 42): el LA se tipifica con base en las convenciones de Viena (1988) y de Palermo (2000). El texto de las convenciones no está en la bibliografía del temario.</p></div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:70.0%"></span><b>A</b><span>1b, 2c, 3d, 4a</span><span class="v">14 · 70 %</span></div><div class="op bad"><span class="bar" style="width:10.0%"></span><b>B</b><span>1c, 2b, 3d, 4a</span><span class="v">2 · 10 %</span></div><div class="op bad"><span class="bar" style="width:10.0%"></span><b>C</b><span>1b, 2c, 3a, 4d</span><span class="v">2 · 10 %</span></div><div class="op bad"><span class="bar" style="width:10.0%"></span><b>D</b><span>1a, 2b, 3c, 4d</span><span class="v">2 · 10 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">A) 1b, 2c, 3d, 4a</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>B)</b> 1c, 2b, 3d, 4a · <b>2 alumnos</b> (10 %)</li><li><b>C)</b> 1b, 2c, 3a, 4d · <b>2 alumnos</b> (10 %)</li><li><b>D)</b> 1a, 2b, 3c, 4d · <b>2 alumnos</b> (10 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>B.</b> Cruzaron <b>Viena con Palermo</b>. Las dos convenciones son de la ONU y sus definiciones casi se calcan; la diferencia está en de dónde vienen los bienes.</li><li><b>C.</b> Cruzaron <b>CNBV con CPF</b>. Las dos son mexicanas; se distinguen por la forma de la frase.</li><li><b>D.</b> Relacionaron en orden (1a, 2b, 3c, 4d), sin distinguir ninguna fuente.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Drogas = Viena. Cualquier delito («producto del delito») = Palermo. «Proceso…» con lista de actividades = CNBV. «A quien…» + lista de verbos = CPF</b> (así empieza un tipo penal).</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>VSPP de la CNBV, «Lavado de Dinero», p. 1 (definición 3, literal). CPF art. 400 Bis, fr. I (p. 133; definición 4). Recomendaciones del GAFI, NI R.3, párr. 1 (p. 42): el LA se tipifica con base en las convenciones de Viena (1988) y de Palermo (2000). El texto de las convenciones no está en la bibliografía del temario.</p></span></div>
   </div>
-</article>
-<article class="card" id="q3">
-  <header><span class="qn">Pregunta 3</span><span class="tag">Financiamiento al terrorismo</span><span class="wr">6 de 20 mal</span></header>
+</article><article class="qc" id="p3">
+  <div class="hd"><span class="no">Pregunta 3</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span><span class="sub2">Área 1 · Básicos · pregunta 3 del área · Financiamiento al terrorismo</span></div>
   <div class="stem">Relaciona de manera correcta la definición de financiamiento al terrorismo con el organismo o documento que le corresponde:<ol><li>Actos en contra de bienes o servicios, ya sea públicos o privados, o bien, en contra de la integridad física, emocional, o la vida de personas, que produzcan alarma, temor o terror en la población o en un grupo o sector de ella, para atentar contra la seguridad nacional o presionar a la autoridad o a un particular, u obligar a éste para que tome una determinación.</li><li>Es cada asistencia, apoyo o conspiración, sean en forma directa o indirecta para coleccionar fondos con la intención que se usen con el fin de cometer un acto terrorista; sea por un autor individual o una organización terrorista. Pueden ser tanto fondos lícitos como ilícitos.</li><li>Consiste en la aportación, financiación o recaudación de recursos o fondos económicos que tengan como fin provocar alarma, temor o terror en la población o en un grupo o sector de ella, para atentar contra la seguridad nacional o presionar a la autoridad para que tome una determinación.</li><li>Al que por cualquier medio que fuere ya sea directa o indirectamente, aporte o recaude fondos económicos o recursos de cualquier naturaleza, con conocimiento de que serán destinados para financiar o apoyar actividades de individuos u organizaciones terroristas, o para ser utilizados […] para la comisión, en territorio nacional o en el extranjero, de cualquiera de los delitos siguientes: terrorismo, sabotaje, terrorismo internacional, ataques a las vías de comunicación […], robo de material radioactivo.</li></ol><p class='cols'>a. Código Penal Federal · b. GAFILAT · c. Comisión Nacional Bancaria y de Valores</p></div>
-  <p class='nota'>Nota: El reporte de Brillium repite parte del enunciado; aquí se muestra limpio.</p>
-  <ul class="ops"><li class='op ko'><span class='lt'>A</span><span class='ot'>2c, 3b, 4a</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>1b, 3c, 4a</span><span class='bar'><i style='width:20%'></i></span><span class='ct'>4 · 20 %</span></li><li class='op ok'><span class='lt'>C</span><span class='ot'>2b, 3c, 4a</span><span class='bar'><i style='width:70%'></i></span><span class='ct'>14 · 70 %</span></li><li class='op ko'><span class='lt'>D</span><span class='ot'>1c, 2b, 4a</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>6 de 20</b> (30 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>A</b> «2c, 3b, 4a»: 1 de 20 (5 %)</li><li><b>B</b> «1b, 3c, 4a»: 4 de 20 (20 %)</li><li><b>D</b> «1c, 2b, 4a»: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>B.</b> Usaron la <b>definición 1</b> como la de GAFILAT. La 1 no habla de fondos: describe los actos que producen alarma o terror. Es el <b>terrorismo</b> mismo (CPF art. 139, fr. I), no su financiamiento. Es el distractor de la relación: sobra.</li><li><b>A.</b> Cruzó GAFILAT con CNBV.</li><li><b>D.</b> Usó la definición 1 y además cruzó GAFILAT con CNBV.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>FT = hay fondos.</b> Si la definición no menciona fondos o recursos, es terrorismo y sobra. «Lícitos como ilícitos» → GAFILAT (igual que el GAFI: «fuente legítima o ilegítima»). «Al que…» + lista de delitos → CPF.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>CPF art. 139, fr. I (p. 40): terrorismo; art. 139 Quáter (p. 41): financiamiento. Recomendaciones del GAFI, NI R.5, párr. 5 (p. 47): fondos de fuente legítima o ilegítima. Las definiciones de GAFILAT y de la CNBV no están en la bibliografía del temario.</p></div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:5.0%"></span><b>A</b><span>2c, 3b, 4a</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:20.0%"></span><b>B</b><span>1b, 3c, 4a</span><span class="v">4 · 20 %</span></div><div class="op ok"><span class="bar" style="width:70.0%"></span><b>C</b><span>2b, 3c, 4a</span><span class="v">14 · 70 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>D</b><span>1c, 2b, 4a</span><span class="v">1 · 5 %</span></div></div><p class="nota">Nota: El reporte de Brillium repite parte del enunciado; aquí se muestra limpio.</p>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">C) 2b, 3c, 4a</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>B)</b> 1b, 3c, 4a · <b>4 alumnos</b> (20 %)</li><li><b>A)</b> 2c, 3b, 4a · <b>1 alumno</b> (5 %)</li><li><b>D)</b> 1c, 2b, 4a · <b>1 alumno</b> (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>B.</b> Usaron la <b>definición 1</b> como la de GAFILAT. La 1 no habla de fondos: describe los actos que producen alarma o terror. Es el <b>terrorismo</b> mismo (CPF art. 139, fr. I), no su financiamiento. Es el distractor de la relación: sobra.</li><li><b>A.</b> Cruzó GAFILAT con CNBV.</li><li><b>D.</b> Usó la definición 1 y además cruzó GAFILAT con CNBV.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>FT = hay fondos.</b> Si la definición no menciona fondos o recursos, es terrorismo y sobra. «Lícitos como ilícitos» → GAFILAT (igual que el GAFI: «fuente legítima o ilegítima»). «Al que…» + lista de delitos → CPF.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>CPF art. 139, fr. I (p. 40): terrorismo; art. 139 Quáter (p. 41): financiamiento. Recomendaciones del GAFI, NI R.5, párr. 5 (p. 47): fondos de fuente legítima o ilegítima. Las definiciones de GAFILAT y de la CNBV no están en la bibliografía del temario.</p></span></div>
   </div>
-</article>
-<article class="card" id="q4">
-  <header><span class="qn">Pregunta 4</span><span class="tag">Corrupción</span><span class="wr">0 de 20 mal</span></header>
+</article><article class="qc" id="p4">
+  <div class="hd"><span class="no">Pregunta 4</span><span class="mal">Contestaron mal: 0 de 20 (0 %)</span><span class="sub2">Área 1 · Básicos · pregunta 4 del área · Corrupción</span></div>
   <div class="stem">Tomando en cuenta la siguiente situación, ¿a qué conducta se hace referencia? Un inspector del departamento de Obras Públicas descubre que un edificio no cumple con las normas antisísmicas ni de protección civil. El dueño de la obra le entrega una suma de dinero al inspector para que firme el dictamen como «aprobado» y no clausure la construcción.</div>
-  
-  <ul class="ops"><li class='op'><span class='lt'>A</span><span class='ot'>Peculado</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ok'><span class='lt'>B</span><span class='ot'>Cohecho</span><span class='bar'><i style='width:100%'></i></span><span class='ct'>20 · 100 %</span></li><li class='op'><span class='lt'>C</span><span class='ot'>Tráfico de influencias</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>D</span><span class='ot'>Concusión</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>0 de 20</b> (0 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><p>Nadie la contestó mal.</p></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><p>Sin errores en el grupo. Repásala de todos modos: el examen la puede plantear con otro caso.</p></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Alguien le da dinero al servidor público para que haga o deje de hacer algo de su función = cohecho.</b></p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>CPF art. 222, fr. I (p. 81): el servidor público que «solicite o reciba ilícitamente […] dinero o cualquier beneficio […] para hacer o dejar de realizar un acto propio de sus funciones».</p></div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0.0%"></span><b>A</b><span>Peculado</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:100.0%"></span><b>B</b><span>Cohecho</span><span class="v">20 · 100 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>C</b><span>Tráfico de influencias</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>D</b><span>Concusión</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">B) Cohecho</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><p>Sin errores en el grupo. Repásala de todos modos: el examen la puede plantear con otro caso.</p></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Alguien le da dinero al servidor público para que haga o deje de hacer algo de su función = cohecho.</b></p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>CPF art. 222, fr. I (p. 81): el servidor público que «solicite o reciba ilícitamente […] dinero o cualquier beneficio […] para hacer o dejar de realizar un acto propio de sus funciones».</p></span></div>
   </div>
-</article>
-<article class="card" id="q5">
-  <header><span class="qn">Pregunta 5</span><span class="tag">Corrupción</span><span class="wr">2 de 20 mal</span></header>
+</article><article class="qc" id="p5">
+  <div class="hd"><span class="no">Pregunta 5</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span><span class="sub2">Área 1 · Básicos · pregunta 5 del área · Corrupción</span></div>
   <div class="stem">Tomando en cuenta la siguiente situación, ¿a qué conducta se hace referencia? El director de Obras Públicas manda maquinaria pesada del gobierno (excavadoras, camiones de volteo) y sacos de cemento pagados con impuestos para pavimentar el estacionamiento de su rancho privado en Morelia.</div>
-  
-  <ul class="ops"><li class='op ok'><span class='lt'>A</span><span class='ot'>Peculado</span><span class='bar'><i style='width:90%'></i></span><span class='ct'>18 · 90 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>Cohecho</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>Tráfico de influencias</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op'><span class='lt'>D</span><span class='ot'>Concusión</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>2 de 20</b> (10 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>B</b> «Cohecho»: 1 de 20 (5 %)</li><li><b>C</b> «Tráfico de influencias»: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>B.</b> Cohecho: aquí nadie le da ni le promete nada al director. Sin alguien que pague, no hay cohecho.</li><li><b>C.</b> Tráfico de influencias: el director no promueve ni gestiona un trámite ante otro servidor; usa directamente bienes que tiene por su cargo.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Usa para sí bienes del Estado que tiene por su cargo = peculado («pecu-lado»: lo hace de lado).</b> Si hay un tercero que paga, es cohecho.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>CPF art. 223, fr. I (p. 82): el servidor público que «distraiga de su objeto dinero, valores, fincas o cualquier otra cosa perteneciente al Estado», si los recibió por razón de su cargo. Tráfico de influencia: CPF art. 221 (p. 80).</p></div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:90.0%"></span><b>A</b><span>Peculado</span><span class="v">18 · 90 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>B</b><span>Cohecho</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>C</b><span>Tráfico de influencias</span><span class="v">1 · 5 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>D</b><span>Concusión</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">A) Peculado</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>B)</b> Cohecho · <b>1 alumno</b> (5 %)</li><li><b>C)</b> Tráfico de influencias · <b>1 alumno</b> (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>B.</b> Cohecho: aquí nadie le da ni le promete nada al director. Sin alguien que pague, no hay cohecho.</li><li><b>C.</b> Tráfico de influencias: el director no promueve ni gestiona un trámite ante otro servidor; usa directamente bienes que tiene por su cargo.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Usa para sí bienes del Estado que tiene por su cargo = peculado («pecu-lado»: lo hace de lado).</b> Si hay un tercero que paga, es cohecho.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>CPF art. 223, fr. I (p. 82): el servidor público que «distraiga de su objeto dinero, valores, fincas o cualquier otra cosa perteneciente al Estado», si los recibió por razón de su cargo. Tráfico de influencia: CPF art. 221 (p. 80).</p></span></div>
   </div>
-</article>
-<article class="card" id="q6">
-  <header><span class="qn">Pregunta 6</span><span class="tag">Penas del delito de operaciones con recursos de procedencia ilícita</span><span class="wr">2 de 20 mal</span></header>
+</article><article class="qc" id="p6">
+  <div class="hd"><span class="no">Pregunta 6</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span><span class="sub2">Área 1 · Básicos · pregunta 6 del área · Penas del delito de operaciones con recursos de procedencia ilícita</span></div>
   <div class="stem">¿Qué pena aplicaría en la siguiente situación? Carlos es empleado de una SOFIPO. Un cliente le informa que determinados recursos provienen de la venta ilegal de armas y drogas en Ciudad de México. Carlos, aun conociendo ese origen, facilita que los recursos sean recibidos y posteriormente transferidos a otras cuentas.</div>
-  
-  <ul class="ops"><li class='op'><span class='lt'>A</span><span class='ot'>Pena base de 5 a 15 años de prisión y de 1,000 a 5,000 días multa</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>B</span><span class='ot'>La pena base aumenta hasta 1/2</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>La pena base se duplica + inhabilitación</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li><li class='op ok'><span class='lt'>D</span><span class='ot'>La pena base aumenta de 1/3 a 1/2 + inhabilitación</span><span class='bar'><i style='width:90%'></i></span><span class='ct'>18 · 90 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>2 de 20</b> (10 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>C</b> «La pena base se duplica + inhabilitación»: 2 de 20 (10 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>C.</b> Tomaron el agravante del <b>servidor público</b> encargado de prevenir, detectar, denunciar, investigar o juzgar. Carlos es empleado de un sujeto obligado privado (una SOFIPO), no servidor público.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Empleado, consejero o apoderado del sujeto obligado: + de un tercio a una mitad + inhabilitación. Servidor público que previene o persigue: se duplica.</b> «Hasta una mitad» sin inhabilitación es por usar a menores.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>CPF art. 400 Bis 1 (p. 134), párrs. primero y segundo (sujetos obligados), tercero (servidores públicos) y cuarto (menores). Pena base: CPF art. 400 Bis (p. 133).</p></div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0.0%"></span><b>A</b><span>Pena base de 5 a 15 años de prisión y de 1,000 a 5,000 días multa</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>B</b><span>La pena base aumenta hasta 1/2</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:10.0%"></span><b>C</b><span>La pena base se duplica + inhabilitación</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:90.0%"></span><b>D</b><span>La pena base aumenta de 1/3 a 1/2 + inhabilitación</span><span class="v">18 · 90 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">D) La pena base aumenta de 1/3 a 1/2 + inhabilitación</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>C)</b> La pena base se duplica + inhabilitación · <b>2 alumnos</b> (10 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>C.</b> Tomaron el agravante del <b>servidor público</b> encargado de prevenir, detectar, denunciar, investigar o juzgar. Carlos es empleado de un sujeto obligado privado (una SOFIPO), no servidor público.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Empleado, consejero o apoderado del sujeto obligado: + de un tercio a una mitad + inhabilitación. Servidor público que previene o persigue: se duplica.</b> «Hasta una mitad» sin inhabilitación es por usar a menores.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>CPF art. 400 Bis 1 (p. 134), párrs. primero y segundo (sujetos obligados), tercero (servidores públicos) y cuarto (menores). Pena base: CPF art. 400 Bis (p. 133).</p></span></div>
   </div>
-</article>
-<article class="card" id="q7">
-  <header><span class="qn">Pregunta 7</span><span class="tag">Penas del delito de financiamiento al terrorismo conforme al Código</span><span class="wr">6 de 20 mal</span></header>
+</article><article class="qc" id="p7">
+  <div class="hd"><span class="no">Pregunta 7</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span><span class="sub2">Área 1 · Básicos · pregunta 7 del área · Penas del delito de financiamiento al terrorismo conforme al Código</span></div>
   <div class="stem">¿Qué pena aplicaría en la siguiente situación? Yolanda organiza una campaña de recaudación afirmando que apoyará a víctimas del reciente terremoto en Chiapas. Sin embargo, desde el inicio sabe que el dinero será entregado a una organización terrorista.</div>
-  
-  <ul class="ops"><li class='op ko'><span class='lt'>A</span><span class='ot'>De 15 a 40 años de prisión y de 400 a 1,200 días multa</span><span class='bar'><i style='width:30%'></i></span><span class='ct'>6 · 30 %</span></li><li class='op'><span class='lt'>B</span><span class='ot'>De 5 a 10 años de prisión y de 100 a 300 días multa</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ok'><span class='lt'>C</span><span class='ot'>De 15 a 40 años de prisión y de 400 a 1,200 veces el valor diario de la UMA</span><span class='bar'><i style='width:70%'></i></span><span class='ct'>14 · 70 %</span></li><li class='op'><span class='lt'>D</span><span class='ot'>De 6 a 12 años de prisión y de 200 a 600 días multa</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>6 de 20</b> (30 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>A</b> «De 15 a 40 años de prisión y de 400 a 1,200 días multa»: 6 de 20 (30 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>A.</b> Las cifras están bien; la <b>unidad de la multa</b>, no. Desde la reforma de 2024, la multa del terrorismo, y por remisión la del FT, se expresa en veces el valor diario de la UMA. «Días multa» es la unidad del lavado (400 Bis) y del terrorismo internacional (148 Bis).</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>FT → UMA. Lavado → días multa.</b> Si dos opciones tienen las mismas cifras, la pregunta es la unidad.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>CPF art. 139 Quáter (p. 41): «la misma pena señalada en el artículo 139». CPF art. 139, primer párrafo (p. 40; reformado DOF 07-06-2024): «prisión de quince a cuarenta años y multa de cuatrocientas a mil doscientas veces el valor diario de la Unidad de Medida y Actualización».</p></div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:30.0%"></span><b>A</b><span>De 15 a 40 años de prisión y de 400 a 1,200 días multa</span><span class="v">6 · 30 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>B</b><span>De 5 a 10 años de prisión y de 100 a 300 días multa</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:70.0%"></span><b>C</b><span>De 15 a 40 años de prisión y de 400 a 1,200 veces el valor diario de la UMA</span><span class="v">14 · 70 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>D</b><span>De 6 a 12 años de prisión y de 200 a 600 días multa</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">C) De 15 a 40 años de prisión y de 400 a 1,200 veces el valor diario de la UMA</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>A)</b> De 15 a 40 años de prisión y de 400 a 1,200 días multa · <b>6 alumnos</b> (30 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>A.</b> Las cifras están bien; la <b>unidad de la multa</b>, no. Desde la reforma de 2024, la multa del terrorismo, y por remisión la del FT, se expresa en veces el valor diario de la UMA. «Días multa» es la unidad del lavado (400 Bis) y del terrorismo internacional (148 Bis).</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>FT → UMA. Lavado → días multa.</b> Si dos opciones tienen las mismas cifras, la pregunta es la unidad.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>CPF art. 139 Quáter (p. 41): «la misma pena señalada en el artículo 139». CPF art. 139, primer párrafo (p. 40; reformado DOF 07-06-2024): «prisión de quince a cuarenta años y multa de cuatrocientas a mil doscientas veces el valor diario de la Unidad de Medida y Actualización».</p></span></div>
   </div>
-</article>
-<article class="card" id="q8">
-  <header><span class="qn">Pregunta 8</span><span class="tag">Conocimientos básicos sobre los organismos y foros</span><span class="wr">0 de 20 mal</span></header>
+</article><article class="qc" id="p8">
+  <div class="hd"><span class="no">Pregunta 8</span><span class="mal">Contestaron mal: 0 de 20 (0 %)</span><span class="sub2">Área 1 · Básicos · pregunta 8 del área · Conocimientos básicos sobre los organismos y foros</span></div>
   <div class="stem">Relaciona los 5 principios de la declaración de principios del Comité de Basilea con sus objetivos.<ol><li>Adhesión a la declaración.</li><li>Cooperación con las autoridades.</li><li>Cumplimiento de las leyes.</li><li>Identificación con clientes.</li><li>Principios deben ser garantizados por los gestores de los bancos.</li></ol><p class='cols'>a. Los bancos deben cooperar plenamente con las autoridades y no dar asesoría a clientes que busquen engañar a la autoridad. · b. Los bancos deben esforzarse para verificar la identidad de los clientes. · c. Todos los bancos deben adoptar las políticas de acuerdo con los principios de la declaración y asegurarse de que su personal lo aplique. · d. La PBC debe ser motivo de preocupación para los bancos ya que la confianza del público puede verse afectada. · e. Los responsables deben asegurarse que las actividades se realicen de acuerdo con las leyes.</p></div>
-  
-  <ul class="ops"><li class='op'><span class='lt'>A</span><span class='ot'>1a, 2c, 3b, 4e, 5d</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>B</span><span class='ot'>1b, 2e, 3a, 4d, 5c</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>C</span><span class='ot'>1c, 2a, 3b, 4e, 5d</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ok'><span class='lt'>D</span><span class='ot'>1c, 2a, 3e, 4b, 5d</span><span class='bar'><i style='width:100%'></i></span><span class='ct'>20 · 100 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>0 de 20</b> (0 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><p>Nadie la contestó mal.</p></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><p>Sin errores en el grupo. Repásala de todos modos: el examen la puede plantear con otro caso.</p></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Amarra por palabra repetida:</b> cooperar → autoridades; verificar identidad → clientes; leyes → cumplimiento; adoptar las políticas de la declaración → adhesión. La que sobra (confianza del público) es la de los gestores.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>La Declaración de principios del Comité de Basilea no está en la bibliografía del temario; la página «Organismos Internacionales» de la CNBV sólo describe al Comité en general. El reactivo se resuelve por correspondencia de palabras.</p></div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0.0%"></span><b>A</b><span>1a, 2c, 3b, 4e, 5d</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>B</b><span>1b, 2e, 3a, 4d, 5c</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>C</b><span>1c, 2a, 3b, 4e, 5d</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:100.0%"></span><b>D</b><span>1c, 2a, 3e, 4b, 5d</span><span class="v">20 · 100 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">D) 1c, 2a, 3e, 4b, 5d</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><p>Sin errores en el grupo. Repásala de todos modos: el examen la puede plantear con otro caso.</p></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Amarra por palabra repetida:</b> cooperar → autoridades; verificar identidad → clientes; leyes → cumplimiento; adoptar las políticas de la declaración → adhesión. La que sobra (confianza del público) es la de los gestores.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>La Declaración de principios del Comité de Basilea no está en la bibliografía del temario; la página «Organismos Internacionales» de la CNBV sólo describe al Comité en general. El reactivo se resuelve por correspondencia de palabras.</p></span></div>
   </div>
-</article>
-<article class="card" id="q9">
-  <header><span class="qn">Pregunta 9</span><span class="tag">Conocimientos básicos sobre los organismos y foros</span><span class="wr">3 de 20 mal</span></header>
+</article><article class="qc" id="p9">
+  <div class="hd"><span class="no">Pregunta 9</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span><span class="sub2">Área 1 · Básicos · pregunta 9 del área · Conocimientos básicos sobre los organismos y foros</span></div>
   <div class="stem">Relaciona los organismos internacionales con el objeto correspondiente.</div>
-  <p class='nota'>Nota: Brillium no muestra la tabla del reactivo («Table Not Shown»); por eso no se ven los organismos ni sus objetos.</p>
-  <ul class="ops"><li class='op ok'><span class='lt'>A</span><span class='ot'>1b, 2a, 3e, 4d, 5c</span><span class='bar'><i style='width:85%'></i></span><span class='ct'>17 · 85 %</span></li><li class='op'><span class='lt'>B</span><span class='ot'>1a, 2b, 3c, 4d, 5e</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>1b, 2a, 3e, 4c, 5d</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li><li class='op ko'><span class='lt'>D</span><span class='ot'>1b, 2d, 3e, 4a, 5c</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>3 de 20</b> (15 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>C</b> «1b, 2a, 3e, 4c, 5d»: 2 de 20 (10 %)</li><li><b>D</b> «1b, 2d, 3e, 4a, 5c»: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>C.</b> Acertaron 1, 2 y 3 e <b>invirtieron el último par</b> (4 y 5).</li><li><b>D.</b> Acertó 1, 3 y 5 e invirtió 2 y 4.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>En una relación de 5, amarra primero las que sí sabes y revisa par por par las que quedan:</b> el error del grupo fue invertir dos objetos, no desconocer el tema.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Página «Organismos Internacionales» de la CNBV (bibliografía del tema 1.2.1).</p></div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:85.0%"></span><b>A</b><span>1b, 2a, 3e, 4d, 5c</span><span class="v">17 · 85 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>B</b><span>1a, 2b, 3c, 4d, 5e</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:10.0%"></span><b>C</b><span>1b, 2a, 3e, 4c, 5d</span><span class="v">2 · 10 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>D</b><span>1b, 2d, 3e, 4a, 5c</span><span class="v">1 · 5 %</span></div></div><p class="nota">Nota: Brillium no muestra la tabla del reactivo («Table Not Shown»); por eso no se ven los organismos ni sus objetos.</p>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">A) 1b, 2a, 3e, 4d, 5c</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>C)</b> 1b, 2a, 3e, 4c, 5d · <b>2 alumnos</b> (10 %)</li><li><b>D)</b> 1b, 2d, 3e, 4a, 5c · <b>1 alumno</b> (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>C.</b> Acertaron 1, 2 y 3 e <b>invirtieron el último par</b> (4 y 5).</li><li><b>D.</b> Acertó 1, 3 y 5 e invirtió 2 y 4.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>En una relación de 5, amarra primero las que sí sabes y revisa par por par las que quedan:</b> el error del grupo fue invertir dos objetos, no desconocer el tema.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Página «Organismos Internacionales» de la CNBV (bibliografía del tema 1.2.1).</p></span></div>
   </div>
-</article>
-<article class="card sev" id="q10">
-  <header><span class="qn">Pregunta 10</span><span class="tag">Conocimientos básicos sobre los organismos y foros</span><span class="wr">7 de 20 mal</span></header>
+</article><article class="qc" id="p10">
+  <div class="hd"><span class="no">Pregunta 10</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span><span class="sub2">Área 1 · Básicos · pregunta 10 del área · Conocimientos básicos sobre los organismos y foros</span></div>
   <div class="stem">De las siguientes opciones, selecciona las que correspondan con las funciones que realizan el Fondo Monetario Internacional y el Banco Mundial en colaboración con el GAFI:<ol><li>Desarrollo de los estándares del GAFI, sus guías y otras políticas CLD/FT.</li><li>Elaborar estándares para la industria de servicios financieros y productos relacionados (KYC).</li><li>Promover la efectiva implementación de las Recomendaciones del GAFI a través de evaluaciones a los países.</li><li>Emitir la regulación prudencial de los bancos a nivel internacional y ser un foro de cooperación en materia de supervisión.</li><li>Brindar asistencia técnica y fomentar la capacidad para combatir LD/FT.</li></ol></div>
-  
-  <ul class="ops"><li class='op ko'><span class='lt'>A</span><span class='ot'>1, 2, 3</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>1, 2, 5</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li><li class='op ok'><span class='lt'>C</span><span class='ot'>1, 3, 5</span><span class='bar'><i style='width:65%'></i></span><span class='ct'>13 · 65 %</span></li><li class='op ko'><span class='lt'>D</span><span class='ot'>2, 3, 5</span><span class='bar'><i style='width:20%'></i></span><span class='ct'>4 · 20 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>7 de 20</b> (35 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>A</b> «1, 2, 3»: 1 de 20 (5 %)</li><li><b>B</b> «1, 2, 5»: 2 de 20 (10 %)</li><li><b>D</b> «2, 3, 5»: 4 de 20 (20 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>D.</b> Cambiaron la 1 (estándares <b>del GAFI</b>) por la 2 (estándares <b>para la industria</b>, KYC). Las dos dicen «estándares»; pero el FMI y el BM contribuyen a los estándares del GAFI, no a los de la industria.</li><li><b>B.</b> Dejaron fuera las <b>evaluaciones a los países</b> (3) y metieron los estándares de la industria (2).</li><li><b>A.</b> Dejó fuera la asistencia técnica (5) y metió los estándares de la industria (2).</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>FMI y BM = C-E-A: Contribuyen a los estándares del GAFI, Evalúan países (Programa de Evaluación del Sector Financiero) y Asisten técnicamente.</b> «Industria» no es del FMI; «regulación prudencial» y «foro de supervisión» son del Comité de Basilea.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Mandato del GAFI 2012-2020, párr. 13, incisos a), b) y c) (pp. 4-5).</p></div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:5.0%"></span><b>A</b><span>1, 2, 3</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:10.0%"></span><b>B</b><span>1, 2, 5</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:65.0%"></span><b>C</b><span>1, 3, 5</span><span class="v">13 · 65 %</span></div><div class="op bad"><span class="bar" style="width:20.0%"></span><b>D</b><span>2, 3, 5</span><span class="v">4 · 20 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">C) 1, 3, 5</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>D)</b> 2, 3, 5 · <b>4 alumnos</b> (20 %)</li><li><b>B)</b> 1, 2, 5 · <b>2 alumnos</b> (10 %)</li><li><b>A)</b> 1, 2, 3 · <b>1 alumno</b> (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>D.</b> Cambiaron la 1 (estándares <b>del GAFI</b>) por la 2 (estándares <b>para la industria</b>, KYC). Las dos dicen «estándares»; pero el FMI y el BM contribuyen a los estándares del GAFI, no a los de la industria.</li><li><b>B.</b> Dejaron fuera las <b>evaluaciones a los países</b> (3) y metieron los estándares de la industria (2).</li><li><b>A.</b> Dejó fuera la asistencia técnica (5) y metió los estándares de la industria (2).</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>FMI y BM = C-E-A: Contribuyen a los estándares del GAFI, Evalúan países (Programa de Evaluación del Sector Financiero) y Asisten técnicamente.</b> «Industria» no es del FMI; «regulación prudencial» y «foro de supervisión» son del Comité de Basilea.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Mandato del GAFI 2012-2020, párr. 13, incisos a), b) y c) (pp. 4-5).</p></span></div>
   </div>
-</article>
-<article class="card sev" id="q11">
-  <header><span class="qn">Pregunta 11</span><span class="tag">Grupo de Acción Financiera Internacional</span><span class="wr">7 de 20 mal</span></header>
+</article><article class="qc" id="p11">
+  <div class="hd"><span class="no">Pregunta 11</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span><span class="sub2">Área 1 · Básicos · pregunta 11 del área · Grupo de Acción Financiera Internacional</span></div>
   <div class="stem">Relaciona las funciones con el cargo correspondiente conforme al Mandato del GAFI.</div>
-  <p class='nota'>Nota: Brillium no muestra la tabla del reactivo («Table Not Shown»); por eso no se ven las funciones ni los cargos.</p>
-  <ul class="ops"><li class='op ko'><span class='lt'>A</span><span class='ot'>1d, 2c, 3a</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>1a, 2b, 3d</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>1b, 2a, 3d</span><span class='bar'><i style='width:25%'></i></span><span class='ct'>5 · 25 %</span></li><li class='op ok'><span class='lt'>D</span><span class='ot'>1b, 2a, 3c</span><span class='bar'><i style='width:65%'></i></span><span class='ct'>13 · 65 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>7 de 20</b> (35 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>A</b> «1d, 2c, 3a»: 1 de 20 (5 %)</li><li><b>B</b> «1a, 2b, 3d»: 1 de 20 (5 %)</li><li><b>C</b> «1b, 2a, 3d»: 5 de 20 (25 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>C.</b> Acertaron 1 y 2 y cruzaron el <b>tercer cargo</b> (eligieron d en lugar de c). Fue el error más repetido del área: 5 de 20.</li><li><b>A.</b> Cruzó los tres.</li><li><b>B.</b> Cruzó los tres.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Filtro de palabras del Mandato:</b> decide, aprueba, nombra → Pleno · convoca, preside, portavoz → Presidente · «Presidente designado», suple → Vicepresidente · consultor, entre plenarias, coordina grupos de trabajo → Grupo Directivo · administra, registros, facilita la cooperación, OCDE → Secretaría.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Mandato del GAFI 2012-2020, párrs. 32 a 46 (pp. 6-8).</p></div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:5.0%"></span><b>A</b><span>1d, 2c, 3a</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>B</b><span>1a, 2b, 3d</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:25.0%"></span><b>C</b><span>1b, 2a, 3d</span><span class="v">5 · 25 %</span></div><div class="op ok"><span class="bar" style="width:65.0%"></span><b>D</b><span>1b, 2a, 3c</span><span class="v">13 · 65 %</span></div></div><p class="nota">Nota: Brillium no muestra la tabla del reactivo («Table Not Shown»); por eso no se ven las funciones ni los cargos.</p>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">D) 1b, 2a, 3c</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>C)</b> 1b, 2a, 3d · <b>5 alumnos</b> (25 %)</li><li><b>A)</b> 1d, 2c, 3a · <b>1 alumno</b> (5 %)</li><li><b>B)</b> 1a, 2b, 3d · <b>1 alumno</b> (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>C.</b> Acertaron 1 y 2 y cruzaron el <b>tercer cargo</b> (eligieron d en lugar de c). Fue el error más repetido del área: 5 de 20.</li><li><b>A.</b> Cruzó los tres.</li><li><b>B.</b> Cruzó los tres.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Filtro de palabras del Mandato:</b> decide, aprueba, nombra → Pleno · convoca, preside, portavoz → Presidente · «Presidente designado», suple → Vicepresidente · consultor, entre plenarias, coordina grupos de trabajo → Grupo Directivo · administra, registros, facilita la cooperación, OCDE → Secretaría.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Mandato del GAFI 2012-2020, párrs. 32 a 46 (pp. 6-8).</p></span></div>
   </div>
-</article>
-<article class="card" id="q12">
-  <header><span class="qn">Pregunta 12</span><span class="tag">Grupo de Acción Financiera Internacional</span><span class="wr">4 de 20 mal</span></header>
+</article><article class="qc" id="p12">
+  <div class="hd"><span class="no">Pregunta 12</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span><span class="sub2">Área 1 · Básicos · pregunta 12 del área · Grupo de Acción Financiera Internacional</span></div>
   <div class="stem">De las siguientes opciones, selecciona las que correspondan con retos del GAFI:<ol><li>Financiamiento de la proliferación de armas de destrucción masiva.</li><li>Transparencia de la propiedad beneficiaria.</li><li>Regulación de criptoactivos y activos virtuales.</li><li>Supervisión de empresas fintech de crédito.</li><li>Gestión de riesgos cibernéticos internacionales.</li><li>Establecer estándares de capital bancario internacional.</li></ol></div>
-  
-  <ul class="ops"><li class='op'><span class='lt'>A</span><span class='ot'>1, 2, 4</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>1, 3, 4</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li><li class='op ok'><span class='lt'>C</span><span class='ot'>1, 2, 3</span><span class='bar'><i style='width:80%'></i></span><span class='ct'>16 · 80 %</span></li><li class='op ko'><span class='lt'>D</span><span class='ot'>1, 3, 6</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>4 de 20</b> (20 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>B</b> «1, 3, 4»: 2 de 20 (10 %)</li><li><b>D</b> «1, 3, 6»: 2 de 20 (10 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>B.</b> Cambiaron la <b>propiedad beneficiaria</b> (2) por la supervisión de fintech de crédito (4). La supervisión de un tipo de entidad en particular no tiene Recomendación propia como tema nuevo.</li><li><b>D.</b> Cambiaron la propiedad beneficiaria por el <b>capital bancario</b> (6), que es materia del Comité de Basilea.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Los retos del GAFI tienen Recomendación propia:</b> proliferación (R.7), beneficiario final (R.24 y R.25), activos virtuales (R.15). <b>Capital = Basilea.</b></p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025: R.7 (p. 15), R.15 (p. 20), R.24 y R.25 (p. 25). La lista de «retos» como tal no está en la bibliografía del temario.</p></div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0.0%"></span><b>A</b><span>1, 2, 4</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:10.0%"></span><b>B</b><span>1, 3, 4</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:80.0%"></span><b>C</b><span>1, 2, 3</span><span class="v">16 · 80 %</span></div><div class="op bad"><span class="bar" style="width:10.0%"></span><b>D</b><span>1, 3, 6</span><span class="v">2 · 10 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">C) 1, 2, 3</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>B)</b> 1, 3, 4 · <b>2 alumnos</b> (10 %)</li><li><b>D)</b> 1, 3, 6 · <b>2 alumnos</b> (10 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>B.</b> Cambiaron la <b>propiedad beneficiaria</b> (2) por la supervisión de fintech de crédito (4). La supervisión de un tipo de entidad en particular no tiene Recomendación propia como tema nuevo.</li><li><b>D.</b> Cambiaron la propiedad beneficiaria por el <b>capital bancario</b> (6), que es materia del Comité de Basilea.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Los retos del GAFI tienen Recomendación propia:</b> proliferación (R.7), beneficiario final (R.24 y R.25), activos virtuales (R.15). <b>Capital = Basilea.</b></p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025: R.7 (p. 15), R.15 (p. 20), R.24 y R.25 (p. 25). La lista de «retos» como tal no está en la bibliografía del temario.</p></span></div>
   </div>
-</article>
-<article class="card" id="q13">
-  <header><span class="qn">Pregunta 13</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">2 de 20 mal</span></header>
+</article><article class="qc" id="p13">
+  <div class="hd"><span class="no">Pregunta 13</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span><span class="sub2">Área 1 · Básicos · pregunta 13 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">¿Cuál de las siguientes acciones contempla la Nota Interpretativa de la Recomendación 26 para la supervisión basada en riesgo?</div>
-  
-  <ul class="ops"><li class='op ok'><span class='lt'>A</span><span class='ot'>Ajustar frecuencia e intensidad de la supervisión según el riesgo</span><span class='bar'><i style='width:90%'></i></span><span class='ct'>18 · 90 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>Aplicar la misma frecuencia de visitas a todas las instituciones</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>Basar la frecuencia de la supervisión en el tamaño de los activos</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op'><span class='lt'>D</span><span class='ot'>Delegar en la UIF la evaluación del riesgo de cada institución</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>2 de 20</b> (10 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>B</b> «Aplicar la misma frecuencia de visitas a todas las instituciones»: 1 de 20 (5 %)</li><li><b>C</b> «Basar la frecuencia de la supervisión en el tamaño de los activos»: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>B.</b> La misma frecuencia para todos es lo contrario del enfoque basado en riesgo.</li><li><b>C.</b> El tamaño no es el criterio: la NI habla de riesgos, políticas, controles internos y perfil de riesgo de la institución.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>EBR = más riesgo, más supervisión.</b> Si la opción no menciona el riesgo, descártala.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025, NI R.26, párr. 2 (p. 118): «La frecuencia e intensidad de la supervisión in-situ y extra-situ […] debe basarse en los riesgos».</p></div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:90.0%"></span><b>A</b><span>Ajustar frecuencia e intensidad de la supervisión según el riesgo</span><span class="v">18 · 90 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>B</b><span>Aplicar la misma frecuencia de visitas a todas las instituciones</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>C</b><span>Basar la frecuencia de la supervisión en el tamaño de los activos</span><span class="v">1 · 5 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>D</b><span>Delegar en la UIF la evaluación del riesgo de cada institución</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">A) Ajustar frecuencia e intensidad de la supervisión según el riesgo</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>B)</b> Aplicar la misma frecuencia de visitas a todas las instituciones · <b>1 alumno</b> (5 %)</li><li><b>C)</b> Basar la frecuencia de la supervisión en el tamaño de los activos · <b>1 alumno</b> (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>B.</b> La misma frecuencia para todos es lo contrario del enfoque basado en riesgo.</li><li><b>C.</b> El tamaño no es el criterio: la NI habla de riesgos, políticas, controles internos y perfil de riesgo de la institución.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>EBR = más riesgo, más supervisión.</b> Si la opción no menciona el riesgo, descártala.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025, NI R.26, párr. 2 (p. 118): «La frecuencia e intensidad de la supervisión in-situ y extra-situ […] debe basarse en los riesgos».</p></span></div>
   </div>
-</article>
-<article class="card" id="q14">
-  <header><span class="qn">Pregunta 14</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">4 de 20 mal</span></header>
+</article><article class="qc" id="p14">
+  <div class="hd"><span class="no">Pregunta 14</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span><span class="sub2">Área 1 · Básicos · pregunta 14 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">¿Cuál de las siguientes afirmaciones corresponde al texto de la Recomendación 21, «Revelación (tipping-off) y confidencialidad»?</div>
-  
-  <ul class="ops"><li class='op ko'><span class='lt'>A</span><span class='ot'>El tipping-off debe reportarse a las autoridades fiscales del país</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ok'><span class='lt'>B</span><span class='ot'>La prohibición de revelar no inhibe el intercambio previsto en la R.18</span><span class='bar'><i style='width:80%'></i></span><span class='ct'>16 · 80 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>La protección legal sólo aplica si la actividad ilegal se comprueba</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>D</span><span class='ot'>Los ROS no pueden compartirse entre las entidades de un grupo financiero</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>4 de 20</b> (20 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>A</b> «El tipping-off debe reportarse a las autoridades fiscales del país»: 1 de 20 (5 %)</li><li><b>C</b> «La protección legal sólo aplica si la actividad ilegal se comprueba»: 1 de 20 (5 %)</li><li><b>D</b> «Los ROS no pueden compartirse entre las entidades de un grupo financiero»: 2 de 20 (10 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>D.</b> Es justo lo contrario: la R.21 aclara que la prohibición de revelar <b>no impide</b> el intercambio dentro del grupo que pide la R.18. Lo prohibido es avisar al cliente o a terceros.</li><li><b>C.</b> La protección aplica «independientemente de si la actividad ilegal realmente ocurrió o no».</li><li><b>A.</b> La R.21 no habla de autoridades fiscales.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Tipping-off = no avisarle al cliente. Dentro del grupo sí se comparte (R.18).</b> La protección cubre a quien reporta de buena fe, ocurra o no el delito.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025, R.21, incisos a) y b) (p. 23).</p></div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:5.0%"></span><b>A</b><span>El tipping-off debe reportarse a las autoridades fiscales del país</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:80.0%"></span><b>B</b><span>La prohibición de revelar no inhibe el intercambio previsto en la R.18</span><span class="v">16 · 80 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>C</b><span>La protección legal sólo aplica si la actividad ilegal se comprueba</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:10.0%"></span><b>D</b><span>Los ROS no pueden compartirse entre las entidades de un grupo financiero</span><span class="v">2 · 10 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">B) La prohibición de revelar no inhibe el intercambio previsto en la R.18</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>D)</b> Los ROS no pueden compartirse entre las entidades de un grupo financiero · <b>2 alumnos</b> (10 %)</li><li><b>A)</b> El tipping-off debe reportarse a las autoridades fiscales del país · <b>1 alumno</b> (5 %)</li><li><b>C)</b> La protección legal sólo aplica si la actividad ilegal se comprueba · <b>1 alumno</b> (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>D.</b> Es justo lo contrario: la R.21 aclara que la prohibición de revelar <b>no impide</b> el intercambio dentro del grupo que pide la R.18. Lo prohibido es avisar al cliente o a terceros.</li><li><b>C.</b> La protección aplica «independientemente de si la actividad ilegal realmente ocurrió o no».</li><li><b>A.</b> La R.21 no habla de autoridades fiscales.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Tipping-off = no avisarle al cliente. Dentro del grupo sí se comparte (R.18).</b> La protección cubre a quien reporta de buena fe, ocurra o no el delito.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025, R.21, incisos a) y b) (p. 23).</p></span></div>
   </div>
-</article>
-<article class="card" id="q15">
-  <header><span class="qn">Pregunta 15</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">3 de 20 mal</span></header>
+</article><article class="qc" id="p15">
+  <div class="hd"><span class="no">Pregunta 15</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span><span class="sub2">Área 1 · Básicos · pregunta 15 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">¿Cuáles de las siguientes funciones de la Unidad de Inteligencia Financiera señala expresamente la Nota Interpretativa de la Recomendación 29?</div>
-  
-  <ul class="ops"><li class='op ok'><span class='lt'>A</span><span class='ot'>Recepción, análisis y comunicación</span><span class='bar'><i style='width:85%'></i></span><span class='ct'>17 · 85 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>Recepción, investigación y sanción</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>Supervisión, análisis y sanción</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>D</span><span class='ot'>Supervisión, investigación y comunicación</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>3 de 20</b> (15 %)</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>B</b> «Recepción, investigación y sanción»: 1 de 20 (5 %)</li><li><b>C</b> «Supervisión, análisis y sanción»: 1 de 20 (5 %)</li><li><b>D</b> «Supervisión, investigación y comunicación»: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>B.</b> Investigar es de las autoridades de orden público (R.30 y R.31); sancionar, del supervisor (R.27).</li><li><b>C.</b> Supervisar y sancionar son del supervisor.</li><li><b>D.</b> Supervisar e investigar no son de la UIF.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>UIF = R-A-C: Recibe, Analiza, Comunica.</b> Investiga la fiscalía; supervisa y sanciona el supervisor.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025, NI R.29: (a) Recepción, párr. 2 (p. 121); (b) Análisis, párr. 3 (p. 121); (c) Comunicación (p. 122).</p></div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:85.0%"></span><b>A</b><span>Recepción, análisis y comunicación</span><span class="v">17 · 85 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>B</b><span>Recepción, investigación y sanción</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>C</b><span>Supervisión, análisis y sanción</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>D</b><span>Supervisión, investigación y comunicación</span><span class="v">1 · 5 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">A) Recepción, análisis y comunicación</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>B)</b> Recepción, investigación y sanción · <b>1 alumno</b> (5 %)</li><li><b>C)</b> Supervisión, análisis y sanción · <b>1 alumno</b> (5 %)</li><li><b>D)</b> Supervisión, investigación y comunicación · <b>1 alumno</b> (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>B.</b> Investigar es de las autoridades de orden público (R.30 y R.31); sancionar, del supervisor (R.27).</li><li><b>C.</b> Supervisar y sancionar son del supervisor.</li><li><b>D.</b> Supervisar e investigar no son de la UIF.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>UIF = R-A-C: Recibe, Analiza, Comunica.</b> Investiga la fiscalía; supervisa y sanciona el supervisor.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025, NI R.29: (a) Recepción, párr. 2 (p. 121); (b) Análisis, párr. 3 (p. 121); (c) Comunicación (p. 122).</p></span></div>
   </div>
-</article>
-<article class="card sev" id="q16">
-  <header><span class="qn">Pregunta 16</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">7 de 20 mal</span></header>
+</article><article class="qc" id="p16">
+  <div class="hd"><span class="no">Pregunta 16</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span><span class="sub2">Área 1 · Básicos · pregunta 16 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">La Recomendación 5 del GAFI, «Delito de financiamiento del terrorismo», establece que los países deben tipificar el financiamiento del terrorismo con base en:</div>
-  
-  <ul class="ops"><li class='op ko'><span class='lt'>A</span><span class='ot'>Convención de las Naciones Unidas contra la Delincuencia Organizada Transnacional</span><span class='bar'><i style='width:20%'></i></span><span class='ct'>4 · 20 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>Convención Interamericana contra el Terrorismo (OEA, 2002)</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>Convenio Internacional para la Prohibición de la Financiación del Terrorismo</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ok'><span class='lt'>D</span><span class='ot'>Convenio Internacional para la Represión de la Financiación del Terrorismo</span><span class='bar'><i style='width:65%'></i></span><span class='ct'>13 · 65 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>7 de 20</b> (35 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>A</b> «Convención de las Naciones Unidas contra la Delincuencia Organizada Transnacional»: 4 de 20 (20 %)</li><li><b>B</b> «Convención Interamericana contra el Terrorismo (OEA, 2002)»: 1 de 20 (5 %)</li><li><b>C</b> «Convenio Internacional para la Prohibición de la Financiación del Terrorismo»: 1 de 20 (5 %)</li><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>A.</b> Eligieron <b>Palermo</b>. Palermo (con Viena) es la base para tipificar el <b>lavado</b> (NI R.3); el FT tiene su propio convenio.</li><li><b>C.</b> El nombre está cambiado: «Prohibición» en lugar de «Represión».</li><li><b>B.</b> La convención de la OEA no la cita la R.5.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>FT → Convenio para la Represión. LA → Viena y Palermo.</b> Ojo con el nombre: «Represión», no «Prohibición».</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025, R.5 (p. 15): «en base al Convenio Internacional para la Represión de la Financiación del Terrorismo». NI R.3, párr. 1 (p. 42): Viena y Palermo para el LA.</p></div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:20.0%"></span><b>A</b><span>Convención de las Naciones Unidas contra la Delincuencia Organizada Transnacional</span><span class="v">4 · 20 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>B</b><span>Convención Interamericana contra el Terrorismo (OEA, 2002)</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>C</b><span>Convenio Internacional para la Prohibición de la Financiación del Terrorismo</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:65.0%"></span><b>D</b><span>Convenio Internacional para la Represión de la Financiación del Terrorismo</span><span class="v">13 · 65 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">D) Convenio Internacional para la Represión de la Financiación del Terrorismo</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>A)</b> Convención de las Naciones Unidas contra la Delincuencia Organizada Transnacional · <b>4 alumnos</b> (20 %)</li><li><b>B)</b> Convención Interamericana contra el Terrorismo (OEA, 2002) · <b>1 alumno</b> (5 %)</li><li><b>C)</b> Convenio Internacional para la Prohibición de la Financiación del Terrorismo · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>A.</b> Eligieron <b>Palermo</b>. Palermo (con Viena) es la base para tipificar el <b>lavado</b> (NI R.3); el FT tiene su propio convenio.</li><li><b>C.</b> El nombre está cambiado: «Prohibición» en lugar de «Represión».</li><li><b>B.</b> La convención de la OEA no la cita la R.5.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>FT → Convenio para la Represión. LA → Viena y Palermo.</b> Ojo con el nombre: «Represión», no «Prohibición».</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025, R.5 (p. 15): «en base al Convenio Internacional para la Represión de la Financiación del Terrorismo». NI R.3, párr. 1 (p. 42): Viena y Palermo para el LA.</p></span></div>
   </div>
-</article>
-<article class="card" id="q17">
-  <header><span class="qn">Pregunta 17</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">1 de 20 mal</span></header>
+</article><article class="qc" id="p17">
+  <div class="hd"><span class="no">Pregunta 17</span><span class="mal">Contestaron mal: 1 de 20 (5 %)</span><span class="sub2">Área 1 · Básicos · pregunta 17 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">¿Cuál de las siguientes medidas exige expresamente la Recomendación 39 (Extradición) a los países?</div>
-  
-  <ul class="ops"><li class='op ok'><span class='lt'>A</span><span class='ot'>Asegurar que el LA y el FT sean delitos extraditables</span><span class='bar'><i style='width:95%'></i></span><span class='ct'>19 · 95 %</span></li><li class='op'><span class='lt'>B</span><span class='ot'>Exigir doble incriminación con igual nombre del delito</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>C</span><span class='ot'>Rechazar la extradición de nacionales sin procesarlos</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>D</span><span class='ot'>Requerir prueba física del delito determinante</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>1 de 20</b> (5 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><p>Sólo hubo respuestas en blanco.</p></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>R.39 = el LA y el FT deben ser delitos extraditables.</b> Si un país no extradita a sus nacionales, debe procesarlos él mismo.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025, R.39 (p. 32).</p></div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:95.0%"></span><b>A</b><span>Asegurar que el LA y el FT sean delitos extraditables</span><span class="v">19 · 95 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>B</b><span>Exigir doble incriminación con igual nombre del delito</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>C</b><span>Rechazar la extradición de nacionales sin procesarlos</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>D</b><span>Requerir prueba física del delito determinante</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">A) Asegurar que el LA y el FT sean delitos extraditables</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><p>Sólo hubo respuestas en blanco.</p></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>R.39 = el LA y el FT deben ser delitos extraditables.</b> Si un país no extradita a sus nacionales, debe procesarlos él mismo.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025, R.39 (p. 32).</p></span></div>
   </div>
-</article>
-<article class="card" id="q18">
-  <header><span class="qn">Pregunta 18</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">1 de 20 mal</span></header>
+</article><article class="qc" id="p18">
+  <div class="hd"><span class="no">Pregunta 18</span><span class="mal">Contestaron mal: 1 de 20 (5 %)</span><span class="sub2">Área 1 · Básicos · pregunta 18 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">«Los abogados, notarios, otros profesionales jurídicos independientes y contadores que actúan como profesionales jurídicos independientes no tienen que reportar transacciones sospechosas si la información relevante se obtuvo en circunstancias en las que éstos están sujetos al ______ […].» ¿Qué término completa correctamente el enunciado?</div>
-  
-  <ul class="ops"><li class='op'><span class='lt'>A</span><span class='ot'>Deber contractual</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>B</span><span class='ot'>Secreto bancario</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>C</span><span class='ot'>Secreto empresarial</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ok'><span class='lt'>D</span><span class='ot'>Secreto profesional</span><span class='bar'><i style='width:95%'></i></span><span class='ct'>19 · 95 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>1 de 20</b> (5 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><p>Sólo hubo respuestas en blanco.</p></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Abogados y contadores → secreto profesional</b> (o privilegio profesional legal). El secreto bancario es de las instituciones financieras (R.9).</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025, NI R.23, párr. 1 (p. 105).</p></div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0.0%"></span><b>A</b><span>Deber contractual</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>B</b><span>Secreto bancario</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>C</b><span>Secreto empresarial</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:95.0%"></span><b>D</b><span>Secreto profesional</span><span class="v">19 · 95 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">D) Secreto profesional</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><p>Sólo hubo respuestas en blanco.</p></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Abogados y contadores → secreto profesional</b> (o privilegio profesional legal). El secreto bancario es de las instituciones financieras (R.9).</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025, NI R.23, párr. 1 (p. 105).</p></span></div>
   </div>
-</article>
-<article class="card" id="q19">
-  <header><span class="qn">Pregunta 19</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">4 de 20 mal</span></header>
+</article><article class="qc" id="p19">
+  <div class="hd"><span class="no">Pregunta 19</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span><span class="sub2">Área 1 · Básicos · pregunta 19 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">«Al efectuar investigaciones de lavado de activos, delitos determinantes asociados y el financiamiento del terrorismo, las autoridades competentes deben ser capaces de obtener acceso a todos los documentos e información necesaria para utilizarla en esas investigaciones…» ¿A qué Recomendación del GAFI corresponde este enunciado?</div>
-  
-  <ul class="ops"><li class='op'><span class='lt'>A</span><span class='ot'>Recomendación 24</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>Recomendación 29</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li><li class='op ok'><span class='lt'>C</span><span class='ot'>Recomendación 31</span><span class='bar'><i style='width:80%'></i></span><span class='ct'>16 · 80 %</span></li><li class='op ko'><span class='lt'>D</span><span class='ot'>Recomendación 38</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>4 de 20</b> (20 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>B</b> «Recomendación 29»: 2 de 20 (10 %)</li><li><b>D</b> «Recomendación 38»: 1 de 20 (5 %)</li><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>B.</b> Eligieron la <b>R.29 (UIF)</b>. La UIF recibe, analiza y comunica; no conduce investigaciones.</li><li><b>D.</b> La R.38 es asistencia legal mutua para congelar y decomisar a petición de otro país.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>«Investigaciones» + «acceso a documentos» = facultades de las autoridades de orden público e investigativas → R.31.</b></p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025, R.31 (p. 28).</p></div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0.0%"></span><b>A</b><span>Recomendación 24</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:10.0%"></span><b>B</b><span>Recomendación 29</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:80.0%"></span><b>C</b><span>Recomendación 31</span><span class="v">16 · 80 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>D</b><span>Recomendación 38</span><span class="v">1 · 5 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">C) Recomendación 31</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>B)</b> Recomendación 29 · <b>2 alumnos</b> (10 %)</li><li><b>D)</b> Recomendación 38 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>B.</b> Eligieron la <b>R.29 (UIF)</b>. La UIF recibe, analiza y comunica; no conduce investigaciones.</li><li><b>D.</b> La R.38 es asistencia legal mutua para congelar y decomisar a petición de otro país.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>«Investigaciones» + «acceso a documentos» = facultades de las autoridades de orden público e investigativas → R.31.</b></p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025, R.31 (p. 28).</p></span></div>
   </div>
-</article>
-<article class="card" id="q20">
-  <header><span class="qn">Pregunta 20</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">1 de 20 mal</span></header>
+</article><article class="qc" id="p20">
+  <div class="hd"><span class="no">Pregunta 20</span><span class="mal">Contestaron mal: 1 de 20 (5 %)</span><span class="sub2">Área 1 · Básicos · pregunta 20 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">«Los países deben prestar rápida, constructiva y eficazmente, el mayor rango posible de asistencia legal mutua con relación a investigaciones, procedimientos judiciales y procesos relacionados con el lavado de activos, delitos determinantes asociados y el financiamiento del terrorismo.» ¿A qué Recomendación del GAFI corresponde este enunciado?</div>
-  
-  <ul class="ops"><li class='op'><span class='lt'>A</span><span class='ot'>Recomendación 10</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>B</span><span class='ot'>Recomendación 24</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>C</span><span class='ot'>Recomendación 29</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ok'><span class='lt'>D</span><span class='ot'>Recomendación 37</span><span class='bar'><i style='width:95%'></i></span><span class='ct'>19 · 95 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>1 de 20</b> (5 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><p>Sólo hubo respuestas en blanco.</p></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Cooperación internacional en escalera:</b> R.37 asistencia legal mutua · R.38 congelar y decomisar a petición · R.39 extradición · R.40 otras formas de cooperación.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025, R.37 (p. 30).</p></div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0.0%"></span><b>A</b><span>Recomendación 10</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>B</b><span>Recomendación 24</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>C</b><span>Recomendación 29</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:95.0%"></span><b>D</b><span>Recomendación 37</span><span class="v">19 · 95 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">D) Recomendación 37</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><p>Sólo hubo respuestas en blanco.</p></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Cooperación internacional en escalera:</b> R.37 asistencia legal mutua · R.38 congelar y decomisar a petición · R.39 extradición · R.40 otras formas de cooperación.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025, R.37 (p. 30).</p></span></div>
   </div>
-</article>
-<article class="card" id="q21">
-  <header><span class="qn">Pregunta 21</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">4 de 20 mal</span></header>
+</article><article class="qc" id="p21">
+  <div class="hd"><span class="no">Pregunta 21</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span><span class="sub2">Área 1 · Básicos · pregunta 21 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">Relaciona cada afirmación con la Recomendación del GAFI que mejor la describe:<ol><li>Debe ser independiente y autónoma operativamente para decidir con libertad qué analizar, solicitar y comunicar.</li><li>Debe existir información adecuada, precisa y actualizada sobre los fideicomisos expresos y sus partes.</li><li>Imponer una gama de sanciones disciplinarias y financieras, y potestad para retirar, restringir o suspender la licencia de la institución financiera, donde corresponda.</li><li>Los países no deben aprobar el establecimiento u operación continuada de bancos pantalla.</li></ol><p class='cols'>a. Transparencia y beneficiario final de otras estructuras jurídicas · b. Regulación y supervisión de las instituciones financieras · c. Facultades de los supervisores · d. Unidades de Inteligencia Financiera (UIF)</p></div>
-  
-  <ul class="ops"><li class='op ko'><span class='lt'>A</span><span class='ot'>1a, 2b, 3c, 4d</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li><li class='op ok'><span class='lt'>B</span><span class='ot'>1d, 2a, 3c, 4b</span><span class='bar'><i style='width:80%'></i></span><span class='ct'>16 · 80 %</span></li><li class='op'><span class='lt'>C</span><span class='ot'>1d, 2b, 3a, 4c</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ko'><span class='lt'>D</span><span class='ot'>1d, 2c, 3b, 4a</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>4 de 20</b> (20 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>A</b> «1a, 2b, 3c, 4d»: 2 de 20 (10 %)</li><li><b>D</b> «1d, 2c, 3b, 4a»: 1 de 20 (5 %)</li><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>A.</b> Relacionaron en orden (1a, 2b, 3c, 4d). Sólo la 3 cae bien por casualidad.</li><li><b>D.</b> Cruzó las sanciones (supervisores) con la regulación, y los bancos pantalla con la transparencia.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Independiente y autónoma → UIF. Fideicomisos → «otras estructuras jurídicas» (R.25). Sanciones y licencia → facultades de los supervisores (R.27). Bancos pantalla → regulación y supervisión (R.26): no se autorizan.</b></p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025: NI R.29, párr. 8 (p. 123); R.25 (p. 25); R.26 (p. 25); R.27 (p. 26).</p></div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:10.0%"></span><b>A</b><span>1a, 2b, 3c, 4d</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:80.0%"></span><b>B</b><span>1d, 2a, 3c, 4b</span><span class="v">16 · 80 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>C</b><span>1d, 2b, 3a, 4c</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>D</b><span>1d, 2c, 3b, 4a</span><span class="v">1 · 5 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">B) 1d, 2a, 3c, 4b</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>A)</b> 1a, 2b, 3c, 4d · <b>2 alumnos</b> (10 %)</li><li><b>D)</b> 1d, 2c, 3b, 4a · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>A.</b> Relacionaron en orden (1a, 2b, 3c, 4d). Sólo la 3 cae bien por casualidad.</li><li><b>D.</b> Cruzó las sanciones (supervisores) con la regulación, y los bancos pantalla con la transparencia.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Independiente y autónoma → UIF. Fideicomisos → «otras estructuras jurídicas» (R.25). Sanciones y licencia → facultades de los supervisores (R.27). Bancos pantalla → regulación y supervisión (R.26): no se autorizan.</b></p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025: NI R.29, párr. 8 (p. 123); R.25 (p. 25); R.26 (p. 25); R.27 (p. 26).</p></span></div>
   </div>
-</article>
-<article class="card" id="q22">
-  <header><span class="qn">Pregunta 22</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">5 de 20 mal</span></header>
+</article><article class="qc" id="p22">
+  <div class="hd"><span class="no">Pregunta 22</span><span class="mal">Contestaron mal: 5 de 20 (25 %)</span><span class="sub2">Área 1 · Básicos · pregunta 22 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">Relaciona cada situación con la Recomendación del GAFI que la fundamenta:<ol><li>La fiscalía exige a un banco y a un notario los registros de una persona investigada por lavado de activos.</li><li>La UIF, la fiscalía y la autoridad que vigila a los bancos operan un mecanismo permanente para trabajar en conjunto y compartir información.</li><li>La autoridad que vigila a los bancos impone una multa y suspende la licencia de uno por incumplir requisitos ALA/CFT.</li></ol><p class='cols'>a. R.2 Cooperación y coordinación nacional · b. R.27 Facultades de los supervisores · c. R.29 Unidades de inteligencia financiera · d. R.31 Facultades de las autoridades de orden público e investigativas</p></div>
-  
-  <ul class="ops"><li class='op ko'><span class='lt'>A</span><span class='ot'>1a, 2c, 3b</span><span class='bar'><i style='width:10%'></i></span><span class='ct'>2 · 10 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>1b, 2a, 3d</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>1c, 2a, 3b</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ok'><span class='lt'>D</span><span class='ot'>1d, 2a, 3b</span><span class='bar'><i style='width:75%'></i></span><span class='ct'>15 · 75 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>5 de 20</b> (25 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>A</b> «1a, 2c, 3b»: 2 de 20 (10 %)</li><li><b>B</b> «1b, 2a, 3d»: 1 de 20 (5 %)</li><li><b>C</b> «1c, 2a, 3b»: 1 de 20 (5 %)</li><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>A.</b> Pusieron la exigencia de la fiscalía como cooperación nacional (R.2) y el mecanismo conjunto como UIF (R.29): se fueron por la palabra «UIF» que aparece en la situación 2.</li><li><b>B.</b> Cruzó fiscalía con supervisor.</li><li><b>C.</b> Dio a la UIF lo que hace la fiscalía.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Primero el actor, luego la Recomendación:</b> fiscalía que obtiene registros → R.31 · varias autoridades en un mecanismo → R.2 · supervisor que multa o suspende → R.27. Que la situación nombre a la UIF no la hace R.29.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025: R.31 (p. 28); R.2 (p. 13); R.27 (p. 26).</p></div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:10.0%"></span><b>A</b><span>1a, 2c, 3b</span><span class="v">2 · 10 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>B</b><span>1b, 2a, 3d</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>C</b><span>1c, 2a, 3b</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:75.0%"></span><b>D</b><span>1d, 2a, 3b</span><span class="v">15 · 75 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">D) 1d, 2a, 3b</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>A)</b> 1a, 2c, 3b · <b>2 alumnos</b> (10 %)</li><li><b>B)</b> 1b, 2a, 3d · <b>1 alumno</b> (5 %)</li><li><b>C)</b> 1c, 2a, 3b · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>A.</b> Pusieron la exigencia de la fiscalía como cooperación nacional (R.2) y el mecanismo conjunto como UIF (R.29): se fueron por la palabra «UIF» que aparece en la situación 2.</li><li><b>B.</b> Cruzó fiscalía con supervisor.</li><li><b>C.</b> Dio a la UIF lo que hace la fiscalía.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Primero el actor, luego la Recomendación:</b> fiscalía que obtiene registros → R.31 · varias autoridades en un mecanismo → R.2 · supervisor que multa o suspende → R.27. Que la situación nombre a la UIF no la hace R.29.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025: R.31 (p. 28); R.2 (p. 13); R.27 (p. 26).</p></span></div>
   </div>
-</article>
-<article class="card" id="q23">
-  <header><span class="qn">Pregunta 23</span><span class="tag">Recomendaciones del GAFI</span><span class="wr">1 de 20 mal</span></header>
+</article><article class="qc" id="p23">
+  <div class="hd"><span class="no">Pregunta 23</span><span class="mal">Contestaron mal: 1 de 20 (5 %)</span><span class="sub2">Área 1 · Básicos · pregunta 23 del área · Recomendaciones del GAFI</span></div>
   <div class="stem">Un banco identifica que un nuevo cliente es una PEP extranjera. Conforme a la Recomendación 12, ¿cuáles de las siguientes medidas debe aplicar además de la DDC normal?<ol><li>Obtener la aprobación de la alta gerencia para establecer la relación.</li><li>Tomar medidas razonables para establecer la fuente de riqueza y la fuente de los fondos.</li><li>Presentar un ROS a la UIF por el solo hecho de ser PEP.</li><li>Llevar a cabo un monitoreo continuo intensificado de la relación.</li><li>Solicitar autorización previa a la UIF para abrir la cuenta.</li></ol></div>
-  
-  <ul class="ops"><li class='op ok'><span class='lt'>A</span><span class='ot'>1, 2, 4</span><span class='bar'><i style='width:95%'></i></span><span class='ct'>19 · 95 %</span></li><li class='op'><span class='lt'>B</span><span class='ot'>1, 3, 5</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>C</span><span class='ot'>2, 3, 4</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>D</span><span class='ot'>2, 4, 5</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>1 de 20</b> (5 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><p>Sólo hubo respuestas en blanco.</p></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>PEP extranjera = A-F-M: Alta gerencia, Fuente de riqueza y de fondos, Monitoreo intensificado.</b> Ser PEP no obliga a un ROS ni a pedir permiso a la UIF.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>Recomendaciones del GAFI dic-2025, R.12, inciso b) (p. 19).</p></div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:95.0%"></span><b>A</b><span>1, 2, 4</span><span class="v">19 · 95 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>B</b><span>1, 3, 5</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>C</b><span>2, 3, 4</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>D</b><span>2, 4, 5</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">A) 1, 2, 4</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><p>Sólo hubo respuestas en blanco.</p></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>PEP extranjera = A-F-M: Alta gerencia, Fuente de riqueza y de fondos, Monitoreo intensificado.</b> Ser PEP no obliga a un ROS ni a pedir permiso a la UIF.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>Recomendaciones del GAFI dic-2025, R.12, inciso b) (p. 19).</p></span></div>
   </div>
-</article>
-<article class="card" id="q24">
-  <header><span class="qn">Pregunta 24</span><span class="tag">Régimen de prevención</span><span class="wr">2 de 20 mal</span></header>
+</article><article class="qc" id="p24">
+  <div class="hd"><span class="no">Pregunta 24</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span><span class="sub2">Área 1 · Básicos · pregunta 24 del área · Régimen de prevención</span></div>
   <div class="stem">¿Cuál es la función de los Sujetos Obligados al régimen de PLD/CFT?</div>
-  <p class='nota'>Nota: Brillium corta el texto de dos opciones («…»); se muestran como vienen en el reporte.</p>
-  <ul class="ops"><li class='op'><span class='lt'>A</span><span class='ot'>Impartición de justicia con apego al marco jurídico de la nación.</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>Recibir reportes y avisos, analizar la información recibida para detectar posibles conductas de LD/F…</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op'><span class='lt'>C</span><span class='ot'>Creación del marco jurídico relativo a la PLD/CFT por medio de la formulación de políticas de promoc…</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op ok'><span class='lt'>D</span><span class='ot'>Identificar y conocer a los clientes, monitorear las operaciones realizadas.</span><span class='bar'><i style='width:90%'></i></span><span class='ct'>18 · 90 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>2 de 20</b> (10 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>B</b> «Recibir reportes y avisos, analizar la información recibida para detectar posibles conductas de LD/F…»: 1 de 20 (5 %)</li><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>B.</b> Es la función de la <b>UIF</b>: recibe los reportes y avisos que mandan los sujetos obligados y los analiza. El sujeto obligado es el que los envía.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Sujeto obligado = primer frente: conoce al cliente, monitorea y reporta.</b> Recibir y analizar = UIF. Crear el marco jurídico = reguladoras. Impartir justicia = Poder Judicial.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>ENR 2023, III.1 «Sujetos Obligados al régimen de PLD/CFT» (p. 13).</p></div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0.0%"></span><b>A</b><span>Impartición de justicia con apego al marco jurídico de la nación.</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>B</b><span>Recibir reportes y avisos, analizar la información recibida para detectar posibles conductas de LD/F…</span><span class="v">1 · 5 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>C</b><span>Creación del marco jurídico relativo a la PLD/CFT por medio de la formulación de políticas de promoc…</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:90.0%"></span><b>D</b><span>Identificar y conocer a los clientes, monitorear las operaciones realizadas.</span><span class="v">18 · 90 %</span></div></div><p class="nota">Nota: Brillium corta el texto de dos opciones («…»); se muestran como vienen en el reporte.</p>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">D) Identificar y conocer a los clientes, monitorear las operaciones realizadas.</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>B)</b> Recibir reportes y avisos, analizar la información recibida para detectar posibles conductas de LD/F… · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>B.</b> Es la función de la <b>UIF</b>: recibe los reportes y avisos que mandan los sujetos obligados y los analiza. El sujeto obligado es el que los envía.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Sujeto obligado = primer frente: conoce al cliente, monitorea y reporta.</b> Recibir y analizar = UIF. Crear el marco jurídico = reguladoras. Impartir justicia = Poder Judicial.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>ENR 2023, III.1 «Sujetos Obligados al régimen de PLD/CFT» (p. 13).</p></span></div>
   </div>
-</article>
-<article class="card" id="q25">
-  <header><span class="qn">Pregunta 25</span><span class="tag">Autoridades nacionales en materia de prevención</span><span class="wr">2 de 20 mal</span></header>
+</article><article class="qc" id="p25">
+  <div class="hd"><span class="no">Pregunta 25</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span><span class="sub2">Área 1 · Básicos · pregunta 25 del área · Autoridades nacionales en materia de prevención</span></div>
   <div class="stem">Selecciona los 4 órganos encargados de supervisar el cumplimiento del régimen de prevención de Lavado de Dinero y Financiamiento al Terrorismo.<ol><li>Comisión Nacional Bancaria y de Valores (CNBV)</li><li>Comisión Nacional de Seguros y Fianzas (CNSF)</li><li>Comisión Nacional del Sistema de Ahorro para el Retiro (CONSAR)</li><li>Servicio de Administración Tributaria (SAT)</li><li>Fiscalía General de la República (FGR)</li><li>Unidad de Inteligencia Financiera (UIF)</li></ol></div>
-  
-  <ul class="ops"><li class='op ok'><span class='lt'>A</span><span class='ot'>1, 2, 3, 4</span><span class='bar'><i style='width:90%'></i></span><span class='ct'>18 · 90 %</span></li><li class='op ko'><span class='lt'>B</span><span class='ot'>1, 2, 4, 5</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op'><span class='lt'>C</span><span class='ot'>2, 3, 4, 5</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op'><span class='lt'>D</span><span class='ot'>2, 4, 5, 6</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>2 de 20</b> (10 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>B</b> «1, 2, 4, 5»: 1 de 20 (5 %)</li><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>B.</b> Metió a la <b>FGR</b> y sacó a la CONSAR. La FGR investiga y persigue delitos; no supervisa a los sujetos obligados.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>Supervisoras = las 3 comisiones + SAT</b> (el SAT, para las actividades vulnerables). La FGR persigue; la UIF analiza.</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>ENR 2023, III.3 «Autoridades Supervisoras» (p. 14).</p></div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:90.0%"></span><b>A</b><span>1, 2, 3, 4</span><span class="v">18 · 90 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>B</b><span>1, 2, 4, 5</span><span class="v">1 · 5 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>C</b><span>2, 3, 4, 5</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>D</b><span>2, 4, 5, 6</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">A) 1, 2, 3, 4</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>B)</b> 1, 2, 4, 5 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>B.</b> Metió a la <b>FGR</b> y sacó a la CONSAR. La FGR investiga y persigue delitos; no supervisa a los sujetos obligados.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>Supervisoras = las 3 comisiones + SAT</b> (el SAT, para las actividades vulnerables). La FGR persigue; la UIF analiza.</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>ENR 2023, III.3 «Autoridades Supervisoras» (p. 14).</p></span></div>
   </div>
-</article>
-<article class="card" id="q26">
-  <header><span class="qn">Pregunta 26</span><span class="tag">Autoridades nacionales en materia de prevención</span><span class="wr">3 de 20 mal</span></header>
+</article><article class="qc" id="p26">
+  <div class="hd"><span class="no">Pregunta 26</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span><span class="sub2">Área 1 · Básicos · pregunta 26 del área · Autoridades nacionales en materia de prevención</span></div>
   <div class="stem">Selecciona las funciones de la Unidad de Inteligencia Financiera:<ol><li>Proponer y emitir opinión a las demás unidades administrativas de la Secretaría sobre las disposiciones de carácter general, en relación con los reportes y lineamientos del conocimiento de clientes.</li><li>Diseñar, en coordinación con los órganos desconcentrados competentes de la Secretaría, las formas oficiales para la presentación de reportes a que se refieren las disposiciones de carácter general.</li><li>Formular, para aprobación superior, las políticas necesarias para desarrollar las actividades financiera, bancaria, crediticia, de valores, derivados y asuntos referentes a la protección al ahorro bancario.</li><li>Denunciar ante el Ministerio Público Federal las conductas que pudieran favorecer, prestar ayuda, auxilio o cooperación de cualquier especie para la comisión de los delitos de LD/FT.</li></ol></div>
-  
-  <ul class="ops"><li class='op ko'><span class='lt'>A</span><span class='ot'>1, 2, 3</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op ok'><span class='lt'>B</span><span class='ot'>1, 2, 4</span><span class='bar'><i style='width:85%'></i></span><span class='ct'>17 · 85 %</span></li><li class='op ko'><span class='lt'>C</span><span class='ot'>1, 3, 4</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li><li class='op'><span class='lt'>D</span><span class='ot'>2, 3, 4</span><span class='bar'><i style='width:0%'></i></span><span class='ct'>0 · 0 %</span></li><li class='op blank'><span class='lt'>—</span><span class='ot'>Sin respuesta</span><span class='bar'><i style='width:5%'></i></span><span class='ct'>1 · 5 %</span></li></ul>
-  <button class="reveal" type="button" aria-expanded="false">Ver la revisión</button>
-  <div class="rev">
-    <div class="blk"><h4>Contestaron mal</h4><p><b>3 de 20</b> (15 %) · incluye 1 sin respuesta</p></div>
-    <div class="blk"><h4>Qué contestaron mal</h4><ul><li><b>A</b> «1, 2, 3»: 1 de 20 (5 %)</li><li><b>C</b> «1, 3, 4»: 1 de 20 (5 %)</li><li>Sin respuesta: 1 de 20 (5 %)</li></ul></div>
-    <div class="blk"><h4>En qué se equivocaron</h4><ul><li><b>A.</b> Metió la 3 en lugar de la denuncia (4).</li><li><b>C.</b> Metió la 3 en lugar de las formas oficiales (2).</li><li>La 3 es de la <b>Unidad de Banca, Valores y Ahorro</b>: formular, para aprobación superior, las políticas de las materias financiera, bancaria, crediticia… y de protección al ahorro bancario. Suena a UIF porque es de la misma Secretaría y habla del sistema financiero.</li></ul></div>
-    <div class="blk tip"><h4>Cómo cachar el error</h4><p><b>«Políticas» + «protección al ahorro bancario» = Unidad de Banca, Valores y Ahorro.</b> UIF: opina sobre las DCG (fr. I), formas oficiales de reportes (fr. VI), denuncia ante el MPF (fr. XV).</p></div>
-    <div class="blk src"><h4>Fundamento</h4><p>RISHCP art. 10, frs. I, VI y XV (UIF); art. 15, fr. I (Unidad de Banca, Valores y Ahorro). Texto oficial de la fr. VI: «Determinar y expedir […] las formas oficiales». Página: el PDF del RISHCP compilado al 24-feb-2025 no está en la carpeta de fuentes; se citó del texto compilado.</p></div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:5.0%"></span><b>A</b><span>1, 2, 3</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:85.0%"></span><b>B</b><span>1, 2, 4</span><span class="v">17 · 85 %</span></div><div class="op bad"><span class="bar" style="width:5.0%"></span><b>C</b><span>1, 3, 4</span><span class="v">1 · 5 %</span></div><div class="op"><span class="bar" style="width:0.0%"></span><b>D</b><span>2, 3, 4</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">B) 1, 2, 4</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul><li><b>A)</b> 1, 2, 3 · <b>1 alumno</b> (5 %)</li><li><b>C)</b> 1, 3, 4 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno (5 %)</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><ul><li><b>A.</b> Metió la 3 en lugar de la denuncia (4).</li><li><b>C.</b> Metió la 3 en lugar de las formas oficiales (2).</li><li>La 3 es de la <b>Unidad de Banca, Valores y Ahorro</b>: formular, para aprobación superior, las políticas de las materias financiera, bancaria, crediticia… y de protección al ahorro bancario. Suena a UIF porque es de la misma Secretaría y habla del sistema financiero.</li></ul></div>
+    
+    <div class="regla"><b>Cómo cachar el error</b><span><p><b>«Políticas» + «protección al ahorro bancario» = Unidad de Banca, Valores y Ahorro.</b> UIF: opina sobre las DCG (fr. I), formas oficiales de reportes (fr. VI), denuncia ante el MPF (fr. XV).</p></span></div>
+    <div class="fundb"><span class="lb">Fundamento real · texto de la fuente</span><span class="fund"><p>RISHCP art. 10, frs. I, VI y XV (UIF); art. 15, fr. I (Unidad de Banca, Valores y Ahorro). Texto oficial de la fr. VI: «Determinar y expedir […] las formas oficiales». Página: el PDF del RISHCP compilado al 24-feb-2025 no está en la carpeta de fuentes; se citó del texto compilado.</p></span></div>
   </div>
-</article>
-
-  <footer>
-    <p><b>Grupo:</b> Simulador 2, 2.ª convocatoria, Área 1. 20 alumnos; 11 respuestas en blanco en total (una en cada pregunta de la 16 a la 26), contadas como error. Sólo se muestran resultados del grupo.</p>
-    <p><b>Fuentes y páginas (según el PDF de cada fuente):</b> Las Recomendaciones del GAFI, versión dic-2025 en español; Mandato del GAFI 2012-2020; Código Penal Federal, última reforma DOF 13-03-2026; ENR 2023; VSPP de la CNBV «Lavado de Dinero» (2 págs.); RISHCP, texto compilado al 24-feb-2025 (por artículo y fracción).</p>
-    <p><b>Criterio didáctico:</b> «Cómo cachar el error» y los ganchos para memorizar son criterio 360Educa, no texto de la norma. Lo que manda es el fundamento citado.</p>
-  </footer>
+</article></div></section>
+<footer><span>Grupo de la 2.ª convocatoria (20 alumnos); las respuestas en blanco cuentan como error, igual que el simulador. Páginas según el PDF de cada fuente.</span><span>«Cómo cachar el error» es criterio didáctico 360Educa; lo que manda es el fundamento.</span></footer>
 </div>
 <script>
+
+</script>
+<script>
 (function(){
-  var b=document.body, pm=document.getElementById('pm');
-  pm.addEventListener('click',function(){
-    var on=!b.classList.contains('practice');
-    b.classList.toggle('practice',on);
-    pm.setAttribute('aria-pressed',on?'true':'false');
-    if(!on) document.querySelectorAll('.card.open').forEach(function(c){c.classList.remove('open');});
-    document.querySelectorAll('.reveal').forEach(function(r){r.textContent='Ver la revisión';r.setAttribute('aria-expanded','false');});
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+window.F4={$, $$, esc};
+/* proyección y recitar */
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+const bp=$("#b-proj"), br=$("#b-rec");
+function setP(on){document.body.classList.toggle("proj",on);bp&&bp.setAttribute("aria-pressed",on);store("f4-proj",on?"1":"0")}
+function setR(on){document.body.classList.toggle("recitar",on);br&&br.setAttribute("aria-pressed",on);$$(".rec.shown").forEach(e=>e.classList.remove("shown"))}
+bp&&bp.addEventListener("click",()=>setP(!document.body.classList.contains("proj")));
+br&&br.addEventListener("click",()=>setR(!document.body.classList.contains("recitar")));
+const bpr=$("#b-print"); bpr&&bpr.addEventListener("click",()=>window.print());
+if(store("f4-proj")==="1")setP(true);
+document.addEventListener("click",e=>{const r=e.target.closest(".rec");if(r&&document.body.classList.contains("recitar"))r.classList.add("shown")});
+/* sorters: data-sorter = id en SORTERS */
+function initSorter(box){
+  const S=SORTERS[box.dataset.sorter]; let done=0, good=0;
+  const order=S.items.map((x,i)=>i); if(S.shuffle!==false){for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}}
+  if(S.sample&&S.sample<order.length)order.length=S.sample;
+  const N=order.length;
+  box.classList.add("sorter");
+  box.innerHTML=`<div class="top"><span class="eyebrow">${esc(S.prompt||"Clasifica")}</span><span class="score num" data-sc>0 de ${N}</span></div>`+
+   order.map(i=>{const it=S.items[i];return `<div class="it" data-i="${i}"><div>${it.t}</div><div class="opts">${S.cats.map(c=>`<button type="button" data-k="${c.k}">${esc(c.label)}</button>`).join("")}</div></div>`}).join("")+
+   `<div class="qbtns"><button class="btn ghost" type="button" data-reset>${S.sample?"Otra tanda al azar":"Reiniciar"}</button>${S.sample?`<span class="mini">${N} de ${S.items.length} factores en cada tanda</span>`:""}</div>`;
+  box.onclick=e=>{
+    if(e.target.closest("[data-reset]")){initSorter(box);return}
+    const b=e.target.closest("button[data-k]"); if(!b)return; const row=b.closest(".it"); if(row.classList.contains("done"))return;
+    const it=S.items[+row.dataset.i]; const right=[].concat(it.k); const ok=right.includes(b.dataset.k);
+    row.classList.add("done"); done++; if(ok)good++;
+    $$("button[data-k]",row).forEach(z=>{z.disabled=true; if(right.includes(z.dataset.k))z.classList.add("right"); else if(z===b)z.classList.add("wrong")});
+    row.insertAdjacentHTML("beforeend",`<div class="fb"><b class="${ok?"tick":"cross"}">${ok?"✓":"✗"}</b> ${it.x||""}${it.ref?` <span class="ref">${esc(it.ref)}</span>`:""}</div>`);
+    $("[data-sc]",box).textContent=`${good} de ${done} · ${N} en total`;
+  };
+}
+$$("[data-sorter]").forEach(initSorter);
+/* rondas: votación antes de revelar */
+$$("[data-ronda]").forEach(box=>{
+  const R=RONDAS[box.dataset.ronda]; let i=0, rev=new Array(R.items.length).fill(false), pick=new Array(R.items.length).fill(-1);
+  box.classList.add("ronda","card");
+  function draw(){
+    const q=R.items[i];
+    box.innerHTML=`<div class="head"><span class="eyebrow num">${esc(R.title)} · ${i+1} de ${R.items.length}</span><span class="dots">${R.items.map((_,k)=>`<i class="${k<=i?"on":""}"></i>`).join("")}</span></div>
+     ${q.pat?`<span class="pat">Ataca: ${esc(q.pat)}</span>`:""}
+     <p class="qtext">${q.q}</p>
+     <div class="opts">${q.o.map((o,k)=>`<button type="button" class="op${pick[i]===k?" sel":""}${rev[i]&&k===q.a?" right":""}${rev[i]&&pick[i]===k&&k!==q.a?" wrong":""}" data-k="${k}"><b>${"ABCD"[k]}</b><span>${o}</span></button>`).join("")}</div>
+     <div data-fb>${rev[i]?`<div class="qfb"><b class="ok">Respuesta: ${"ABCD"[q.a]}.</b> ${q.x} <span class="ref">${esc(q.ref)}</span></div>`:`<p class="mini sub">Voten primero (mano alzada o chat: A, B, C o D). Luego revela.</p>`}</div>
+     <div class="qbtns"><button class="btn ghost" type="button" data-prev ${i===0?"disabled":""}>Anterior</button>${rev[i]?"":`<button class="btn" type="button" data-rev>Revelar</button>`}<button class="btn ghost" type="button" data-next ${i===R.items.length-1?"disabled":""}>Siguiente</button></div>`;
+  }
+  box.addEventListener("click",e=>{
+    const op=e.target.closest(".op"); if(op&&!rev[i]){pick[i]=+op.dataset.k;draw();return}
+    if(e.target.closest("[data-rev]")){rev[i]=true;draw();return}
+    if(e.target.closest("[data-next]")&&i<R.items.length-1){i++;draw();return}
+    if(e.target.closest("[data-prev]")&&i>0){i--;draw();return}
   });
-  document.querySelectorAll('.reveal').forEach(function(r){
-    r.addEventListener('click',function(){
-      var c=r.closest('.card'), o=c.classList.toggle('open');
-      r.textContent=o?'Ocultar la revisión':'Ver la revisión';
-      r.setAttribute('aria-expanded',o?'true':'false');
-    });
-  });
+  draw();
+});
+})();
+</script>
+<script>
+(function(){
+ const b=document.getElementById("b-prac");
+ b&&b.addEventListener("click",()=>{const on=!document.body.classList.contains("practica");document.body.classList.toggle("practica",on);b.setAttribute("aria-pressed",on);b.textContent=on?"Mostrar todas las respuestas":"Modo práctica: ocultar respuestas";document.querySelectorAll(".qc").forEach(c=>c.classList.remove("rev"))});
+ document.addEventListener("click",e=>{const r=e.target.closest("[data-rev]");if(r){const c=r.closest(".qc");c.classList.toggle("rev");r.textContent=c.classList.contains("rev")?"Ocultar":(c.classList.contains("rv")?"Ver la norma":"Ver la revisión")}});
+ const f=document.getElementById("goto");
+ f&&f.addEventListener("submit",e=>{e.preventDefault();const n=+document.getElementById("goto-n").value;const el=document.getElementById("p"+n);const m=document.getElementById("goto-msg");if(el){m.textContent="";el.scrollIntoView({behavior:"smooth"});el.classList.add("rev")}else{m.textContent="Esa pregunta no es de este módulo. Vuelve a la portada para buscarla."}});
 })();
 </script>
 </body>
