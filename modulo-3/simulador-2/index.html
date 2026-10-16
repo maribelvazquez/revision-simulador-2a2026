@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Revisión Simulador 2 · Área 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#faf5ec; --surface:#ffffff; --surface-2:#f3ede1; --line:#e4dccd;
+  --fg:#1b1b1e; --muted:#5b5f62; --carbon:#393e41;
+  --verde:#64c27b; --verde-claro:#87d895; --verde-tint:#e3f4e6;
+  --morado:#a663cc; --morado-tint:#f1e6f8;
+  --turquesa:#80bcb5; --amarillo:#faa916; --coral:#ff8361; --coral-tint:#ffe9e2;
+  --no:#b9b2a5; --on-color:#1b1b1e; --on-dark:#ffffff;
+  --f-display:"Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --f-body:"Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#17181a; --surface:#212326; --surface-2:#2a2c30; --line:#393c41;
+  --fg:#f2eee6; --muted:#b4b0a8; --carbon:#d6d2ca;
+  --verde:#6fcb86; --verde-claro:#87d895; --verde-tint:#1f3a28;
+  --morado:#b884d6; --morado-tint:#33253d;
+  --turquesa:#8fc8c1; --amarillo:#f7b23b; --coral:#ff9373; --coral-tint:#3d2620;
+  --no:#5f5b55; --on-color:#1b1b1e; --on-dark:#ffffff; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#17181a; --surface:#212326; --surface-2:#2a2c30; --line:#393c41;
+  --fg:#f2eee6; --muted:#b4b0a8; --carbon:#d6d2ca;
+  --verde:#6fcb86; --verde-claro:#87d895; --verde-tint:#1f3a28;
+  --morado:#b884d6; --morado-tint:#33253d;
+  --turquesa:#8fc8c1; --amarillo:#f7b23b; --coral:#ff9373; --coral-tint:#3d2620;
+  --no:#5f5b55; --on-color:#1b1b1e; --on-dark:#ffffff; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.55;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:18px;padding-block:20px 64px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(21px,3vw,27px);font-weight:800}
+h3{font-size:16px;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--f-display);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.hl{background:var(--verde);color:var(--on-color);padding:0 .18em;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.lede{max-width:68ch;color:var(--carbon);font-size:16px}
+.membrete{height:3px;background:var(--verde-claro);border:0;margin:14px 0 0}
+header.top{display:grid;gap:12px;padding-block:8px 18px}
+nav.idx{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;padding-block:8px;margin-bottom:8px;scrollbar-width:thin}
+nav.idx a{flex:0 0 auto;font-size:13px;font-weight:600;color:var(--fg);text-decoration:none;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+nav.idx a:hover{border-color:var(--morado)}
+section{padding-block:30px 6px;display:grid;gap:14px;scroll-margin-top:60px}
+.sub{color:var(--muted);max-width:72ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.num{font-variant-numeric:tabular-nums}
+.ref{font-size:12px;color:var(--muted);font-weight:600}
+.mini{font-size:13px}
+/* Puertas */
+.doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.door{appearance:none;text-align:left;font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:6px;cursor:pointer;position:relative}
+.door:hover{border-color:var(--carbon)}
+.door[aria-pressed="true"]{outline:3px solid var(--morado);outline-offset:-1px}
+.door .n{font-family:var(--f-display);font-weight:800;font-size:40px;line-height:1}
+.door .t{font-family:var(--f-display);font-weight:700;font-size:15px}
+.door .d{font-size:13px;color:var(--muted)}
+.door .tag{justify-self:start;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;background:var(--surface-2)}
+.door.debe .tag{background:var(--amarillo);color:var(--on-color)}
+.ritmo{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;font-family:var(--f-display);font-weight:800;font-size:22px}
+.ritmo span.lbl{font-family:var(--f-body);font-weight:500;font-size:14px;color:var(--muted)}
+.extra{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.extra .card{display:grid;gap:6px}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;justify-self:start}
+.pill.star{background:var(--amarillo);color:var(--on-color)}
+.pill.warn{background:var(--coral);color:var(--on-color)}
+/* Matriz */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+thead th{font-family:var(--f-display);font-size:12.5px;font-weight:700;background:var(--surface-2);position:sticky;top:0}
+thead th button{all:unset;cursor:pointer;display:grid;gap:2px}
+thead th button:focus-visible{outline:2px solid var(--morado);outline-offset:3px}
+thead th small{font-family:var(--f-body);font-weight:500;color:var(--muted);font-size:11px}
+th.col-x{background:var(--coral-tint)}
+tbody th{font-weight:600;font-size:14px;white-space:nowrap;border-left:6px solid var(--fam,var(--line))}
+tbody th button{all:unset;cursor:pointer}
+tbody th button:focus-visible{outline:2px solid var(--morado);outline-offset:3px}
+td.cell{text-align:center;padding:5px}
+.c{all:unset;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:74px;min-height:30px;padding:3px 8px;border-radius:7px;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+.c:focus-visible{outline:2px solid var(--morado);outline-offset:2px}
+.c.si{background:var(--verde);color:var(--on-color)}
+.c.debe{background:var(--amarillo);color:var(--on-color)}
+.c.medio{border:2px dashed var(--carbon);color:var(--fg)}
+.c.no{color:var(--no);font-weight:600}
+tr.fam-sep th, tr.fam-sep td{border-top:2px solid var(--line)}
+table.dim tbody td.cell:not(.on) .c{opacity:.28}
+table.dim thead th.on{background:var(--morado);color:var(--on-dark)}
+table.dim thead th.on small{color:var(--on-dark)}
+tbody tr.rowon th{background:var(--morado-tint)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted);align-items:center}
+.legend .c{min-width:auto;cursor:default}
+.detail{border-left:6px solid var(--morado)}
+.detail h3{margin-bottom:4px}
+.detail ul{margin:8px 0 0;padding-left:18px;display:grid;gap:4px}
+/* Asistente */
+.wiz{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:820px){.wiz{grid-template-columns:1fr}}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:8px}
+legend{font-family:var(--f-display);font-weight:700;font-size:14px;margin-bottom:6px}
+legend b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--carbon);color:var(--bg);font-size:12px;margin-right:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{cursor:pointer;font-size:13px;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;gap:6px}
+.chips label i{width:9px;height:9px;border-radius:50%;background:var(--fam,var(--line))}
+.chips input:checked + label{background:var(--morado);border-color:var(--morado);color:var(--on-dark)}
+.chips input:focus-visible + label{outline:2px solid var(--morado);outline-offset:2px}
+.verdict{display:grid;gap:10px;align-content:start}
+.vbadge{justify-self:start;font-family:var(--f-display);font-weight:800;font-size:22px;padding:4px 14px;border-radius:8px}
+.vbadge.si{background:var(--verde);color:var(--on-color)}
+.vbadge.debe{background:var(--amarillo);color:var(--on-color)}
+.vbadge.no{background:var(--carbon);color:var(--bg)}
+.vbadge.medio{border:2px dashed var(--carbon)}
+.req{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.req li{display:grid;grid-template-columns:22px 1fr;gap:6px;font-size:14px}
+.req li::before{content:"✓";font-weight:800;color:var(--verde)}
+.note{font-size:13.5px;background:var(--surface-2);border-radius:8px;padding:10px 12px}
+.note.warn{background:var(--coral-tint)}
+/* Requisitos */
+table.req-t{min-width:980px;font-size:13px}
+table.req-t td{vertical-align:top}
+table.req-t tbody th{border-left:0;white-space:normal;min-width:150px;font-size:13px}
+.yes{font-weight:700}
+.y::before{content:"Sí · ";font-weight:800;color:var(--verde)}
+.n0{color:var(--muted)}
+.colfilter{display:flex;flex-wrap:wrap;gap:6px}
+.colfilter button{font:inherit;font-size:13px;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.colfilter button[aria-pressed="true"]{background:var(--carbon);color:var(--bg);border-color:var(--carbon)}
+/* Transferencias */
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;counter-reset:t}
+.tl .card{display:grid;gap:6px;border-top:5px solid var(--amarillo)}
+.tl .k{font-family:var(--f-display);font-weight:800;font-size:18px}
+/* Trampas */
+.traps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
+.trap{display:grid;gap:6px;border:2px dashed var(--carbon);background:var(--surface)}
+.trap h3{font-size:15px}
+/* Práctica */
+.quiz{display:grid;gap:12px}
+.qbox{display:grid;gap:12px}
+.qtext{font-size:17px;font-weight:600;max-width:70ch}
+.qbtns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-weight:700;padding:9px 18px;border-radius:8px;border:0;cursor:pointer;background:var(--morado);color:var(--on-dark)}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.qfb{font-size:14.5px;border-radius:8px;padding:10px 12px;background:var(--surface-2)}
+.qfb b.ok{color:var(--verde)} .qfb b.bad{color:var(--coral)}
+.score{font-family:var(--f-display);font-weight:800}
+footer{margin-top:40px;font-size:12.5px;color:var(--muted);display:grid;gap:6px;max-width:80ch}
+@media (prefers-reduced-motion:no-preference){ .c,.door,.chips label{transition:background .15s, opacity .15s, border-color .15s} }
+
+
+/* ---- Frente 4: piezas nuevas ---- */
+.topbar{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;padding:9px 16px;background:#1b1b1e;color:#fff;font:600 13px/1.3 Inter,Arial,sans-serif}
+.topbar a{color:#fff}
+.topbar .sp{flex:1}
+.topbar button{font:inherit;font-size:12px;color:#fff;background:transparent;border:1px solid #6b6f72;border-radius:999px;padding:4px 10px;cursor:pointer}
+.topbar button[aria-pressed="true"]{background:var(--verde);color:#1b1b1e;border-color:var(--verde)}
+body.proj{font-size:18px}
+body.proj .wrap{max-width:1280px}
+body.proj .qtext{font-size:24px}
+body.proj .sorter .it{font-size:17px}
+body.proj table{font-size:16px}
+.rec{transition:filter .15s}
+body.recitar .rec:not(.shown){filter:blur(6px);cursor:pointer;user-select:none}
+.hint-rec{display:none}
+body.recitar .hint-rec{display:block}
+/* ganchos */
+.hooks{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.hook{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--verde);border-radius:var(--r);padding:12px 14px;display:grid;gap:4px;align-content:start}
+.hook .n{font-family:var(--f-display);font-weight:800;font-size:38px;line-height:1}
+.hook .t{font-family:var(--f-display);font-weight:700;font-size:14px}
+.hook .d{font-size:12.5px;color:var(--muted)}
+.hook.warn{border-top-color:var(--coral)}
+.col .hooks{grid-template-columns:repeat(auto-fit,minmax(125px,1fr))}
+.col .hook .n{font-size:30px}
+.hook.star{border-top-color:var(--amarillo)}
+/* tablas de contenido */
+table.t2{min-width:720px;font-size:14px}
+table.t2 td,table.t2 th{vertical-align:top}
+table.t2 tbody th{border-left:0;white-space:normal;min-width:170px;font-size:14px}
+td.dif{background:var(--coral-tint)}
+td.ok{background:var(--verde-tint)}
+td.na{color:var(--no)}
+td.lv-a,span.lv-a{background:var(--coral-tint);font-weight:700}
+td.lv-ma,span.lv-ma{background:color-mix(in srgb,var(--coral) 12%,var(--surface));font-weight:600}
+td.lv-m,span.lv-m{background:color-mix(in srgb,var(--amarillo) 22%,var(--surface))}
+td.lv-mb,span.lv-mb{background:color-mix(in srgb,var(--amarillo) 9%,var(--surface))}
+td.lv-b,span.lv-b{background:var(--verde-tint)}
+td.chg{outline:2px solid var(--carbon);outline-offset:-3px}
+span.lv-a,span.lv-m,span.lv-mb,span.lv-b,span.lv-ma{padding:1px 6px;border-radius:5px}
+.tick{font-weight:800;color:var(--verde)}
+.cross{font-weight:800;color:var(--coral)}
+.tl .k{justify-self:start;font-size:13px}
+.k{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:1px 7px;border-radius:999px;background:var(--surface-2);margin-right:4px}
+.k.g{background:var(--verde);color:var(--on-color)} .k.m{background:var(--morado);color:var(--on-dark)} .k.a{background:var(--amarillo);color:var(--on-color)} .k.c{background:var(--coral);color:var(--on-color)} .k.t{background:var(--turquesa);color:var(--on-color)}
+.lit{font-style:italic}
+.lit::before{content:"«"} .lit::after{content:"»"}
+.regla{display:grid;gap:4px;border-left:6px solid var(--verde);background:var(--surface);border-radius:8px;padding:10px 14px}
+.regla b{font-family:var(--f-display)}
+.crit{font-size:12px;color:var(--muted);font-style:italic}
+/* sorter */
+.sorter{display:grid;gap:8px}
+.sorter .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.sorter .it{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14.5px}
+@media (max-width:700px){.sorter .it{grid-template-columns:1fr}}
+.sorter .opts{display:flex;flex-wrap:wrap;gap:6px}
+.sorter .opts button{font:inherit;font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);color:var(--fg);cursor:pointer}
+.sorter .opts button:disabled{cursor:default;opacity:.55}
+.sorter .opts button.right{background:var(--verde);color:var(--on-color);opacity:1;border-color:var(--verde)}
+.sorter .opts button.wrong{background:var(--coral);color:var(--on-color);opacity:1;border-color:var(--coral)}
+.sorter .fb{grid-column:1/-1;font-size:13.5px;color:var(--carbon)}
+.sorter .fb .ref{margin-left:6px}
+.sorter .it.done{border-color:var(--carbon)}
+/* ronda */
+.ronda{display:grid;gap:12px}
+.ronda .head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.ronda .opts{display:grid;gap:8px}
+.ronda .op{all:unset;cursor:pointer;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:15px}
+.ronda .op b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--surface-2);font-family:var(--f-display)}
+.ronda .op.sel{outline:3px solid var(--morado);outline-offset:-2px}
+.ronda .op.right{background:var(--verde-tint);border-color:var(--verde)}
+.ronda .op.right b{background:var(--verde);color:var(--on-color)}
+.ronda .op.wrong{background:var(--coral-tint);border-color:var(--coral)}
+.ronda .op:focus-visible{outline:2px solid var(--morado)}
+.ronda .pat{font-size:12px;font-weight:700;color:var(--muted)}
+.dots{display:flex;gap:4px;flex-wrap:wrap}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--carbon)}
+/* línea de tiempo */
+.tline{display:grid;gap:0;counter-reset:st}
+.tline .st{display:grid;grid-template-columns:44px 1fr;gap:12px;position:relative;padding-bottom:14px}
+.tline .st::before{counter-increment:st;content:counter(st);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--verde);color:var(--on-color);font-family:var(--f-display);font-weight:800;z-index:1}
+.tline .st::after{content:"";position:absolute;left:16px;top:34px;bottom:0;width:2px;background:var(--line)}
+.tline .st:last-child::after{display:none}
+.tline .st .card{display:grid;gap:4px;padding:10px 14px}
+.tline .st.alert::before{background:var(--coral)}
+/* asistente */
+.steps{display:grid;gap:12px}
+.qstep{display:grid;gap:8px}
+.qstep[hidden]{display:none}
+.yn{display:flex;gap:8px;flex-wrap:wrap}
+.yn button{font:inherit;font-weight:700;padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.yn button[aria-pressed="true"]{background:var(--morado);color:var(--on-dark);border-color:var(--morado)}
+.cases{display:flex;flex-wrap:wrap;gap:6px}
+.cases button{font:inherit;font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:999px;border:1px dashed var(--carbon);background:var(--surface);color:var(--fg);cursor:pointer;text-align:left}
+.cases button[aria-pressed="true"]{background:var(--carbon);color:var(--bg)}
+.vbadge.c1{background:var(--verde);color:var(--on-color)}
+.vbadge.c2{background:var(--verde-claro);color:var(--on-color)}
+.vbadge.c3{background:var(--amarillo);color:var(--on-color)}
+.vbadge.c4{background:var(--coral);color:var(--on-color)}
+.vbadge.c5{background:var(--surface-2);border:2px dashed var(--carbon)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.col h3{margin-bottom:6px}
+.col ol,.col ul{margin:0;padding-left:20px;display:grid;gap:5px}
+.col.gafi{border-top:5px solid var(--morado)} .col.bas{border-top:5px solid var(--turquesa)} .col.dcg{border-top:5px solid var(--amarillo)}
+@media (max-width:700px){table.t2{min-width:600px;font-size:13px} table.t2 tbody th{min-width:110px} .hook .n{font-size:30px}}
+@media print{.topbar,nav.idx,.btn,.yn,.cases,.sorter .opts{display:none!important} body{background:#fff} .card{break-inside:avoid}}
+
+</style>
+</head>
+<body>
+<nav class="topbar" aria-label="Repaso"><b style="font-family:Montserrat,Arial,sans-serif;letter-spacing:.04em">Módulo 3 · Repaso</b><a href="../../index.html">← Elegir módulo</a><span class="sp"></span><button type="button" id="b-proj" aria-pressed="false">Modo proyección</button><button type="button" id="b-rec" aria-pressed="false">Modo recitar</button><button type="button" id="b-print">Imprimir</button></nav>
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">360Educa · Módulo 3 · Repaso de resultados · Certificación CNBV PLD/FT · 2ª convocatoria 2026</div>
+  <h1>Simulador 2 · <span class="hl">Revisión pregunta por pregunta</span></h1>
+  <p class="lede">Área 3, Auditoría y riesgos: 39 preguntas, 71 % de aciertos del grupo. Qué se contestó mal, por qué y cómo no volver a caer.</p>
+  <p class="mini sub hint-rec">Modo recitar: las celdas difuminadas se descubren con un toque. Dilas en voz alta antes de tocar.</p>
+  <hr class="membrete">
+</header>
+<nav class="idx" aria-label="Secciones"><a href="#como">Cómo leerla</a><a href="#t311">3.1.1</a><a href="#t312">3.1.2</a><a href="#t321">3.2.1</a><a href="#t322">3.2.2</a><a href="#t331">3.3.1</a><a href="#t332">3.3.2</a><a href="#t333">3.3.3</a><a href="#t334">3.3.4</a></nav>
+<style>
+.clin{display:grid;gap:18px}
+.qc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:grid;gap:12px;min-width:0;scroll-margin-top:70px}
+.qc .hd{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.qc .hd .no{font-family:var(--f-display);font-weight:800;font-size:18px}
+.qc .hd .mal{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums}
+.qc .hd .mal.hi{color:var(--coral)}
+.qc .stem{font-size:15.5px;line-height:1.55}
+.qc .ops{display:grid;gap:6px}
+.qc .op{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 10px;position:relative;overflow:hidden;background:var(--bg)}
+.qc .op b{font-family:var(--f-display)}
+.qc .op .bar{position:absolute;inset:0 auto 0 0;z-index:0;background:var(--surface-2)}
+.qc .op > *{position:relative;z-index:1}
+.qc .op .v{text-align:right;font-variant-numeric:tabular-nums;font-size:13px;font-weight:700;white-space:nowrap}
+.qc .op.ok{border-color:var(--verde);border-width:2px}
+.qc .op.ok .bar{background:var(--verde-tint)}
+.qc .op.bad .bar{background:var(--coral-tint)}
+.qc .why{display:grid;gap:12px}
+.qc .why > div{display:grid;gap:3px}
+.qc .lb{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.qc .ans{font-family:var(--f-display);font-weight:800}
+.qc ul.wr{margin:0;padding-left:18px;display:grid;gap:2px}
+.qc .nota{font-size:12.5px;color:var(--muted);font-style:italic;margin:0}
+.qc .fund{font-weight:600}
+.practica .qc:not(.rev) .why,.practica .qc:not(.rev) .op .v,.practica .qc:not(.rev) .op .bar,.practica .qc:not(.rev) .hd .mal{visibility:hidden}
+.practica .qc:not(.rev) .why{display:none}
+.practica .qc:not(.rev) .op.ok{border-color:var(--line);border-width:1px}
+.qc [data-rev]{display:none}
+.practica .qc [data-rev]{display:inline-block}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips a{font-size:12.5px;font-weight:700;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--surface);font-variant-numeric:tabular-nums}
+.chips a.hi{border-color:var(--coral);background:var(--coral-tint)}
+.modo{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+</style>
+<section id="como">
+  <h2>Cómo leer esta revisión</h2>
+  <p class="sub">Están las 39 preguntas del Área 3 en el mismo orden del simulador. En cada una ves cuántos contestaron mal y qué eligieron, en qué se equivocaron, cómo cachar el error la próxima vez y el fundamento real con su página. Los números son del grupo completo (20 alumnos); no hay resultados individuales.</p>
+  <div class="tablewrap"><table class="t2"><thead><tr><th>Tema</th><th>Preguntas</th><th>Aciertos</th><th>Números</th></tr></thead><tbody><tr><th><a href="#t311">3.1.1 · Lineamientos del Informe de Auditoría</a></th><td class="num">7</td><td class="num">75 %</td><td>1, 2, 3, 4, 5, 6, 7</td></tr><tr><th><a href="#t312">3.1.2 · Reglamento de Supervisión</a></th><td class="num">6</td><td class="num">78 %</td><td>8, 9, 10, 11, 12, 13</td></tr><tr><th><a href="#t321">3.2.1 · Guía EBR del GAFI</a></th><td class="num">4</td><td class="num">69 %</td><td>14, 15, 16, 17</td></tr><tr><th><a href="#t322">3.2.2 · Basilea</a></th><td class="num">4</td><td class="num">65 %</td><td>18, 19, 20, 21</td></tr><tr><th><a href="#t331">3.3.1 · Metodología de evaluación de riesgos</a></th><td class="num">6</td><td class="num">75 %</td><td>22, 23, 24, 25, 26, 27</td></tr><tr><th><a href="#t332">3.3.2 · Grado de riesgo del cliente</a></th><td class="num">5</td><td class="num">76 %</td><td>28, 29, 30, 31, 32</td></tr><tr><th><a href="#t333">3.3.3 · ENR 2023</a></th><td class="num">5</td><td class="num">56 %</td><td>33, 34, 35, 36, 37</td></tr><tr><th><a href="#t334">3.3.4 · Riesgos de corrupción</a></th><td class="num">2</td><td class="num">62 %</td><td>38, 39</td></tr></tbody></table></div>
+  <h3>Ir a una pregunta</h3>
+  <p class="mini">En rojo, las que fallaron 7 o más alumnos (35 % o más).</p>
+  <div class="chips"><a href="#p1" class="">1 · 3 mal</a><a href="#p2" class="hi">2 · 10 mal</a><a href="#p3" class="">3 · 6 mal</a><a href="#p4" class="hi">4 · 7 mal</a><a href="#p5" class="">5 · 2 mal</a><a href="#p6" class="">6 · 4 mal</a><a href="#p7" class="">7 · 3 mal</a><a href="#p8" class="hi">8 · 10 mal</a><a href="#p9" class="hi">9 · 8 mal</a><a href="#p10" class="">10 · 3 mal</a><a href="#p11" class="">11 · 2 mal</a><a href="#p12" class="">12 · 2 mal</a><a href="#p13" class="">13 · 1 mal</a><a href="#p14" class="">14 · 5 mal</a><a href="#p15" class="">15 · 6 mal</a><a href="#p16" class="hi">16 · 7 mal</a><a href="#p17" class="hi">17 · 7 mal</a><a href="#p18" class="">18 · 6 mal</a><a href="#p19" class="hi">19 · 11 mal</a><a href="#p20" class="">20 · 6 mal</a><a href="#p21" class="">21 · 5 mal</a><a href="#p22" class="">22 · 2 mal</a><a href="#p23" class="">23 · 4 mal</a><a href="#p24" class="">24 · 6 mal</a><a href="#p25" class="">25 · 5 mal</a><a href="#p26" class="">26 · 4 mal</a><a href="#p27" class="hi">27 · 9 mal</a><a href="#p28" class="">28 · 2 mal</a><a href="#p29" class="">29 · 6 mal</a><a href="#p30" class="">30 · 3 mal</a><a href="#p31" class="hi">31 · 8 mal</a><a href="#p32" class="">32 · 5 mal</a><a href="#p33" class="">33 · 6 mal</a><a href="#p34" class="hi">34 · 11 mal</a><a href="#p35" class="hi">35 · 11 mal</a><a href="#p36" class="hi">36 · 7 mal</a><a href="#p37" class="hi">37 · 9 mal</a><a href="#p38" class="">38 · 4 mal</a><a href="#p39" class="hi">39 · 11 mal</a></div>
+  <div class="modo"><button class="btn ghost" type="button" id="b-prac" aria-pressed="false">Modo práctica: ocultar respuestas</button><span class="mini">Para contestar primero y revisar después.</span></div>
+</section>
+<section id="t311"><h2>3.1.1 · Lineamientos del Informe de Auditoría</h2><div class="clin"><article class="qc" id="p1">
+  <div class="hd"><span class="no">Pregunta 1</span><span class="k">3.1.1</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span></div>
+  <div class="stem">Relaciona el plazo con la obligación a la que corresponde para una SOFOM ENR: 1. Remisión del Informe de Auditoría a la Comisión · 2. Envío de las modificaciones al Manual de Cumplimiento · 3. Envío de la información de las personas que ejerzan el Control. a. 20 días hábiles siguientes a que su comité de auditoría las apruebe · b. 60 días naturales siguientes al cierre del ejercicio · c. 10 días hábiles siguientes a que los accionistas lo comuniquen · d. 3 días hábiles siguientes a que se inscriba la transmisión de acciones</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:10%"></span><b>a)</b><span>1a, 2c, 3d</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:85%"></span><b>b)</b><span>1b, 2a, 3c</span><span class="v">17 · 85 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>c)</b><span>1b, 2d, 3a</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>1c, 2b, 3a</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1b, 2a, 3c</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1a, 2c, 3d · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Quienes eligieron a) le dieron al Informe los 20 días hábiles que son del Manual: cruzaron los dos plazos que se remiten a la Comisión.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Cada plazo tiene su disparador. <b>Informe</b>: 60 días naturales desde el cierre del ejercicio. <b>Manual</b>: 20 días hábiles desde que lo aprueba el comité de auditoría. <b>Personas con Control</b>: 10 días hábiles desde que los accionistas lo comunican. Los 3 días hábiles son de la transmisión de acciones de más del 2 %, que aquí no se pregunta.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">DCG SOFOM, 52ª (p. 36), 53ª y 54ª (p. 37)</span></div>
+  </div>
+</article><article class="qc" id="p2">
+  <div class="hd"><span class="no">Pregunta 2</span><span class="k">3.1.1</span><span class="mal hi">Contestaron mal: 10 de 20 (50 %)</span></div>
+  <div class="stem">¿Cuáles de los siguientes requisitos debe reunir la <b>Persona Moral</b> contratada para elaborar el Informe de Auditoría en materia de PLD/FT? 1. Ser independiente del Sujeto Supervisado · 2. No haber sido sentenciada por delitos patrimoniales · 3. No ser apoderada del Sujeto Supervisado · 4. Contar con recursos técnicos, humanos, financieros y administrativos suficientes · 5. No ejercer el Control en el Sujeto Supervisado</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:15%"></span><b>a)</b><span>1, 2, 4</span><span class="v">3 · 15 %</span></div><div class="op ok"><span class="bar" style="width:50%"></span><b>b)</b><span>1, 4, 5</span><span class="v">10 · 50 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>c)</b><span>2, 3, 5</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:30%"></span><b>d)</b><span>3, 4, 5</span><span class="v">6 · 30 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1, 4, 5</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> 3, 4, 5 · <b>6 alumnos</b> (30 %)</li><li><b>a)</b> 1, 2, 4 · <b>3 alumnos</b> (15 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>«No ser apoderada» y «no haber sido sentenciada por delitos patrimoniales» sí son requisitos de los Lineamientos, pero del <b>Auditor</b>, no de la Persona Moral. Los dos suenan a independencia, y la independencia sí es requisito de la Persona Moral. Por eso se cuelan.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>El QUINTO (Persona Moral) tiene sólo <b>tres</b> fracciones: I independencia, II recursos técnicos, humanos, financieros y administrativos, III no ejercer el Control. Si el requisito suena a <b>currículum o antecedentes de una persona</b> (estudios, certificado, sentencias, ser apoderado, litigios, listas), es del CUARTO, el Auditor.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, CUARTO fr. III y VI (pp. 4–5) y QUINTO fr. I a III (p. 5)</span></div>
+  </div>
+</article><article class="qc" id="p3">
+  <div class="hd"><span class="no">Pregunta 3</span><span class="k">3.1.1</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
+  <div class="stem">Durante la revisión anual a una SOFOM ENR, el Auditor detecta por separado los hechos siguientes. ¿Cuál encuadra, por sí mismo, en un supuesto que el lineamiento OCTAVO, apartado C, considera <b>«preocupante»</b> y, por ello, puede describirse en la sección de Asuntos clave de la auditoría?</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:70%"></span><b>a)</b><span>Irregularidades que, a su juicio, pudieran favorecer el delito del 400 Bis</span><span class="v">14 · 70 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>b)</b><span>La capacitación anual omitió las constancias de 2 de los 5 empleados capacitados</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>Su Oficial de Cumplimiento todavía no cuenta con la certificación</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:15%"></span><b>d)</b><span>Un reporte de Operaciones Relevantes del primer trimestre se presentó extemporáneo</span><span class="v">3 · 15 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) Irregularidades que, a su juicio, pudieran favorecer el delito del 400 Bis</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> Un reporte de Operaciones Relevantes del primer trimestre se presentó extemporáneo · <b>3 alumnos</b> (15 %)</li><li><b>b)</b> La capacitación anual omitió las constancias de 2 de los 5 empleados capacitados · <b>1 alumno</b> (5 %)</li><li><b>c)</b> Su Oficial de Cumplimiento todavía no cuenta con la certificación · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 15 % eligió el reporte extemporáneo. Es un incumplimiento, pero puntual: se evalúa en Cumplimiento regulatorio y se anota como hallazgo, no como asunto preocupante.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>El apartado C sólo llama preocupante a cuatro cosas: medidas que no son acordes a los productos u Operaciones; controles sin eficacia para mitigar los Riesgos; hallazgos que sean <b>infracción grave</b>; e irregularidades que puedan favorecer el <b>139 Quáter o el 400 Bis</b>. Un incumplimiento aislado (constancias, certificación, un reporte tarde) no entra.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, OCTAVO, apartado C (pp. 12–13)</span></div>
+  </div>
+</article><article class="qc" id="p4">
+  <div class="hd"><span class="no">Pregunta 4</span><span class="k">3.1.1</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span></div>
+  <div class="stem">Selecciona los enunciados que corresponden al <b>objeto</b> de los Lineamientos para la elaboración del Informe de Auditoría: 1. Requisitos mínimos en la contratación de Personas Morales y Auditores · 2. Procedimientos y requisitos mínimos respecto de la elaboración del Informe · 3. Criterios conforme a los cuales la Comisión sancionará las deficiencias del Informe · 4. Procedimientos y requisitos mínimos respecto de la remisión a la Comisión del Informe · 5. Metodología que los Sujetos Supervisados deben seguir para evaluar sus Riesgos de LD/FT</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:15%"></span><b>a)</b><span>1, 2, 3</span><span class="v">3 · 15 %</span></div><div class="op ok"><span class="bar" style="width:65%"></span><b>b)</b><span>1, 2, 4</span><span class="v">13 · 65 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>c)</b><span>1, 3, 5</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:15%"></span><b>d)</b><span>2, 4, 5</span><span class="v">3 · 15 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1, 2, 4</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1, 2, 3 · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 2, 4, 5 · <b>3 alumnos</b> (15 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>«Sancionar deficiencias» y «metodología de riesgos» son temas reales del Módulo 3, así que parecen parte del objeto. La CNBV sí sanciona y las Disposiciones sí piden metodología, pero eso no lo regulan estos Lineamientos.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>El PRIMERO tiene <b>tres objetos</b>, en el orden en que vive el informe: <b>contratar → elaborar → remitir</b>. Si la opción no es uno de esos tres momentos, no es objeto de los Lineamientos.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, PRIMERO (p. 3)</span></div>
+  </div>
+</article><article class="qc" id="p5">
+  <div class="hd"><span class="no">Pregunta 5</span><span class="k">3.1.1</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span></div>
+  <div class="stem">El Sujeto Supervisado deberá convenir con la Persona Moral que la documentación y los papeles de trabajo que soporten el Informe de Auditoría deberán conservarse y mantenerse a disposición del Sujeto Supervisado y, en su caso, de la Comisión. ¿Cuál es el <b>plazo mínimo de conservación</b>?</div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0%"></span><b>a)</b><span>3 años a partir de la elaboración del Informe de Auditoría</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>3 años a partir de la presentación ante la Comisión del Informe de Auditoría</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>5 años a partir de la elaboración del Informe de Auditoría</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:90%"></span><b>d)</b><span>5 años a partir de la presentación ante la Comisión del Informe de Auditoría</span><span class="v">18 · 90 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">d) 5 años a partir de la presentación ante la Comisión del Informe de Auditoría</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 5 años a partir de la elaboración del Informe de Auditoría · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El error acertó los 5 años pero no el arranque: lo contó desde la elaboración.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>El reloj empieza cuando el informe <b>llega a la Comisión</b>: 5 años a partir de su presentación.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, QUINTO, último párrafo (pp. 5–6)</span></div>
+  </div>
+</article><article class="qc" id="p6">
+  <div class="hd"><span class="no">Pregunta 6</span><span class="k">3.1.1</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span></div>
+  <div class="stem">El Sujeto Supervisado realiza Operaciones por medio de comisionistas y permite que sean estos quienes integren y conserven los expedientes de identificación. El Auditor detecta que el Sujeto Supervisado no recaba, no registra ni conserva en su sistema automatizado los datos de dichas Operaciones, por lo que emite una acción correctiva. ¿Qué evaluación corresponde a la obligación del lineamiento OCTAVO, apartado A, fracción XIV (comisionistas)?</div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0%"></span><b>a)</b><span>Cumple</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>b)</b><span>Cumple Mayoritariamente</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>c)</b><span>Cumple Parcialmente</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:80%"></span><b>d)</b><span>No cumple</span><span class="v">16 · 80 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">d) No cumple</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> Cumple Parcialmente · <b>2 alumnos</b> (10 %)</li><li><b>b)</b> Cumple Mayoritariamente · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Quienes eligieron Parcialmente o Mayoritariamente pensaron que, como los comisionistas sí integran expedientes, algo se cumple.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Si la entidad no recaba, no registra ni conserva lo que la obligación exige, el cumplimiento <b>no cubre los elementos necesarios</b>: No cumple. Parcialmente es cuando falta <b>evidencia objetiva</b> de un cumplimiento que podría existir.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, OCTAVO, apartado B, numerales 3 y 4 (p. 12)</span></div>
+  </div>
+</article><article class="qc" id="p7">
+  <div class="hd"><span class="no">Pregunta 7</span><span class="k">3.1.1</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span></div>
+  <div class="stem">Relaciona cada hallazgo del Auditor con la evaluación que corresponde según el lineamiento OCTAVO, apartado B. 1. El Oficial de Cumplimiento afirma que el Comité revisa las alertas cada mes, pero no exhibe actas ni otra evidencia objetiva · 2. 14 operaciones dictaminadas como inusuales no se reportaron, incumplimiento que actualiza una sanción · 3. La capacitación se impartió y está documentada, pero no incluye tipologías recientes; el Auditor emite una recomendación de mejora. a. Cumple · b. Cumple Mayoritariamente · c. Cumple Parcialmente · d. No cumple</div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0%"></span><b>a)</b><span>1c, 2b, 3d</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:85%"></span><b>b)</b><span>1c, 2d, 3b</span><span class="v">17 · 85 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>1d, 2b, 3c</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>d)</b><span>1d, 2c, 3b</span><span class="v">1 · 5 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1c, 2d, 3b</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 1d, 2b, 3c · <b>1 alumno</b> (5 %)</li><li><b>d)</b> 1d, 2c, 3b · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Los errores pusieron el hallazgo 1 (sin evidencia) como No cumple, o bajaron la sanción a Mayoritariamente.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Cada nivel tiene su palabra clave: <b>sin evidencia objetiva</b> → Parcialmente; <b>actualiza una sanción</b> → No cumple; <b>sólo recomendación de mejora</b> → Mayoritariamente; <b>no requiere ni recomienda mejoras</b> → Cumple. El quinto sentido es No aplica.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Lineamientos, OCTAVO, apartado B (p. 12)</span></div>
+  </div>
+</article></div></section><section id="t312"><h2>3.1.2 · Reglamento de Supervisión</h2><div class="clin"><article class="qc" id="p8">
+  <div class="hd"><span class="no">Pregunta 8</span><span class="k">3.1.2</span><span class="mal hi">Contestaron mal: 10 de 20 (50 %)</span></div>
+  <div class="stem">¿Qué establece el <b>artículo 8</b> del Reglamento de Supervisión de la Comisión Nacional Bancaria y de Valores?</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:5%"></span><b>a)</b><span>Definición de las visitas ordinarias</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>b)</b><span>Supuestos de las visitas de investigación</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:50%"></span><b>c)</b><span>Supuestos de las visitas especiales</span><span class="v">10 · 50 %</span></div><div class="op bad"><span class="bar" style="width:30%"></span><b>d)</b><span>Tipos de visitas de inspección</span><span class="v">6 · 30 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) Supuestos de las visitas especiales</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> Tipos de visitas de inspección · <b>6 alumnos</b> (30 %)</li><li><b>b)</b> Supuestos de las visitas de investigación · <b>2 alumnos</b> (10 %)</li><li><b>a)</b> Definición de las visitas ordinarias · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>«Tipos de visitas» es la idea general del bloque de visitas, y por eso se elige cuando no se recuerda el número exacto. Los arts. 5 a 9 hablan todos de visitas; sin el mapa de artículos, cualquiera parece correcta.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Recítalo en orden: <b>5</b> tipos (ordinarias, especiales, de investigación) · <b>6</b> ordinarias · <b>7</b> programa anual · <b>8</b> especiales y sus seis supuestos · <b>9</b> investigación.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Reglamento de Supervisión, arts. 5 a 9 (pp. 6–7)</span></div>
+  </div>
+</article><article class="qc" id="p9">
+  <div class="hd"><span class="no">Pregunta 9</span><span class="k">3.1.2</span><span class="mal hi">Contestaron mal: 8 de 20 (40 %)</span></div>
+  <div class="stem">¿Cuáles de los siguientes son supuestos en los que la Comisión puede llevar a cabo <b>visitas especiales</b>? 1. Cuando se tengan indicios de alguna conducta que presuntamente contravenga las leyes · 2. Cuando se presenten cambios o modificaciones en la situación contable, legal, económica, financiera o administrativa de una Entidad Supervisada · 3. Cuando se tengan indicios de que una persona, sin autorización, opera como Entidad Supervisada o se ostenta con tal carácter · 4. Cuando una Entidad Supervisada inicie operaciones después de la elaboración del programa anual</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:15%"></span><b>a)</b><span>1, 2</span><span class="v">3 · 15 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>b)</b><span>1, 3</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:60%"></span><b>c)</b><span>2, 4</span><span class="v">12 · 60 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>d)</b><span>3, 4</span><span class="v">2 · 10 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) 2, 4</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1, 2 · <b>3 alumnos</b> (15 %)</li><li><b>b)</b> 1, 3 · <b>2 alumnos</b> (10 %)</li><li><b>d)</b> 3, 4 · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Los enunciados 1 y 3 describen algo que no estaba en el programa anual, igual que una visita especial. Especial e investigación están las dos fuera del programa anual, así que se confunden.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>La palabra <b>«indicios»</b> es de investigación: de una conducta (art. 9) o de alguien que opera sin autorización (art. 10). La especial nace de un <b>hecho de la entidad</b>: seguimiento de una visita, cambios en su situación, inicio de operaciones después del programa, hechos no contemplados o cooperación internacional.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Reglamento de Supervisión, art. 8 fr. III y IV (pp. 6–7); arts. 9 y 10 (p. 7)</span></div>
+  </div>
+</article><article class="qc" id="p10">
+  <div class="hd"><span class="no">Pregunta 10</span><span class="k">3.1.2</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span></div>
+  <div class="stem">Tras una visita de inspección a una SOFOM ENR, la CNBV le ordena mediante oficio adoptar un <b>programa de cumplimiento forzoso</b>, con plazo para cumplirlo, a fin de eliminar las irregularidades detectadas. ¿A qué facultad de supervisión corresponde esa orden?</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:10%"></span><b>a)</b><span>Inspección mediante visitas</span><span class="v">2 · 10 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>Investigación de conductas</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:85%"></span><b>c)</b><span>Prevención y corrección</span><span class="v">17 · 85 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>Vigilancia de la información</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) Prevención y corrección</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> Inspección mediante visitas · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 10 % eligió inspección porque la orden llega después de una visita.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>La visita es inspección. Lo que se ordena <b>después</b> para corregir (acciones, medidas correctivas o programas de cumplimiento forzoso) es prevención y corrección.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">LCNBV, art. 5; Reglamento de Supervisión, art. 52 (p. 19)</span></div>
+  </div>
+</article><article class="qc" id="p11">
+  <div class="hd"><span class="no">Pregunta 11</span><span class="k">3.1.2</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span></div>
+  <div class="stem">Relaciona cada facultad de supervisión con su característica. 1. Inspección · 2. Vigilancia · 3. Prevención y corrección. a. Establecimiento de acciones, medidas correctivas o programas de cumplimiento forzoso · b. Debe entregarse la información y documentación que señalen las leyes y disposiciones · c. Las visitas podrán ser ordinarias, especiales o de investigación · d. Plazo de 10 días hábiles para manifestar lo que a su derecho convenga y ofrecer pruebas</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:5%"></span><b>a)</b><span>1a, 2b, 3d</span><span class="v">1 · 5 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>1a, 2d, 3c</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:90%"></span><b>c)</b><span>1c, 2b, 3a</span><span class="v">18 · 90 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>1d, 2a, 3b</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) 1c, 2b, 3a</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1a, 2b, 3d · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El error le dio a inspección las medidas correctivas y a prevención y corrección el plazo para ofrecer pruebas.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Inspección = <b>visitas</b>; vigilancia = <b>información que se entrega</b>; prevención y corrección = <b>medidas y programas</b>. El plazo para manifestar y ofrecer pruebas es del trámite de observaciones, no una facultad: es el distractor que sobra.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Reglamento de Supervisión, arts. 4 y 5 (pp. 5–6), 43 (p. 16) y 52 (p. 19)</span></div>
+  </div>
+</article><article class="qc" id="p12">
+  <div class="hd"><span class="no">Pregunta 12</span><span class="k">3.1.2</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span></div>
+  <div class="stem">Relaciona cada característica con el tipo de visita. 1. Se efectúan siempre que la Comisión tenga indicios de conductas que presuntamente contravengan las leyes · 2. Se practican conforme al programa anual, con la frecuencia que la experiencia y las necesidades ameriten · 3. No están incluidas en el programa anual; proceden, entre otros supuestos, ante cambios en la situación contable, legal, económica, financiera o administrativa. a. Ordinarias · b. Especiales · c. De investigación</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:5%"></span><b>a)</b><span>1a, 2b, 3c</span><span class="v">1 · 5 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>1b, 2a, 3c</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:90%"></span><b>c)</b><span>1c, 2a, 3b</span><span class="v">18 · 90 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>1c, 2b, 3a</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) 1c, 2a, 3b</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1a, 2b, 3c · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El error leyó la lista en el orden a, b, c sin relacionarla.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span><b>Indicios</b> → investigación; <b>programa anual</b> → ordinaria; <b>fuera del programa por un hecho de la entidad</b> → especial.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Reglamento de Supervisión, arts. 6 a 9 (pp. 6–7)</span></div>
+  </div>
+</article><article class="qc" id="p13">
+  <div class="hd"><span class="no">Pregunta 13</span><span class="k">3.1.2</span><span class="mal">Contestaron mal: 1 de 20 (5 %)</span></div>
+  <div class="stem">La CNBV programa una visita ordinaria de inspección a una institución de banca múltiple, prevista en su programa anual. ¿Con qué anticipación debe notificarse la orden de visita?</div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0%"></span><b>a)</b><span>Al menos cinco días hábiles antes de la visita</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>Al menos diez días naturales antes de la visita</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:95%"></span><b>c)</b><span>Al menos dos días hábiles antes de la visita</span><span class="v">19 · 95 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>En el acto de inicio de la visita</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) Al menos dos días hábiles antes de la visita</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Nadie eligió una opción equivocada; un alumno la dejó en blanco.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Ordinarias y especiales: aviso con <b>al menos 2 días hábiles</b>. La de investigación puede notificarse <b>en el acto de inicio</b>: ese es el distractor d).</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Reglamento de Supervisión, art. 21 (p. 10)</span></div>
+  </div>
+</article></div></section><section id="t321"><h2>3.2.1 · Guía EBR del GAFI</h2><div class="clin"><article class="qc" id="p14">
+  <div class="hd"><span class="no">Pregunta 14</span><span class="k">3.2.1</span><span class="mal">Contestaron mal: 5 de 20 (25 %)</span></div>
+  <div class="stem">Según la Sección III «Guía para Bancos» de la Guía del EBR del GAFI, ¿cuáles son algunos de los factores que los bancos deben considerar al identificar y evaluar el riesgo de LA/FT al que están expuestos? 1. Mercados a los que se dirige · 2. Número de clientes identificados como de bajo riesgo · 3. Auditoría interna y resultados de regulación · 4. Competencia y participación de mercado · 5. Volumen y alcance de sus operaciones</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:15%"></span><b>a)</b><span>1, 2, 4</span><span class="v">3 · 15 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>1, 3, 4</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:75%"></span><b>c)</b><span>1, 3, 5</span><span class="v">15 · 75 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>d)</b><span>2, 3, 5</span><span class="v">1 · 5 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) 1, 3, 5</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1, 2, 4 · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 2, 3, 5 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 15 % eligió la opción con «clientes de bajo riesgo» y «competencia». La Guía habla de clientes de <b>alto</b> riesgo, y la competencia no aparece.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>La lista del párr. 56: naturaleza, escala, diversidad y complejidad del negocio; mercados a los que se dirige; clientes ya identificados como de <b>alto</b> riesgo; jurisdicciones; canales de distribución; auditoría interna y resultados de regulación; volumen y alcance de operaciones. Si un enunciado dice «bajo riesgo», está cambiado.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">GAFI, Guía EBR Sector Bancario, Sección III, párr. 56 (p. 21)</span></div>
+  </div>
+</article><article class="qc" id="p15">
+  <div class="hd"><span class="no">Pregunta 15</span><span class="k">3.2.1</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
+  <div class="stem">De acuerdo con la Sección II «Guía para Supervisores» de la Guía del EBR del GAFI, ¿a qué tipo de ajuste se refiere el enunciado? «Los supervisores deben determinar el alcance o nivel de evaluación apropiados en función de los riesgos identificados, con el fin de evaluar la adecuación de las políticas y procedimientos que los bancos han diseñado para evitar ser objeto de abusos».</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:15%"></span><b>a)</b><span>Ajuste de la frecuencia y naturaleza de la supervisión continua</span><span class="v">3 · 15 %</span></div><div class="op ok"><span class="bar" style="width:70%"></span><b>b)</b><span>Ajuste de la intensidad de la supervisión en materia de ALA/CFT</span><span class="v">14 · 70 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>c)</b><span>Ajuste de la intensidad de los controles para la autorización</span><span class="v">2 · 10 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>Ajuste del tipo de supervisión en materia de ALA/CFT</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">b) Ajuste de la intensidad de la supervisión en materia de ALA/CFT</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> Ajuste de la frecuencia y naturaleza de la supervisión continua · <b>3 alumnos</b> (15 %)</li><li><b>c)</b> Ajuste de la intensidad de los controles para la autorización · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 15 % eligió frecuencia y naturaleza; el 10 %, los controles para la autorización. Los tres hablan de qué hace el supervisor según el riesgo.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>«<b>Alcance o nivel de evaluación</b>» es la firma de la intensidad: qué tan a fondo se revisa. Frecuencia es cada cuándo; autorización es al entrar al mercado.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">GAFI, Sección II, ajuste d) de la intensidad de la supervisión (p. 16)</span></div>
+  </div>
+</article><article class="qc" id="p16">
+  <div class="hd"><span class="no">Pregunta 16</span><span class="k">3.2.1</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span></div>
+  <div class="stem">Según la Guía del EBR para el Sector Bancario del GAFI (Sección I, D), ¿cuáles son algunos de los <b>retos</b> para poner en práctica un Enfoque Basado en Riesgos? 1. Asignación de responsabilidades en un EBR · 2. Costo económico de implementar un EBR · 3. Desarrollo de grupos de trabajo · 4. Inclusión financiera · 5. Mitigación del riesgo de LA/FT</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:15%"></span><b>a)</b><span>1, 2, 3</span><span class="v">3 · 15 %</span></div><div class="op ok"><span class="bar" style="width:65%"></span><b>b)</b><span>1, 4, 5</span><span class="v">13 · 65 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>c)</b><span>2, 3, 4</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:15%"></span><b>d)</b><span>2, 4, 5</span><span class="v">3 · 15 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1, 4, 5</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1, 2, 3 · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 2, 4, 5 · <b>3 alumnos</b> (15 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>«Costo económico» y «grupos de trabajo» son retos de cualquier proyecto real, así que suenan lógicos. La pregunta pide «retos» y el sentido común dice que el costo es un reto. La Guía no lo nombra.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Los retos son <b>seis títulos</b> de la Sección I.D: Asignación de responsabilidades · Identificación del riesgo · Evaluación del riesgo · Mitigación del riesgo · Desarrollo de un entendimiento común del EBR · Inclusión financiera. Si no es uno de esos títulos, no es reto.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">GAFI, Guía EBR Sector Bancario, Sección I.D, párr. 17 y siguientes (pp. 10–12)</span></div>
+  </div>
+</article><article class="qc" id="p17">
+  <div class="hd"><span class="no">Pregunta 17</span><span class="k">3.2.1 · 3.2.2</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span></div>
+  <div class="stem">Relaciona los conceptos con su clasificación: <b>1.</b> Retos del EBR (Guía GAFI) · <b>2.</b> Elementos esenciales de una sólida gestión del riesgo (Basilea). a. Identificación del riesgo de LA/FT · b. Inclusión financiera · c. Política de aceptación de clientes · d. Seguimiento continuo · e. Evaluación del riesgo de LA/FT · f. Evaluación, comprensión, gestión y mitigación de riesgos · g. Mitigación del riesgo de LA/FT · h. Notificación de transacciones sospechosas y bloqueo de activos · i. Gestión de la información</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:15%"></span><b>a)</b><span>1a, 1b, 1c, 2d, 2e, 1f, 1g, 2h, 2i</span><span class="v">3 · 15 %</span></div><div class="op ok"><span class="bar" style="width:65%"></span><b>b)</b><span>1a, 1b, 2c, 2d, 1e, 2f, 1g, 2h, 2i</span><span class="v">13 · 65 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>2a, 2b, 1c, 1d, 1e, 2f, 1g, 1h, 1i</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>d)</b><span>2a, 2b, 2c, 1d, 1e, 1f, 1g, 2h, 2i</span><span class="v">2 · 10 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1a, 1b, 2c, 2d, 1e, 2f, 1g, 2h, 2i</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1a, 1b, 1c, 2d, 2e, 1f, 1g, 2h, 2i · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 2a, 2b, 2c, 1d, 1e, 1f, 1g, 2h, 2i · <b>2 alumnos</b> (10 %)</li><li><b>c)</b> 2a, 2b, 1c, 1d, 1e, 2f, 1g, 1h, 1i · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Identificar, evaluar y mitigar aparecen en los dos documentos con palabras casi iguales. El elemento f de Basilea es casi la suma de a, e y g, así que se reparten mal.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span><b>Suelto</b> (identificación, evaluación, mitigación) es reto del GAFI. <b>En bloque de cuatro verbos</b> («evaluación, comprensión, gestión y mitigación») es Basilea. Inclusión financiera sólo es reto. Basilea nombra procesos del banco con su cliente: aceptación, seguimiento, información, notificación.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">GAFI, Sección I.D (pp. 10–12); Basilea, Adecuada gestión de los riesgos BC/FT, apartado II.1 (pp. 8–17)</span></div>
+  </div>
+</article></div></section><section id="t322"><h2>3.2.2 · Basilea</h2><div class="clin"><article class="qc" id="p18">
+  <div class="hd"><span class="no">Pregunta 18</span><span class="k">3.2.2</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
+  <div class="stem">Relaciona el propósito con el documento al que corresponde: 1. Indicar cómo deben los bancos integrar los riesgos de LA/FT dentro de su gestión global del riesgo · 2. Preparar los principios que deben aplicarse al ajustar las medidas contra el LA/FT a los riesgos identificados · 3. Destacar la relevancia de una sólida gestión del riesgo de LA/FT para la seguridad y solvencia de los bancos · 4. Fomentar que autoridades y bancos compartan un entendimiento común sobre el EBR. a. Basilea · b. Guía del GAFI</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:70%"></span><b>a)</b><span>1a, 2b, 3a, 4b</span><span class="v">14 · 70 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>b)</b><span>1a, 2b, 3b, 4a</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:20%"></span><b>c)</b><span>1b, 2a, 3a, 4b</span><span class="v">4 · 20 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>1b, 2a, 3b, 4a</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) 1a, 2b, 3a, 4b</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 1b, 2a, 3a, 4b · <b>4 alumnos</b> (20 %)</li><li><b>b)</b> 1a, 2b, 3b, 4a · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 20 % invirtió los dos primeros: le dio al GAFI la gestión global del riesgo y a Basilea los principios.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span><b>Basilea mira al banco por dentro</b>: integrar el riesgo LA/FT en su gestión global y cuidar su seguridad y solvencia. <b>El GAFI habla de principios</b> y de un entendimiento común entre autoridades y bancos.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Basilea, Introducción, párr. 1 (p. 5) y párr. 5 (p. 6); GAFI, Propósito de la Guía, párr. 4 (p. 6)</span></div>
+  </div>
+</article><article class="qc" id="p19">
+  <div class="hd"><span class="no">Pregunta 19</span><span class="k">3.2.2</span><span class="mal hi">Contestaron mal: 11 de 20 (55 %)</span></div>
+  <div class="stem">De acuerdo con la Adecuada gestión de los riesgos relacionados con el BC y la FT del Comité de Basilea, selecciona los <b>elementos esenciales</b> de una sólida gestión del riesgo BC/FT: 1. Notificación de transacciones sospechosas y bloqueo de activos · 2. Identificación, verificación y elaboración del perfil de riesgo de clientes y beneficiarios efectivos · 3. Identificación del riesgo de LA/FT · 4. Evaluación, comprensión, gestión y mitigación de riesgos · 5. Ajuste de la intensidad de la supervisión en materia de ALA/CFT · 6. Controles internos · 7. Inclusión financiera · 8. Gestión de la información · 9. Seguimiento continuo · 10. Política de aceptación de clientes</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:45%"></span><b>a)</b><span>1, 2, 4, 8, 9, 10</span><span class="v">9 · 45 %</span></div><div class="op bad"><span class="bar" style="width:15%"></span><b>b)</b><span>1, 3, 4, 5, 8, 10</span><span class="v">3 · 15 %</span></div><div class="op bad"><span class="bar" style="width:25%"></span><b>c)</b><span>2, 4, 5, 6, 8, 10</span><span class="v">5 · 25 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>d)</b><span>2, 4, 6, 7, 9, 10</span><span class="v">2 · 10 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) 1, 2, 4, 8, 9, 10</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 2, 4, 5, 6, 8, 10 · <b>5 alumnos</b> (25 %)</li><li><b>b)</b> 1, 3, 4, 5, 8, 10 · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 2, 4, 6, 7, 9, 10 · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>«Controles internos» suena esencial para cualquier banco, y «ajuste de la intensidad de la supervisión» suena a enfoque basado en riesgo. Los dos son conceptos reales, pero vienen de otros textos: el ajuste de intensidad es de la Guía del GAFI para <b>supervisores</b>, e identificación del riesgo e inclusión financiera son retos del GAFI.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Basilea II.1 tiene <b>seis</b> elementos: Evaluación, comprensión, gestión y mitigación de riesgos · Política de aceptación de clientes · Identificación, verificación y perfil de riesgo de clientes y beneficiarios efectivos · Seguimiento continuo · Gestión de la información · Notificación de transacciones sospechosas y bloqueo de activos. Si la opción habla de lo que hace el supervisor, no es Basilea II.1.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Basilea, apartado II.1 (pp. 8–17); GAFI, Sección II, ajuste d) de la intensidad de la supervisión (p. 16)</span></div>
+  </div>
+</article><article class="qc" id="p20">
+  <div class="hd"><span class="no">Pregunta 20</span><span class="k">3.2.2</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
+  <div class="stem">De acuerdo con Basilea, relaciona la línea de defensa con su función: 1. Auditoría interna (tercera línea) · 2. Responsable ejecutivo de PBC/FT (segunda línea) · 3. Unidades de negocio (primera línea). a. Evaluar de forma independiente la gestión y los controles del riesgo, rindiendo cuentas al comité de auditoría del Consejo · b. Identificar, evaluar y controlar los riesgos de sus actividades · c. Promover una sólida gestión del riesgo para la seguridad y solvencia de los bancos · d. Seguimiento continuo del cumplimiento de todas las obligaciones de PBC/FT</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:70%"></span><b>a)</b><span>1a, 2d, 3b</span><span class="v">14 · 70 %</span></div><div class="op bad"><span class="bar" style="width:15%"></span><b>b)</b><span>1a, 2d, 3c</span><span class="v">3 · 15 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>c)</b><span>1d, 2a, 3b</span><span class="v">2 · 10 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>1d, 2a, 3c</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) 1a, 2d, 3b</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> 1a, 2d, 3c · <b>3 alumnos</b> (15 %)</li><li><b>c)</b> 1d, 2a, 3b · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 15 % le dio a las unidades de negocio «promover una sólida gestión del riesgo»; el 10 % invirtió auditoría interna y responsable de PBC/FT.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Primera línea: <b>identifica, evalúa y controla</b> los riesgos de sus actividades. Segunda: <b>seguimiento continuo</b> del cumplimiento. Tercera: <b>evalúa de forma independiente</b> y rinde cuentas al comité de auditoría. «Promover una sólida gestión» es el objetivo del documento, no la función de una línea.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Basilea, II.1 c), párr. 19 a 26 (pp. 9–10)</span></div>
+  </div>
+</article><article class="qc" id="p21">
+  <div class="hd"><span class="no">Pregunta 21</span><span class="k">3.2.2</span><span class="mal">Contestaron mal: 5 de 20 (25 %)</span></div>
+  <div class="stem">Relaciona las tres líneas de defensa de Basilea con un ejemplo para un banco en México: 1. Unidades de negocio · 2. Responsable ejecutivo de PBC/FT · 3. Auditoría interna. a. Personal de Promotoría · b. Gobierno corporativo · c. Auditor externo · d. Oficial de Cumplimiento · e. Alta dirección · f. Área de Auditoría Interna de PLD/FT</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:75%"></span><b>a)</b><span>1a, 2d, 3f</span><span class="v">15 · 75 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>b)</b><span>1a, 2e, 3c</span><span class="v">2 · 10 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>c)</b><span>1b, 2d, 3c</span><span class="v">2 · 10 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>1b, 2e, 3f</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) 1a, 2d, 3f</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> 1a, 2e, 3c · <b>2 alumnos</b> (10 %)</li><li><b>c)</b> 1b, 2d, 3c · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 10 % puso al auditor externo como tercera línea; otro 10 %, al gobierno corporativo como primera.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Las tres líneas están <b>dentro</b> del banco: el negocio (promotoría), cumplimiento (Oficial de Cumplimiento) y auditoría interna. El auditor externo, el Consejo y la alta dirección no son ninguna de las tres.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Basilea, II.1 c), párr. 19 a 26 (pp. 9–10)</span></div>
+  </div>
+</article></div></section><section id="t331"><h2>3.3.1 · Metodología de evaluación de riesgos</h2><div class="clin"><article class="qc" id="p22">
+  <div class="hd"><span class="no">Pregunta 22</span><span class="k">3.3.1</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span></div>
+  <div class="stem">Según la Guía de la CNBV para la elaboración de una Metodología de Evaluación de Riesgos, ¿cuáles son dos de los <b>Elementos de Riesgo</b> que el Sujeto Supervisado debe considerar como mínimo?</div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0%"></span><b>a)</b><span>Actividad económica del Cliente e incidencia delictiva</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>b)</b><span>Frecuencia y monto de las transacciones del Cliente</span><span class="v">1 · 5 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>c)</b><span>Nacionalidad y domicilio del Cliente o Usuario</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:90%"></span><b>d)</b><span>Productos y servicios, y países y áreas geográficas</span><span class="v">18 · 90 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">d) Productos y servicios, y países y áreas geográficas</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> Frecuencia y monto de las transacciones del Cliente · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El único error eligió frecuencia y monto, que es un indicador de transacciones, no un elemento.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Los cuatro elementos mínimos son: clientes y/o usuarios; países y áreas geográficas; productos y servicios; transacciones y canales. Lo demás (actividad, nacionalidad, domicilio, frecuencia, incidencia) son <b>indicadores</b> dentro de esos elementos.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Guía de Metodología, definición IV (p. 2)</span></div>
+  </div>
+</article><article class="qc" id="p23">
+  <div class="hd"><span class="no">Pregunta 23</span><span class="k">3.3.1</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span></div>
+  <div class="stem">De acuerdo con la Guía de Metodología de la CNBV, ¿en qué supuestos debe un Sujeto Supervisado revisar y, en su caso, actualizar su Metodología? 1. En un plazo no mayor a 24 meses contados a partir de que cuente con los resultados de su implementación · 2. Cuando detecte la existencia de nuevos Riesgos · 3. De forma semestral, sin importar si hay cambios o no · 4. Cuando se actualice la Evaluación Nacional de Riesgos</div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0%"></span><b>a)</b><span>1, 3</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>b)</b><span>1, 4</span><span class="v">2 · 10 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>2, 3</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:80%"></span><b>d)</b><span>2, 4</span><span class="v">16 · 80 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">d) 2, 4</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> 1, 4 · <b>2 alumnos</b> (10 %)</li><li><b>c)</b> 2, 3 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 10 % aceptó los «24 meses». La Guía dice <b>12 meses</b>.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Tres disparadores: <b>12 meses</b> desde los resultados de la implementación, <b>nuevos Riesgos</b> y <b>actualización de la ENR</b>. No hay revisión semestral. Si cambian el número de meses, la opción ya es falsa.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Guía de Metodología, III. Valoración (p. 12)</span></div>
+  </div>
+</article><article class="qc" id="p24">
+  <div class="hd"><span class="no">Pregunta 24</span><span class="k">3.3.1</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
+  <div class="stem">Según la Guía de Metodología de la CNBV, una Metodología eficaz debe ser un proceso continuo. Su revisión y, en su caso, actualización tiene como objeto:</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:20%"></span><b>a)</b><span>Comprender y evaluar el Riesgo específico de cada Cliente</span><span class="v">4 · 20 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>b)</b><span>Determinar el Grado de Riesgo asignado a cada Cliente</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:70%"></span><b>c)</b><span>Identificar cambios en el grado de exposición al Riesgo</span><span class="v">14 · 70 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>Sustituir la auditoría anual en materia de PLD/FT</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) Identificar cambios en el grado de exposición al Riesgo</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> Comprender y evaluar el Riesgo específico de cada Cliente · <b>4 alumnos</b> (20 %)</li><li><b>b)</b> Determinar el Grado de Riesgo asignado a cada Cliente · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 20 % eligió «el Riesgo de cada Cliente». Eso es el grado de riesgo del cliente (tema 3.3.2), no la metodología de la entidad.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>La metodología mide a la <b>entidad</b>; su revisión sirve para identificar cambios en el grado de exposición al Riesgo. Si la opción habla de un Cliente, es del otro tema.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Guía de Metodología, III. Valoración (p. 12)</span></div>
+  </div>
+</article><article class="qc" id="p25">
+  <div class="hd"><span class="no">Pregunta 25</span><span class="k">3.3.1</span><span class="mal">Contestaron mal: 5 de 20 (25 %)</span></div>
+  <div class="stem">¿Cuáles son los procesos que comprende la <b>fase de diseño</b> de la Metodología de Evaluación de Riesgos? 1. Establecer mecanismos para identificar los delitos de ORPI y FT · 2. Identificar los Mitigantes implementados al momento del diseño · 3. Utilizar un método de medición que relacione Indicadores y Elementos y asigne pesos · 4. Identificar los Elementos de Riesgo y sus Indicadores · 5. Revisar la eficiencia y eficacia de la Metodología y realizar actualizaciones</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:10%"></span><b>a)</b><span>1, 3, 5</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:75%"></span><b>b)</b><span>2, 3, 4</span><span class="v">15 · 75 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>2, 3, 5</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>d)</b><span>2, 4, 5</span><span class="v">1 · 5 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">b) 2, 3, 4</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1, 3, 5 · <b>2 alumnos</b> (10 %)</li><li><b>c)</b> 2, 3, 5 · <b>1 alumno</b> (5 %)</li><li><b>d)</b> 2, 4, 5 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Los errores metieron el enunciado 5, que es de la tercera fase, o el 1, que no es un proceso de la Guía.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>El diseño tiene tres procesos: <b>identificar</b> elementos e indicadores, <b>medir</b> con pesos e <b>identificar los Mitigantes implementados</b>. Revisar eficiencia y eficacia es la fase de <b>Valoración</b>.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Guía de Metodología, I. Diseño (pp. 4–10) y III. Valoración (p. 12)</span></div>
+  </div>
+</article><article class="qc" id="p26">
+  <div class="hd"><span class="no">Pregunta 26</span><span class="k">3.3.1</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span></div>
+  <div class="stem">Relaciona cada Elemento de Riesgo con el Indicador que le corresponde: 1. Productos y servicios · 2. Clientes y/o Usuarios · 3. Países y áreas geográficas · 4. Transacciones y canales. a. Sucursales en todo el país donde se reciben en efectivo los pagos de créditos · b. Sucursal en un municipio con alta incidencia delictiva · c. Fideicomiso que permite no individualizar a los fideicomitentes · d. Joven de 25 años accionista mayoritario de una empresa de refacciones</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:5%"></span><b>a)</b><span>1a, 2c, 3b, 4d</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>b)</b><span>1c, 2b, 3a, 4d</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>1c, 2d, 3a, 4b</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:80%"></span><b>d)</b><span>1c, 2d, 3b, 4a</span><span class="v">16 · 80 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">d) 1c, 2d, 3b, 4a</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> 1a, 2c, 3b, 4d · <b>1 alumno</b> (5 %)</li><li><b>b)</b> 1c, 2b, 3a, 4d · <b>1 alumno</b> (5 %)</li><li><b>c)</b> 1c, 2d, 3a, 4b · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Los errores se repartieron. El cruce típico: «sucursales» suena a área geográfica, pero lo que importa es que reciben <b>efectivo</b>.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Fideicomiso que no individualiza → <b>producto</b>; joven accionista → <b>cliente</b>; municipio con incidencia → <b>área geográfica</b>; pagos en efectivo en sucursales → <b>canal</b>.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Guía de Metodología, tabla de Elementos de Riesgo e Indicadores (p. 5)</span></div>
+  </div>
+</article><article class="qc" id="p27">
+  <div class="hd"><span class="no">Pregunta 27</span><span class="k">3.3.1</span><span class="mal hi">Contestaron mal: 9 de 20 (45 %)</span></div>
+  <div class="stem">Una Entidad revisa la lista de Indicadores de su Metodología de Evaluación de Riesgos. Según la tabla de Indicadores de la Guía de la CNBV, ¿cuál de los siguientes corresponde al Elemento de Riesgo <b>Transacciones y canales de envío o distribución</b>?</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:55%"></span><b>a)</b><span>Banca móvil que permite disponer de inmediato de los recursos</span><span class="v">11 · 55 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>Empresa constituida hace tres meses con accionistas de 22 años</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>Sucursal ubicada en un municipio fronterizo de alta marginación</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:35%"></span><b>d)</b><span>Tarjeta prepagada recargable que permite transferir valor</span><span class="v">7 · 35 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) Banca móvil que permite disponer de inmediato de los recursos</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> Tarjeta prepagada recargable que permite transferir valor · <b>7 alumnos</b> (35 %)</li><li><b>c)</b> Sucursal ubicada en un municipio fronterizo de alta marginación · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>«Transferir valor» suena a transacción, y por eso la tarjeta prepagada parece de canales. La tabla sí dice «transferencia de valor», pero la pone en Productos y servicios.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Pregúntate: ¿es <b>lo que el cliente contrata</b> o <b>por dónde opera</b>? Lo que contrata es Producto (anonimato, alto valor, facilita transferir valor). Por dónde opera es Canal (no presencial, acceso inmediato a los recursos, montos altos). La tarjeta es el producto; la app es la vía.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Guía CNBV para la elaboración de una Metodología de Evaluación de Riesgos, tabla de Elementos de Riesgo e Indicadores (p. 5)</span></div>
+  </div>
+</article></div></section><section id="t332"><h2>3.3.2 · Grado de riesgo del cliente</h2><div class="clin"><article class="qc" id="p28">
+  <div class="hd"><span class="no">Pregunta 28</span><span class="k">3.3.2</span><span class="mal">Contestaron mal: 2 de 20 (10 %)</span></div>
+  <div class="stem">Una SOFIPO clasificó a un Cliente persona física como de Grado de Riesgo alto. ¿Respecto de quiénes procurará obtener datos adicionales? 1. Su empleador · 2. Cónyuge y dependientes económicos · 3. Sus referencias personales · 4. Las sociedades y asociaciones con las que mantenga vínculos patrimoniales</div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0%"></span><b>a)</b><span>1, 2</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>1, 4</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>2, 3</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:90%"></span><b>d)</b><span>2, 4</span><span class="v">18 · 90 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">d) 2, 4</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 2, 3 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El único error eligió referencias personales en lugar de sociedades con vínculos patrimoniales.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Persona física de alto riesgo: <b>cónyuge, dependientes económicos y sociedades con vínculos patrimoniales</b>. Empleador y referencias no aparecen.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">DCG SOFIPO, 27ª (p. 28)</span></div>
+  </div>
+</article><article class="qc" id="p29">
+  <div class="hd"><span class="no">Pregunta 29</span><span class="k">3.3.2</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
+  <div class="stem">La SOFIPO «Ahorra Max» debe clasificar a un Cliente que solicita un crédito por un monto considerable. ¿Cuáles corresponden a los aspectos que el último párrafo de la 27ª ordena tomar en cuenta en los criterios para asignar el Grado de Riesgo? 1. Pagos de máximo 30 mil pesos · 2. Antecedentes del Cliente · 3. Reside en el municipio de Zumpango · 4. Frecuencia mensual de los pagos · 5. Profesión como Contador General · 6. Destino que dará a los recursos del crédito</div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0%"></span><b>a)</b><span>1, 2, 3, 4</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>b)</b><span>1, 3, 4, 5</span><span class="v">2 · 10 %</span></div><div class="op bad"><span class="bar" style="width:15%"></span><b>c)</b><span>2, 3, 4, 5</span><span class="v">3 · 15 %</span></div><div class="op ok"><span class="bar" style="width:70%"></span><b>d)</b><span>2, 3, 5, 6</span><span class="v">14 · 70 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">d) 2, 3, 5, 6</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> 2, 3, 4, 5 · <b>3 alumnos</b> (15 %)</li><li><b>b)</b> 1, 3, 4, 5 · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 15 % metió la frecuencia de pagos y dejó fuera el destino de los recursos; el 10 % metió además el monto.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Los criterios describen <b>al cliente</b>: antecedentes, profesión, actividad o giro, origen y destino de los recursos, residencia y geolocalización. Monto y frecuencia de pagos son <b>perfil transaccional</b>, otra parte de la 27ª.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">DCG SOFIPO, 27ª, último párrafo (p. 28)</span></div>
+  </div>
+</article><article class="qc" id="p30">
+  <div class="hd"><span class="no">Pregunta 30</span><span class="k">3.3.2</span><span class="mal">Contestaron mal: 3 de 20 (15 %)</span></div>
+  <div class="stem">El Banco «Mejora tu vida» debe asignar un Grado de Riesgo a cada prospecto. ¿Cuáles deben clasificarse como de <b>Grado de Riesgo alto</b>? 1. Hombre mexicano de 45 años, residente en el país, crédito para vivienda de $1,000,000 · 2. Mujer japonesa que declaró haber sido ministra de Estado en Japón, crédito de $600,000 · 3. Hombre mexicano de 30 años, residente en España, asignado a banca privada · 4. Mujer mexicana de 24 años, residente en el país, crédito estudiantil de $80,000</div>
+  <div class="ops"><div class="op"><span class="bar" style="width:0%"></span><b>a)</b><span>1, 2</span><span class="v">0 · 0 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>1, 4</span><span class="v">0 · 0 %</span></div><div class="op ok"><span class="bar" style="width:85%"></span><b>c)</b><span>2, 3</span><span class="v">17 · 85 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>d)</b><span>2, 4</span><span class="v">2 · 10 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) 2, 3</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> 2, 4 · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 10 % eligió a la estudiante en lugar del mexicano en banca privada que vive en España.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Alto como mínimo: <b>PEP extranjera</b> y <b>no residente asignado a banca privada</b>. Ni el monto, ni la edad, ni el tipo de crédito hacen alto por sí solos.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">DCG Bancos, 28ª (p. 43)</span></div>
+  </div>
+</article><article class="qc" id="p31">
+  <div class="hd"><span class="no">Pregunta 31</span><span class="k">3.3.2</span><span class="mal hi">Contestaron mal: 8 de 20 (40 %)</span></div>
+  <div class="stem">Conforme a las Disposiciones de carácter general aplicables a las SOFIPO, ¿qué Grados de Riesgo debe establecer la Entidad, como mínimo, para sus Clientes <b>personas físicas</b>?</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:60%"></span><b>a)</b><span>Alto y bajo</span><span class="v">12 · 60 %</span></div><div class="op bad"><span class="bar" style="width:25%"></span><b>b)</b><span>Alto, medio y bajo</span><span class="v">5 · 25 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>Bajo y medio</span><span class="v">1 · 5 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>d)</b><span>Medio y alto</span><span class="v">1 · 5 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) Alto y bajo</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> Alto, medio y bajo · <b>5 alumnos</b> (25 %)</li><li><b>c)</b> Bajo y medio · <b>1 alumno</b> (5 %)</li><li><b>d)</b> Medio y alto · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>«Alto, medio y bajo» es la escala que más se usa en la práctica. Tres grados sí son el mínimo, pero para personas morales y fideicomisos, no para personas físicas.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Mínimo en la 27ª: persona <b>física, 2</b> (alto y bajo); persona <b>moral y fideicomiso, 3</b> (alto, medio y bajo). La Entidad puede agregar grados intermedios. La moral tiene más capas.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">DCG SOFIPO, 27ª (pp. 27–28)</span></div>
+  </div>
+</article><article class="qc" id="p32">
+  <div class="hd"><span class="no">Pregunta 32</span><span class="k">3.3.2</span><span class="mal">Contestaron mal: 5 de 20 (25 %)</span></div>
+  <div class="stem">Una SOFIPO detecta, ya iniciada la relación comercial, que un Cliente de Grado de Riesgo alto reúne los requisitos para ser considerado Persona Políticamente Expuesta. ¿Qué debe hacer para <b>continuar</b> la relación comercial?</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:75%"></span><b>a)</b><span>Obtener la aprobación de un directivo con facultades específicas</span><span class="v">15 · 75 %</span></div><div class="op bad"><span class="bar" style="width:15%"></span><b>b)</b><span>Obtener la autorización previa del Comité de Comunicación y Control</span><span class="v">3 · 15 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>c)</b><span>Presentar un reporte de Operación Inusual ante la Secretaría</span><span class="v">1 · 5 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>d)</b><span>Recabar el visto bueno del Oficial de Cumplimiento</span><span class="v">0 · 0 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) Obtener la aprobación de un directivo con facultades específicas</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> Obtener la autorización previa del Comité de Comunicación y Control · <b>3 alumnos</b> (15 %)</li><li><b>c)</b> Presentar un reporte de Operación Inusual ante la Secretaría · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 15 % eligió al Comité de Comunicación y Control, porque es el órgano que dictamina.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>PEP con alto riesgo → <b>aprobación de un directivo con facultades específicas</b>, tanto para iniciar como para continuar. El Comité dictamina operaciones, no aprueba clientes.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">DCG SOFIPO, 28ª (p. 28)</span></div>
+  </div>
+</article></div></section><section id="t333"><h2>3.3.3 · ENR 2023</h2><div class="clin"><article class="qc" id="p33">
+  <div class="hd"><span class="no">Pregunta 33</span><span class="k">3.3.3</span><span class="mal">Contestaron mal: 6 de 20 (30 %)</span></div>
+  <div class="stem">De acuerdo con la ENR 2023, ¿cuáles fueron valoradas con un nivel de riesgo de LD <b>ALTO</b>? 1. Banca Múltiple-Cambiarios · 2. Banca Múltiple-Inversión · 3. Obras de arte · 4. Monederos y certificados de devoluciones o recompensas · 5. Juegos con apuesta, concursos o sorteos · 6. Tarjetas prepagadas, vales o cupones</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:5%"></span><b>a)</b><span>2, 3 y 5</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:70%"></span><b>b)</b><span>1, 3 y 4</span><span class="v">14 · 70 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>c)</b><span>1, 3 y 6</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:20%"></span><b>d)</b><span>3, 5 y 6</span><span class="v">4 · 20 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">b) 1, 3 y 4</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> 3, 5 y 6 · <b>4 alumnos</b> (20 %)</li><li><b>a)</b> 2, 3 y 5 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El 20 % eligió juegos con apuesta y tarjetas prepagadas, que en 2023 son medio-bajo y medio.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Alto en 2023. Sistema financiero: sólo <b>Banca Múltiple G-7 y Banca Múltiple-Cambiarios</b>. Actividades vulnerables: <b>obras de arte, metales y joyas, monederos y certificados</b> (monederos subió de medio).</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">ENR 2023, Cap. IV: matriz sectorial (p. 21) y AV (p. 25)</span></div>
+  </div>
+</article><article class="qc" id="p34">
+  <div class="hd"><span class="no">Pregunta 34</span><span class="k">3.3.3</span><span class="mal hi">Contestaron mal: 11 de 20 (55 %)</span></div>
+  <div class="stem">De acuerdo con la ENR 2023, ¿cuáles de las siguientes actividades vulnerables y entidades del sector financiero fueron valoradas con un nivel de riesgo de LD <b>MEDIO</b>? 1. Transmisores de dinero · 2. SOFOM no reguladas · 3. Tarjetas de servicios o de crédito · 4. Uniones de crédito · 5. SOFOM reguladas · 6. Tarjetas prepagadas, vales o cupones</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:15%"></span><b>a)</b><span>1, 2 y 3</span><span class="v">3 · 15 %</span></div><div class="op bad"><span class="bar" style="width:30%"></span><b>b)</b><span>1, 4 y 5</span><span class="v">6 · 30 %</span></div><div class="op ok"><span class="bar" style="width:45%"></span><b>c)</b><span>1, 5 y 6</span><span class="v">9 · 45 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>d)</b><span>1, 2 y 6</span><span class="v">1 · 5 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) 1, 5 y 6</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> 1, 4 y 5 · <b>6 alumnos</b> (30 %)</li><li><b>a)</b> 1, 2 y 3 · <b>3 alumnos</b> (15 %)</li><li><b>d)</b> 1, 2 y 6 · <b>1 alumno</b> (5 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Uniones de crédito eran riesgo medio en 2020. Se recuerda el nivel de la evaluación anterior, no el de 2023.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Medio en 2023: <b>transmisores de dinero</b> (subieron de medio-bajo), <b>SOFOM reguladas</b> y <b>tarjetas prepagadas</b>. Uniones de crédito <b>bajaron</b> a medio-bajo; SOFOM no reguladas y tarjetas de servicios o de crédito son medio-bajo. Lee siempre la columna 2023.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">ENR 2023, Cap. IV: matriz de riesgo sectorial (p. 21) y riesgo de LD de las AV (p. 25)</span></div>
+  </div>
+</article><article class="qc" id="p35">
+  <div class="hd"><span class="no">Pregunta 35</span><span class="k">3.3.3</span><span class="mal hi">Contestaron mal: 11 de 20 (55 %)</span></div>
+  <div class="stem">¿Cuál de las siguientes vulnerabilidades de LD, identificadas en la ENR 2023, fue valorada con un <b>grado de facilitación MEDIO</b>?</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:45%"></span><b>a)</b><span>Debilidad regulatoria de las Instituciones de Tecnología Financiera</span><span class="v">9 · 45 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>b)</b><span>Debilidad en los procesos de contratación pública de bienes y servicios</span><span class="v">2 · 10 %</span></div><div class="op bad"><span class="bar" style="width:20%"></span><b>c)</b><span>Deficientes controles en los movimientos transfronterizos en puertos de entrada y salida internacional</span><span class="v">4 · 20 %</span></div><div class="op bad"><span class="bar" style="width:20%"></span><b>d)</b><span>Deficiente impartición de justicia</span><span class="v">4 · 20 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) Debilidad regulatoria de las Instituciones de Tecnología Financiera</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>c)</b> Deficientes controles en los movimientos transfronterizos en puertos de entrada y salida internacional · <b>4 alumnos</b> (20 %)</li><li><b>d)</b> Deficiente impartición de justicia · <b>4 alumnos</b> (20 %)</li><li><b>b)</b> Debilidad en los procesos de contratación pública de bienes y servicios · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>«Debilidad regulatoria» suena grave, y la palabra se lee como «alto». Las cuatro son vulnerabilidades de LD y las cuatro se oyen serias.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Tres de las cuatro son <b>alto y alto</b>: contratación pública, puertos e impartición de justicia. Lo institucional es alto; lo regulatorio de ITF y de comercio electrónico es <b>medio y medio</b>.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">ENR 2023, Cap. XI, Mapa 3, vulnerabilidades de LD, factores 18, 23, 24 y 25 (p. 84)</span></div>
+  </div>
+</article><article class="qc" id="p36">
+  <div class="hd"><span class="no">Pregunta 36</span><span class="k">3.3.3</span><span class="mal hi">Contestaron mal: 7 de 20 (35 %)</span></div>
+  <div class="stem">¿Cuál de las siguientes tablas muestra de manera correcta los <b>Factores Emergentes</b> identificados en la ENR 2023 y su <b>probabilidad de ocurrencia</b>?</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:20%"></span><b>a)</b><span>Activos virtuales: ALTO · …</span><span class="v">4 · 20 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>Activos virtuales: MEDIO · …</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:10%"></span><b>c)</b><span>Activos virtuales: ALTO · …</span><span class="v">2 · 10 %</span></div><div class="op ok"><span class="bar" style="width:65%"></span><b>d)</b><span>Activos virtuales: MEDIO · Ransomware: ALTO · COVID-19: MEDIO</span><span class="v">13 · 65 %</span></div></div><p class="nota">Las opciones del simulador son tablas; aquí sólo se muestra el inicio de las incorrectas.</p>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">d) Activos virtuales: MEDIO · Ransomware: ALTO · COVID-19: MEDIO</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>a)</b> Activos virtuales: ALTO · … · <b>4 alumnos</b> (20 %)</li><li><b>c)</b> Activos virtuales: ALTO · … · <b>2 alumnos</b> (10 %)</li><li>En blanco: 1 alumno</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Activos virtuales tiene <b>impacto</b> alto, y se pasa ese grado a la columna de probabilidad. Se recuerda «activos virtuales = alto» sin recordar de qué columna.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>Emergentes, impacto · probabilidad: <b>activos virtuales alto · medio</b>; <b>ransomware alto · alto</b>; <b>COVID-19 medio · medio</b>. Sólo ransomware tiene probabilidad alta.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">ENR 2023, Cap. XI, Mapa 6, factores emergentes 35 a 37 (p. 88)</span></div>
+  </div>
+</article><article class="qc" id="p37">
+  <div class="hd"><span class="no">Pregunta 37</span><span class="k">3.3.3</span><span class="mal hi">Contestaron mal: 9 de 20 (45 %)</span></div>
+  <div class="stem">¿Cuál de las siguientes tablas muestra de manera correcta la valoración de una <b>Vulnerabilidad del Régimen de PLD/CFT</b> con su <b>grado de facilitación</b>?</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:55%"></span><b>a)</b><span>Insuficiente obligatoriedad de la normativa para implementar un EBR: MEDIO</span><span class="v">11 · 55 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>b)</b><span>Debilidad en el Marco Jurídico de AV: BAJO</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:15%"></span><b>c)</b><span>Debilidad en el Marco Jurídico del SF: ALTO</span><span class="v">3 · 15 %</span></div><div class="op bad"><span class="bar" style="width:20%"></span><b>d)</b><span>Deficiente información sobre el Beneficiario Final: ALTO</span><span class="v">4 · 20 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) Insuficiente obligatoriedad de la normativa para implementar un EBR: MEDIO</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> Deficiente información sobre el Beneficiario Final: ALTO · <b>4 alumnos</b> (20 %)</li><li><b>c)</b> Debilidad en el Marco Jurídico del SF: ALTO · <b>3 alumnos</b> (15 %)</li><li>En blanco: 2 alumnos</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>El beneficiario final es tema estrella y se asume alto. Y los dos marcos jurídicos se cruzan. Las opciones c y d tienen nombres reales del Mapa 2; sólo el grado está cambiado.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span>En el Régimen, sólo el <b>Marco Jurídico de AV</b> es alto en facilitación. El <b>Marco Jurídico del SF</b> es bajo y bajo, el único bajo de los 37 factores. El resto, beneficiario final incluido, es medio.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">ENR 2023, Cap. XI, Mapa 2, vulnerabilidades del Régimen de PLD/CFT (pp. 82–83)</span></div>
+  </div>
+</article></div></section><section id="t334"><h2>3.3.4 · Riesgos de corrupción</h2><div class="clin"><article class="qc" id="p38">
+  <div class="hd"><span class="no">Pregunta 38</span><span class="k">3.3.4</span><span class="mal">Contestaron mal: 4 de 20 (20 %)</span></div>
+  <div class="stem">Relaciona las definiciones con las conductas, según Transparencia Internacional: 1. Actos en los niveles más altos del gobierno que distorsionan políticas o funciones centrales del Estado · 2. Abuso cotidiano de poder por PEP de bajo y mediano rango al interactuar con ciudadanos comunes · 3. Manipulación de políticas, instituciones y normas en la asignación de recursos por quienes deciden, para conservar su poder · 4. Abuso del poder para beneficio propio. a. Corrupción · b. Actos de corrupción menores · c. Corrupción política · d. Corrupción a gran escala</div>
+  <div class="ops"><div class="op ok"><span class="bar" style="width:80%"></span><b>a)</b><span>1d, 2b, 3c, 4a</span><span class="v">16 · 80 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>b)</b><span>1a, 2b, 3c, 4d</span><span class="v">1 · 5 %</span></div><div class="op"><span class="bar" style="width:0%"></span><b>c)</b><span>1d, 2c, 3a, 4b</span><span class="v">0 · 0 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>d)</b><span>1b, 2a, 3c, 4d</span><span class="v">1 · 5 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">a) 1d, 2b, 3c, 4a</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>b)</b> 1a, 2b, 3c, 4d · <b>1 alumno</b> (5 %)</li><li><b>d)</b> 1b, 2a, 3c, 4d · <b>1 alumno</b> (5 %)</li><li>En blanco: 2 alumnos</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>Los errores cruzaron la definición general de corrupción con la de gran escala.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span><b>Niveles más altos</b> → gran escala; <b>bajo y mediano rango, cotidiano</b> → menores; <b>manipular políticas para conservar el poder</b> → política. «Abuso del poder para beneficio propio» es la definición general de corrupción, de la que salen las otras tres.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Guía Anticorrupción, I.1.3 Transparencia Internacional (p. 6)</span></div>
+  </div>
+</article><article class="qc" id="p39">
+  <div class="hd"><span class="no">Pregunta 39</span><span class="k">3.3.4</span><span class="mal hi">Contestaron mal: 11 de 20 (55 %)</span></div>
+  <div class="stem">Según la Guía Anticorrupción, relaciona los Factores de Riesgo con su clasificación: 1. El Cliente adquiere, directamente o a través de terceros, bienes muebles e inmuebles y los vuelve a negociar en un corto plazo · 2. Uso de vehículos corporativos sin una justificación comercial válida · 3. Varias empresas fachada simulan competir en los concursos de licitación · 4. Transferencias a personas físicas o morales desde cuentas de Dependencias, Entidades u Órganos Públicos sin razón aparente. a. Ocultamiento de identidad · b. Comportamiento atípico de las PEP nacionales y Personas Vulnerables · c. Comportamiento atípico de las cuentas a nombre de Dependencias · d. Identificados en los casos recientes en México</div>
+  <div class="ops"><div class="op bad"><span class="bar" style="width:15%"></span><b>a)</b><span>1a, 2b, 3c, 4d</span><span class="v">3 · 15 %</span></div><div class="op bad"><span class="bar" style="width:5%"></span><b>b)</b><span>1b, 2a, 3c, 4d</span><span class="v">1 · 5 %</span></div><div class="op ok"><span class="bar" style="width:45%"></span><b>c)</b><span>1b, 2a, 3d, 4c</span><span class="v">9 · 45 %</span></div><div class="op bad"><span class="bar" style="width:25%"></span><b>d)</b><span>1a, 2b, 3d, 4c</span><span class="v">5 · 25 %</span></div></div>
+  <div><button class="btn" type="button" data-rev>Ver la revisión</button></div>
+  <div class="why">
+    <div><span class="lb">Respuesta correcta</span><span class="ans">c) 1b, 2a, 3d, 4c</span></div>
+    <div><span class="lb">Qué contestaron mal</span><ul class="wr"><li><b>d)</b> 1a, 2b, 3d, 4c · <b>5 alumnos</b> (25 %)</li><li><b>a)</b> 1a, 2b, 3c, 4d · <b>3 alumnos</b> (15 %)</li><li><b>b)</b> 1b, 2a, 3c, 4d · <b>1 alumno</b> (5 %)</li><li>En blanco: 2 alumnos</li></ul></div>
+    <div><span class="lb">En qué se equivocaron</span><span>«A través de terceros» suena a ocultar la identidad, y «uso de vehículos» suena a un comportamiento. Las dos palabras clave apuntan al bloque contrario.</span></div>
+    <div class="regla"><b>Cómo cachar el error</b><span><b>III.1 Ocultamiento</b> = estructuras: vehículos corporativos, prestanombres, familiares o intermediarios. <b>III.2 PEP atípica</b> = conducta del cliente: compra y revende en corto plazo, pregunta por la política PLD, evita hablar del origen de su riqueza. <b>III.3</b> = cuentas de dependencias. <b>III.4</b> = casos en México: empresas fachada y licitaciones simuladas.</span></div>
+    <div><span class="lb">Fundamento real</span><span class="fund">Guía Anticorrupción, III.1 a III.4 (pp. 14–17)</span></div>
+  </div>
+</article></div></section>
+<footer><span>Porcentajes del grupo de la 2ª convocatoria (20 alumnos); uno dejó el Área 3 en blanco y otro las preguntas 37 a 39. Páginas según el PDF de cada fuente en la biblioteca del Aula.</span><span>«Cómo cachar el error»: criterio didáctico 360Educa. Material didáctico; no sustituye la norma.</span></footer>
+</div>
+<script>
+
+</script>
+<script>
+(function(){
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+window.F4={$, $$, esc};
+/* proyección y recitar */
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+const bp=$("#b-proj"), br=$("#b-rec");
+function setP(on){document.body.classList.toggle("proj",on);bp&&bp.setAttribute("aria-pressed",on);store("f4-proj",on?"1":"0")}
+function setR(on){document.body.classList.toggle("recitar",on);br&&br.setAttribute("aria-pressed",on);$$(".rec.shown").forEach(e=>e.classList.remove("shown"))}
+bp&&bp.addEventListener("click",()=>setP(!document.body.classList.contains("proj")));
+br&&br.addEventListener("click",()=>setR(!document.body.classList.contains("recitar")));
+const bpr=$("#b-print"); bpr&&bpr.addEventListener("click",()=>window.print());
+if(store("f4-proj")==="1")setP(true);
+document.addEventListener("click",e=>{const r=e.target.closest(".rec");if(r&&document.body.classList.contains("recitar"))r.classList.add("shown")});
+/* sorters: data-sorter = id en SORTERS */
+function initSorter(box){
+  const S=SORTERS[box.dataset.sorter]; let done=0, good=0;
+  const order=S.items.map((x,i)=>i); if(S.shuffle!==false){for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}}
+  if(S.sample&&S.sample<order.length)order.length=S.sample;
+  const N=order.length;
+  box.classList.add("sorter");
+  box.innerHTML=`<div class="top"><span class="eyebrow">${esc(S.prompt||"Clasifica")}</span><span class="score num" data-sc>0 de ${N}</span></div>`+
+   order.map(i=>{const it=S.items[i];return `<div class="it" data-i="${i}"><div>${it.t}</div><div class="opts">${S.cats.map(c=>`<button type="button" data-k="${c.k}">${esc(c.label)}</button>`).join("")}</div></div>`}).join("")+
+   `<div class="qbtns"><button class="btn ghost" type="button" data-reset>${S.sample?"Otra tanda al azar":"Reiniciar"}</button>${S.sample?`<span class="mini">${N} de ${S.items.length} factores en cada tanda</span>`:""}</div>`;
+  box.onclick=e=>{
+    if(e.target.closest("[data-reset]")){initSorter(box);return}
+    const b=e.target.closest("button[data-k]"); if(!b)return; const row=b.closest(".it"); if(row.classList.contains("done"))return;
+    const it=S.items[+row.dataset.i]; const right=[].concat(it.k); const ok=right.includes(b.dataset.k);
+    row.classList.add("done"); done++; if(ok)good++;
+    $$("button[data-k]",row).forEach(z=>{z.disabled=true; if(right.includes(z.dataset.k))z.classList.add("right"); else if(z===b)z.classList.add("wrong")});
+    row.insertAdjacentHTML("beforeend",`<div class="fb"><b class="${ok?"tick":"cross"}">${ok?"✓":"✗"}</b> ${it.x||""}${it.ref?` <span class="ref">${esc(it.ref)}</span>`:""}</div>`);
+    $("[data-sc]",box).textContent=`${good} de ${done} · ${N} en total`;
+  };
+}
+$$("[data-sorter]").forEach(initSorter);
+/* rondas: votación antes de revelar */
+$$("[data-ronda]").forEach(box=>{
+  const R=RONDAS[box.dataset.ronda]; let i=0, rev=new Array(R.items.length).fill(false), pick=new Array(R.items.length).fill(-1);
+  box.classList.add("ronda","card");
+  function draw(){
+    const q=R.items[i];
+    box.innerHTML=`<div class="head"><span class="eyebrow num">${esc(R.title)} · ${i+1} de ${R.items.length}</span><span class="dots">${R.items.map((_,k)=>`<i class="${k<=i?"on":""}"></i>`).join("")}</span></div>
+     ${q.pat?`<span class="pat">Ataca: ${esc(q.pat)}</span>`:""}
+     <p class="qtext">${q.q}</p>
+     <div class="opts">${q.o.map((o,k)=>`<button type="button" class="op${pick[i]===k?" sel":""}${rev[i]&&k===q.a?" right":""}${rev[i]&&pick[i]===k&&k!==q.a?" wrong":""}" data-k="${k}"><b>${"ABCD"[k]}</b><span>${o}</span></button>`).join("")}</div>
+     <div data-fb>${rev[i]?`<div class="qfb"><b class="ok">Respuesta: ${"ABCD"[q.a]}.</b> ${q.x} <span class="ref">${esc(q.ref)}</span></div>`:`<p class="mini sub">Voten primero (mano alzada o chat: A, B, C o D). Luego revela.</p>`}</div>
+     <div class="qbtns"><button class="btn ghost" type="button" data-prev ${i===0?"disabled":""}>Anterior</button>${rev[i]?"":`<button class="btn" type="button" data-rev>Revelar</button>`}<button class="btn ghost" type="button" data-next ${i===R.items.length-1?"disabled":""}>Siguiente</button></div>`;
+  }
+  box.addEventListener("click",e=>{
+    const op=e.target.closest(".op"); if(op&&!rev[i]){pick[i]=+op.dataset.k;draw();return}
+    if(e.target.closest("[data-rev]")){rev[i]=true;draw();return}
+    if(e.target.closest("[data-next]")&&i<R.items.length-1){i++;draw();return}
+    if(e.target.closest("[data-prev]")&&i>0){i--;draw();return}
+  });
+  draw();
+});
+})();
+</script>
+<script>
+(function(){
+ const b=document.getElementById("b-prac");
+ b&&b.addEventListener("click",()=>{const on=!document.body.classList.contains("practica");document.body.classList.toggle("practica",on);b.setAttribute("aria-pressed",on);b.textContent=on?"Mostrar todas las respuestas":"Modo práctica: ocultar respuestas";document.querySelectorAll(".qc").forEach(c=>c.classList.remove("rev"))});
+ document.addEventListener("click",e=>{const r=e.target.closest("[data-rev]");if(r){const c=r.closest(".qc");c.classList.toggle("rev");r.textContent=c.classList.contains("rev")?"Ocultar la revisión":"Ver la revisión"}});
+})();
+</script>
+</body>
+</html>
