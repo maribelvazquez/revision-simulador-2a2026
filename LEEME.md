@@ -6,7 +6,7 @@ Revisiones pregunta por pregunta de los simuladores de Brillium para que los alu
 
 ```
 index.html                      ← portada: el alumno elige el módulo
-modulo-1/                       ← Módulo 1 (pendiente)
+modulo-1/simulador-2/index.html ← Módulo 1 · Simulador 2 · Área 1
 modulo-2/                       ← Módulo 2 (pendiente)
 modulo-3/simulador-2/index.html ← Módulo 3 · Simulador 2 · Área 3
 ```
